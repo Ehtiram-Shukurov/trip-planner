@@ -36,6 +36,23 @@ Which (if any) progressive web app feature(s) does your app support?
 
 ## Mockup images
 ![Mock Up](./mockup/Mockup.png?raw=true)
+From top to bottom left to right. 
+
+First Row
+* (root page) where user are place when they first open the application
+* (destination page) where user are place when they click on the "+" icon in root page
+* (calender page) where user are place after they confired a destination
+* (date page) where user are place after they seleced dates for their a destination. This page also allow users to add itinerary for each day
+
+Second row
+* (itinerary page) where user can add itinerary and location of the itinerary
+* (itinerary detail page) adding more details to the itinerary page
+* (itinerary page result) where users are place after they added all the detail to the itinerary
+* (memories page) where user can add photos of the day of the event where the itinerary is taken place
+
+
+![Mock Up](./mockup/desktop.png?raw=true)
+Desktop version of our webapp. Everythig is the same excepet for the fact that the UI will be stretched to fit the screen, and user have to browse through their folders to upload a picture instead of being able to take one.
 
 
 ## Testing Notes
