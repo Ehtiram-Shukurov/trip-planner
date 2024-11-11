@@ -1,56 +1,87 @@
-# project-2-big-chungus
+# Module 2 Group Assignment
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+CSCI 5117, Fall 2024, [assignment description](https://canvas.umn.edu/courses/460699/pages/project-2)
 
-## Prerequisites
+## App Info:
 
-You will need the following things properly installed on your computer.
+* Team Name: Big Chungus
+* App Name: 
+* App Link: <h
 
-- [Git](https://git-scm.com/)
-- [Node.js](https://nodejs.org/) (with npm)
-- [Ember CLI](https://cli.emberjs.com/release/)
-- [Google Chrome](https://google.com/chrome/)
+### Students
 
-## Installation
 
-- `git clone <repository-url>` this repository
-- `cd project-2-big-chungus`
-- `npm install`
+* Daniel Bielejeski, biele026@umn.edu
+* Ezra Blake, shuku010@umn.edu
+* Crystal Wen, wen00015@umn.edu
+* William Yang, yang7313@umn.edu
+* Jinming Chen, chen6386@umn.edu
 
-## Running / Development
+## Key Features
 
-- `npm run start`
-- Visit your app at [http://localhost:4200](http://localhost:4200).
-- Visit your tests at [http://localhost:4200/tests](http://localhost:4200/tests).
+**Describe the most challenging features you implemented
+(one sentence per bullet, maximum 4 bullets):**
 
-### Code Generators
+* ...
 
-Make use of the many generators for code, try `ember help generate` for more details
+Which (if any) device integration(s) does your app support?
 
-### Running Tests
+* ...
 
-- `npm run test`
-- `npm run test:ember -- --server`
+Which (if any) progressive web app feature(s) does your app support?
 
-### Linting
+* ...
 
-- `npm run lint`
-- `npm run lint:fix`
 
-### Building
 
-- `npm exec ember build` (development)
-- `npm run build` (production)
+## Mockup images
+![Mock Up](./mockup/Mockup.png?raw=true)
+From top to bottom left to right. 
 
-### Deploying
+First Row
+* (root page) where user are place when they first open the application
+* (destination page) where user are place when they click on the "+" icon in root page
+* (calender page) where user are place after they confired a destination
+* (date page) where user are place after they seleced dates for their a destination. This page also allow users to add itinerary for each day
 
-Specify what it takes to deploy your app.
+Second row
+* (itinerary page) where user can add itinerary and location of the itinerary
+* (itinerary detail page) adding more details to the itinerary page
+* (itinerary page result) where users are place after they added all the detail to the itinerary
+* (memories page) where user can add photos of the day of the event where the itinerary is taken place
 
-## Further Reading / Useful Links
 
-- [ember.js](https://emberjs.com/)
-- [ember-cli](https://cli.emberjs.com/release/)
-- Development Browser Extensions
-  - [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
-  - [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
+![Mock Up](./mockup/desktop.png?raw=true)
+Desktop version of our webapp. Everythig is the same excepet for the fact that the UI will be stretched to fit the screen, and user have to browse through their folders to upload a picture instead of being able to take one.
+
+
+## Testing Notes
+
+**Is there anything special we need to know in order to effectively test your app? (optional):**
+
+* ...
+
+
+
+## Screenshots of Site (complete)
+
+**[Add a screenshot of each key page](https://stackoverflow.com/questions/10189356/how-to-add-screenshot-to-readmes-in-github-repository)
+along with a very brief caption:**
+
+![](https://media.giphy.com/media/o0vwzuFwCGAFO/giphy.gif)
+
+
+
+## External Dependencies
+
+**Document integrations with 3rd Party code or services here.
+Please do not document required libraries (e.g., React, Azure serverless functions, Azure nosql).**
+
+* Library or service name: description of use
+* ...
+
+**If there's anything else you would like to disclose about how your project
+relied on external code, expertise, or anything else, please disclose that
+here:**
+
+...
