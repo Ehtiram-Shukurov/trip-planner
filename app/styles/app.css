@@ -1,48 +1,39 @@
-/*TODO: maybe use bootstrap card components instead?"
-
-/* style code was copied from BigChungus Next.js tutorial
-/* Carousel Container and Carousel Styling */
-
-
 .carousel-container {
-  perspective: 1000px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   overflow-x: auto;
+  gap: 1rem;
   width: 100%;
 }
 
 .carousel {
-  width: 80%;
   display: flex;
-  gap: 1.5rem;
-  transform-style: preserve-3d;
+  gap: 1rem;
 }
 
-/* Individual Card Styling */
 .carousel-card {
   position: relative;
-  width: 200px;
-  height: 250px;
+  min-width: 200px;
   padding: 1.5rem;
   background: #fff;
-  border-radius: 15px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgb(0 0 0 / 10%);
   overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
+  transition: transform 0.2s ease-in-out;
   opacity: 0.9;
 }
+
 .carousel-card:hover {
   transform: scale(1.05);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 6px 12px rgb(0 0 0 / 20%);
 }
 
-
-/* Card Content Styling */
 .card-content {
   text-align: center;
 }
@@ -59,61 +50,121 @@
   color: #555;
 }
 
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-  .carousel {
-    width: 90%;
-    flex-direction: column;
-    gap: 1rem;
-  }
+.card-content svg {
+  margin-top: 0.5rem;
+}
 
-  .carousel-card {
-    width: 100%;
-    height: 300px;
-  }
+.vertical-card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.vertical-card-list .carousel-card {
+  width: 100%;
+  max-width: 350px;
+  padding: 0.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgb(0 0 0 / 10%);
+  background-color: #fff;
+  max-height: 80px;
+  overflow: hidden;
+  text-align: center;
+}
+
+.vertical-card-list .carousel-card button {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 /*Scroll menue code was copied from https://www.w3schools.com/howto/howto_css_menu_horizontal_scroll.asp*/
-/*Scroll menue styling*/
 div.scrollmenu {
-  overflow: auto;
+  overflow-x: auto;
   white-space: nowrap;
+  display: flex;
+  gap: 1rem;
+  padding: 0.5rem 0;
 }
 
 div.scrollmenu a {
   display: inline-block;
   color: white;
   text-align: center;
-  padding: 14px;
+  padding: 10px 15px;
   text-decoration: none;
+  background: #007bff;
+  border-radius: 5px;
 }
 
 div.scrollmenu a:hover {
-  background-color: #777;
+  background-color: #0056b3;
 }
 
-/* Below copied from Team Im giving you an A tech share on bootstrap */
-        /* Ensure full height for HTML and Body */
-        html, body {
-            height: 100%;
-        }
+.list-group-item {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 0.5rem;
+  padding: 1rem;
+}
 
-        /* Flexbox layout for body */
-        body {
-            display: flex;
-            flex-direction: column;
-        }
+.list-group-item strong {
+  font-size: 1.2rem;
+}
 
-        /* Content area grows to fill the available space */
-        .content-wrapper {
-            flex: 1;
-        }
+.list-group-item .badge {
+  font-size: 0.9rem;
+  padding: 0.5rem 0.75rem;
+}
 
-        /* Footer remains at the bottom */
-        .footer {
-            background-color: #333;
-            color: white;
-            padding: 10px;
-            text-align: center;
-        }
+html,
+body {
+  height: 100%;
+}
 
+body {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  display: flex;
+  flex-direction: column;
+}
+
+.content-wrapper {
+  flex: 1;
+}
+
+.container-fluid {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+footer {
+  margin-top: auto;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+}
+
+header {
+  background-color: #235725;
+  color: #fff;
+  padding: 1rem;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+main {
+  padding: 2rem;
+  background-color: #e8f5e9;
+}

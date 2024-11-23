@@ -1,103 +1,68 @@
 {{page-title "Index"}}
 <div class="content-wrapper container my-4">
-<div class="scrollmenu">
-    <h1>Trips</h1>
+  <!-- Trips Section -->
+  <section class="mb-4">
+    <h1 class="mb-3">Trips</h1>
     <div class="carousel-container">
-        <div class="carousel">
-            <div class="carousel-card">
-                <div class="card-content">
-                    <h2>Card Title 1</h2>
-                    <!-- TODO: There is a bug where there is a gray box arround the icon. Most likely due to linkTO-->
-                        <LinkTo @route ="test">
-                            <!-- bootstrap icon https://icons.getbootstrap.com/icons/plus/-->
-
-                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="#000000" class="bi bi-plus" viewBox="0 0 16 16">
-                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
-                              </svg>
-                        </LinkTo>
-                </div>
-            </div>
+      <div class="carousel">
+        <div class="carousel-card">
+          <div class="card-content d-flex justify-content-center align-items-center">
+            <LinkTo @route="test" class="btn btn-outline-primary d-flex justify-content-center align-items-center" style="width: 80px; height: 80px; border-radius: 50%;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-plus">
+                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+              </svg>
+            </LinkTo>
+          </div>
         </div>
 
-        <div class="carousel">
-            <div class="carousel-card">
-                <div class="card-content">
-                    <h2>Card Title 2</h2>
-                    <p>Even more content for the fourth card.</p>
-                </div>
-            </div>
+        <!-- Existing Trip Cards -->
+        <div class="carousel-card">
+          <div class="card-content">
+            <h2>Trip 1</h2>
+          </div>
         </div>
-
-        <div class="carousel">
-            <div class="carousel-card">
-                <div class="card-content">
-                    <h2>Card Title 3</h2>
-                    <p>Even more content for the fourth card.</p>
-                </div>
-            </div>
+        <div class="carousel-card">
+          <div class="card-content">
+            <h2>Trip 2</h2>
+          </div>
         </div>
-
-        <div class="carousel">
-            <div class="carousel-card">
-                <div class="card-content">
-                    <h2>Card Title 4</h2>
-                    <p>Even more content for the fourth card.</p>
-                </div>
-            </div>
+        <div class="carousel-card">
+          <div class="card-content">
+            <h2>Trip 3</h2>
+          </div>
         </div>
-
-
-        <div class="carousel">
-            <div class="carousel-card">
-                <div class="card-content">
-                    <h2>Card Title 5</h2>
-                    <p>Even more content for the fourth card.</p>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
-</div>
+  </section>
 
-<hr>
-<div class="scrollmenu">
-    <h1>Memories</h1>
+  <hr class="my-4">
+
+  <!-- Memories Section -->
+  <section>
+    <h1 class="mb-3">Memories</h1>
     <div class="carousel-container">
-        <div class="carousel">
-            <div class="carousel-card">
-                <div class="card-content">
-                    <h2>Card Title 1</h2>
-                    <p>Even more content for the fourth card.</p>
-                </div>
-            </div>
+      <div class="carousel">
+        <div class="carousel-card">
+          <div class="card-content">
+            <img src="https://via.placeholder.com/100" class="img-fluid rounded" alt="Memory 1">
+          </div>
         </div>
-        <div class="carousel">
-            <div class="carousel-card">
-                <div class="card-content">
-                    <h2>Card Title 2</h2>
-                    <p>Even more content for the fourth card.</p>
-                </div>
-            </div>
+        <div class="carousel-card">
+          <div class="card-content">
+            <img src="https://via.placeholder.com/100" class="img-fluid rounded" alt="Memory 2">
+          </div>
         </div>
-        <div class="carousel">
-            <div class="carousel-card">
-                <div class="card-content">
-                    <h2>Card Title 3</h2>
-                    <p>Even more content for the fourth card.</p>
-                </div>
-            </div>
+        <div class="carousel-card">
+          <div class="card-content">
+            <img src="https://via.placeholder.com/100" class="img-fluid rounded" alt="Memory 3">
+          </div>
         </div>
-        <div class="carousel">
-            <div class="carousel-card">
-                <div class="card-content">
-                    <h2>Card Title 4</h2>
-                    <p>Even more content for the fourth card.</p>
-                </div>
-            </div>
+        <div class="carousel-card">
+          <div class="card-content">
+            <img src="https://via.placeholder.com/100" class="img-fluid rounded" alt="Memory 4">
+          </div>
         </div>
+      </div>
     </div>
+  </section>
 </div>
-
-</div>
-
-{{outlet}}
-
