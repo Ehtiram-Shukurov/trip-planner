@@ -1,7 +1,16 @@
 {{page-title "Project2BigChungus"}}
+  <header class="p-3">
+    <div class="container">
+      <h1 class="mb-0">My Travel Planner</h1>
+    </div>
+  </header>
 
-{{outlet}}
+  <main class="flex-grow-1 d-flex align-items-start justify-content-center py-4">
+    <div class="container" style="max-width: 900px;">
+      {{outlet}}
+    </div>
+  </main>
 
-{{! The following component displays Ember's default welcome message. }}
-<WelcomePage />
-{{! Feel free to remove this! }}
+  <footer class="bg-dark text-white text-center py-3">
+    <p class="mb-0">&copy; 2024 My Travel Planner</p>
+  </footer>
