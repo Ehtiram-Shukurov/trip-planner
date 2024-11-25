@@ -1,0 +1,13 @@
+{{page-title "Destination"}}
+
+<h1>Where do you want to go?</h1>
+
+<div>
+  <label for="search">Search for a destination:</label>
+  <input id="search" type="text" placeholder="Enter a destination"/>
+  <button {{on "click" this.searchQuery}}>Search</button>
+</div>
+
+<div class="map-container">
+  <GoogleMapsIframe @query={{this.selectedDestination}} />
+</div>
