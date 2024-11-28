@@ -87,7 +87,7 @@
   overflow: hidden;
 }
 
-/*Scroll menue code was copied from https://www.w3schools.com/howto/howto_css_menu_horizontal_scroll.asp*/
+/* Scroll menue code was copied from https://www.w3schools.com/howto/howto_css_menu_horizontal_scroll.asp */
 div.scrollmenu {
   overflow-x: auto;
   white-space: nowrap;

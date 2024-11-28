@@ -1,11 +1,12 @@
 import { module, test } from 'qunit';
 import { setupTest } from 'project-2-big-chungus/tests/helpers';
 
-module('Unit | Route | index', function (hooks) {
+module('Unit | Service | auth', function (hooks) {
   setupTest(hooks);
 
+  // TODO: Replace this with your real tests.
   test('it exists', function (assert) {
-    let route = this.owner.lookup('route:index');
-    assert.ok(route);
+    let service = this.owner.lookup('service:auth');
+    assert.ok(service);
   });
 });
