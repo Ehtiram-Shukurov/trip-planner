@@ -3,6 +3,11 @@
     <div class="container">
       <h1 class="mb-0">My Travel Planner</h1>
     </div>
+    {{#if this.auth.user}}
+    <button {{on "click" this.auth.sign_out}}>
+        Log out
+      </button>
+    {{/if}}
   </header>
 
   <main class="flex-grow-1 d-flex align-items-start justify-content-center py-4">

@@ -11,7 +11,8 @@ import {
   onAuthStateChanged,
   authStateReady,
 } from 'firebase/auth';
-export default class IndexController extends Controller {
+
+export default class ApplicationController extends Controller {
   @service firebase;
   @service auth;
 }
