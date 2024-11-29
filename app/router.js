@@ -7,9 +7,9 @@ export default class Router extends EmberRouter {
 }
 
 Router.map(function () {
-  this.route('test');
-  this.route('date');
-  this.route('day', { path: '/date/:date_id' });
-  this.route('addactivity', { path: '/addactivity/:date_id' });
-  this.route('result');
+  this.route('destination');
+  this.route("test");
+  this.route("date");
+  this.route("day", { path: "/date/:date_id" });
+  this.route("addactivity", { path: "/addactivity/:date_id" });
 });
