@@ -1,0 +1,13 @@
+{{yield}}
+<div class="d-flex justify-content-center align-items-center">
+  <label for="camera-input" class="file-input-label">Take a Picture</label>
+  <input id="camera-input" type="file" accept="image/*" capture="environment" {{on "change" this.handleCameraInput}}
+    class="hidden-input" />
+
+  <label for="gallery-input" class="file-input-label">Upload from Gallery</label>
+  <input id="gallery-input" type="file" accept="image/*" {{on "change" this.handleGalleryInput}} class="hidden-input" />
+</div>
+
+{{!-- TDOD: placeholder of displaying image and testing--}}
+{{!-- TODO: Change the style later --}}
+<div id="image-preview-container" class="d-flex justify-content-center mt-2"></div>

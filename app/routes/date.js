@@ -1,5 +1,5 @@
-import Route from "@ember/routing/route";
-import { tracked } from "@glimmer/tracking";
+import Route from '@ember/routing/route';
+import { tracked } from '@glimmer/tracking';
 
 export default class DateRoute extends Route {
   @tracked dates = [];
@@ -11,7 +11,6 @@ export default class DateRoute extends Route {
     for (let i = 0; i < 5; i++) {
       let date = new Date();
       date.setDate(date.getDate() + i);
-      //convert to day/month/year format
       date = date.toLocaleDateString();
       this.dates.push(date);
     }

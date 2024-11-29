@@ -1,12 +1,12 @@
-import { module, test } from "qunit";
-import { setupTest } from "project-2-big-chungus/tests/helpers";
+import { module, test } from 'qunit';
+import { setupTest } from 'project-2-big-chungus/tests/helpers';
 
-module("Unit | Controller | date", function (hooks) {
+module('Unit | Controller | date', function (hooks) {
   setupTest(hooks);
 
   // TODO: Replace this with your real tests.
-  test("it exists", function (assert) {
-    let controller = this.owner.lookup("controller:date");
+  test('it exists', function (assert) {
+    let controller = this.owner.lookup('controller:date');
     assert.ok(controller);
   });
 });
