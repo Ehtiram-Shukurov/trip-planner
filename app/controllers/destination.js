@@ -5,47 +5,55 @@ import fetch from 'fetch';
 
 export default class DestinationsController extends Controller {
   @tracked destinationQuery = '';
-  @tracked selectedDestination = ''; 
+  @tracked selectedDestination = '';
   @tracked errorMessage = '';
 
   GOOGLE_API_KEY = 'AIzaSyCiObBVhMw70C36XriG71n7aRDjnxyZkPQ';
 
   @action
-  async searchQuery(){
+  async searchQuery() {
     this.destinationQuery = document.querySelector('#search').value;
     const query = this.destinationQuery.trim();
 
-    if(query === '') {
+    if (query === '') {
       alert('Please enter a destination');
       return;
     }
 
     const apiURL = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(query)}&key=${this.GOOGLE_API_KEY}`;
 
-    try{
+    try {
       const response = await fetch(apiURL);
       const data = await response.json();
       console.log('Geocoding API Response:', data);
       console.log(data.status);
 
-      if(data.status === 'OK') {
+      if (data.status === 'OK') {
         const res = data.results[0];
-        const allowedTypes = ['country', 'administrative_area_level_1', 'locality'];
+        const allowedTypes = [
+          'country',
+          'administrative_area_level_1',
+          'locality',
+        ];
 
-        const isValid = res.types.some(type => allowedTypes.includes(type));
+        const isValid = res.types.some((type) => allowedTypes.includes(type));
 
-        if(isValid){
+        if (isValid) {
           this.selectedDestination = res.formatted_address;
           this.errorMessage = '';
-        }else{
-          alert('Only countries, regions, or cities are allowed. Please try again.');
+        } else {
+          alert(
+            'Only countries, regions, or cities are allowed. Please try again.',
+          );
           // this.destinationQuery = '';
         }
       } else {
-        alert('Location not found. Please enter a valid country, region, or city.');
+        alert(
+          'Location not found. Please enter a valid country, region, or city.',
+        );
       }
     } catch (error) {
-      console.error("Error with Google Maps Embed API: ", error);
+      console.error('Error with Google Maps Embed API: ', error);
     }
   }
 }

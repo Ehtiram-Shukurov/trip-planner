@@ -1,4 +1,25 @@
 {{page-title "Test"}}
 <h1>Place holder for root route because without an actual route linkto element breaks the code</h1>
 
+<div>
+  <h2 class="text-center"> Location 1</h2>
+  <div>
+      Image place holder area
+  </div>
+    <div class="mb-3">
+      <textarea class="form-control" id="location_id" rows="5">Journal Entry.....</textarea>
+    </div>
+</div>
+
+{{#if this.auth.user}}
+
+<button class="button is-light" type="button" {{on "click" this.auth.sign_out}}>
+    Log out
+  </button>
+{{else}}
+<button class="button is-primary" type="button" {{on "click" this.auth.sign_in_with_popup}}>
+    <strong>Log in</strong>
+  </button>
+{{/if}}
+
 {{outlet}}
