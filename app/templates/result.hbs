@@ -1,0 +1,34 @@
+{{page-title "Result"}}
+
+<div class="container vh-100 d-flex flex-column align-items-center py-3">
+  <div class="card shadow-lg w-100" style="max-width: 400px; border-radius: 10px;">
+    <div class="card-body">
+      <h2 class="text-center mb-4">Date 1</h2>
+
+      <div class="d-flex align-items-center justify-content-between border rounded p-2 mb-3">
+        <div>
+          <h5 class="mb-1">Location 1</h5>
+          <p class="mb-0 text-muted">time - time</p>
+        </div>
+        <button class="btn btn-outline-secondary btn-sm">
+          <i class="bi bi-pencil"></i>
+        </button>
+      </div>
+
+      {{!-- placeholder --}}
+      <div class="d-flex justify-content-center mb-3">
+        <button class="btn btn-primary btn-lg rounded-circle" style="width: 60px; height: 60px;">
+          <i class="bi bi-plus"></i>
+        </button>
+      </div>
+
+      <div class="map-placeholder border rounded d-flex align-items-center justify-content-center"
+        style="height: 200px;">
+        <i class="bi bi-geo-alt fs-1 text-muted"></i>
+        <p class="mb-0 ms-2">Map placeholder</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{outlet}}

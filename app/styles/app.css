@@ -168,3 +168,23 @@ main {
   padding: 2rem;
   background-color: #e8f5e9;
 }
+
+/* camera input styles */
+.file-input-label {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 10px;
+  background-color: #9b9b7a;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.file-input-label:hover {
+  background-color: #797d62;
+}
+
+.hidden-input {
+  display: none;
+}
