@@ -5,9 +5,20 @@
 <div>
   <label for="search">Search for a destination:</label>
   <input id="search" type="text" placeholder="Enter a destination"/>
-  <button {{on "click" this.searchQuery}}>Search</button>
+  <button type="button" {{on "click" this.searchQuery}}>Search</button>
 </div>
 
 <div class="map-container">
   <GoogleMapsIframe @query={{this.selectedDestination}} />
+</div>
+
+<div class="d-flex justify-content-between mt-4">
+    {{!-- replace be previous page link there --}}
+    <button class="btn btn-primary rounded-circle" type="button">
+        <i class="bi bi-arrow-left"></i>
+    </button>
+    {{!-- replace be next page link there --}}
+    <button class="btn btn-primary rounded-circle" type="button">
+        <i class="bi bi-arrow-right"></i>
+    </button>
 </div>

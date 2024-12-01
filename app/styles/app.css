@@ -1,3 +1,5 @@
+/* @import url("litepicker/dist/css/litepicker.css"); */
+
 .carousel-container {
   display: flex;
   justify-content: flex-start;
@@ -87,7 +89,7 @@
   overflow: hidden;
 }
 
-/* Scroll menue code was copied from https://www.w3schools.com/howto/howto_css_menu_horizontal_scroll.asp */
+/*  Scroll menue code was copied from https://www.w3schools.com/howto/howto_css_menu_horizontal_scroll.asp  */
 div.scrollmenu {
   overflow-x: auto;
   white-space: nowrap;
@@ -167,6 +169,24 @@ header {
 main {
   padding: 2rem;
   background-color: #e8f5e9;
+}
+
+.litepicker-container {
+  max-width: 100%;
+  margin: auto;
+  z-index: 9999;
+  max-width: 600px; 
+}
+
+.custom-litepicker input {
+  padding:0.5em;
+  width:200px;
+  margin-bottom: 10px;
+}
+
+.custom-litepicker {
+  width: 100% !important;
+  max-width: 100% !important;
 }
 
 /* camera input styles */
