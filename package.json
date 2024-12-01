@@ -79,6 +79,9 @@
     "edition": "octane"
   },
   "dependencies": {
+    "firebase": "^11.0.2"
+  },
+  "dependencies": {
     "litepicker": "^2.0.12"
   }
 }

@@ -1,3 +1,8 @@
 import Route from '@ember/routing/route';
-
-export default class IndexRoute extends Route {}
+import { service } from '@ember/service';
+import { tracked } from '@glimmer/tracking';
+import { action } from '@ember/object';
+export default class IndexRoute extends Route {
+  @service router;
+  @service auth;
+}

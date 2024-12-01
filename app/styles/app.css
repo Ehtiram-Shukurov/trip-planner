@@ -89,7 +89,7 @@
   overflow: hidden;
 }
 
-/* Scroll menue code was copied from https://www.w3schools.com/howto/howto_css_menu_horizontal_scroll.asp */
+/*  Scroll menue code was copied from https://www.w3schools.com/howto/howto_css_menu_horizontal_scroll.asp  */
 div.scrollmenu {
   overflow-x: auto;
   white-space: nowrap;
@@ -189,5 +189,22 @@ main {
   max-width: 100% !important;
 }
 
+/* camera input styles */
+.file-input-label {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 10px;
+  background-color: #9b9b7a;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+}
 
+.file-input-label:hover {
+  background-color: #797d62;
+}
 
+.hidden-input {
+  display: none;
+}

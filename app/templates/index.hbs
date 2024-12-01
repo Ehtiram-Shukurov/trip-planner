@@ -1,21 +1,26 @@
 {{page-title "Index"}}
-<div class="content-wrapper container my-4">
-  {{!-- Trips Section --}}
-  <section class="mb-4">
-    <h1 class="mb-3">Trips</h1>
-    <div class="carousel-container">
-      <div class="carousel">
-        <div class="carousel-card">
-          <div class="card-content d-flex justify-content-center align-items-center">
-            <LinkTo @route="test" class="btn btn-outline-primary d-flex justify-content-center align-items-center" style="width: 80px; height: 80px; border-radius: 50%;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-plus">
-                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-              </svg>
-            </LinkTo>
+{{#if this.auth.user}}
+
+  <div class="content-wrapper container my-4">
+    {{!-- Trips Section --}}
+    <section class="mb-4">
+      <h1 class="mb-3">Trips</h1>
+      <div class="carousel-container">
+        <div class="carousel">
+          <div class="carousel-card">
+            <div class="card-content d-flex justify-content-center align-items-center">
+              <LinkTo @route="destination"
+                      class="btn btn-outline-primary d-flex justify-content-center align-items-center"
+                      style="width: 80px; height: 80px; border-radius: 50%;"></LinkTo>
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-plus">
+                  <path
+                    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                </svg>
+            </div>
           </div>
         </div>
 
-        {{!-- Existing Trip Cards --}}
+        <!-- Existing Trip Cards -->
         <div class="carousel-card">
           <div class="card-content">
             <h2>Trip 1</h2>
@@ -35,9 +40,9 @@
     </div>
   </section>
 
-  <hr class="my-4">
+    <hr class="my-4">
 
-  {{!-- Memories Section --}}
+  <!-- Memories Section -->
   <section>
     <h1 class="mb-3">Memories</h1>
     <div class="carousel-container">
