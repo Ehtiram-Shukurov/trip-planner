@@ -2,7 +2,6 @@ import Component from '@glimmer/component';
 import { action } from '@ember/object';
 
 export default class CameraGallery extends Component {
-
   @action
   handleCameraInput(event) {
     const file = event.target.files[0];
@@ -35,5 +34,4 @@ export default class CameraGallery extends Component {
 
     reader.readAsDataURL(file);
   }
-  
 }

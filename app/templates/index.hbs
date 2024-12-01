@@ -37,7 +37,6 @@
           </div>
         </div>
       </div>
-    </div>
   </section>
 
     <hr class="my-4">
@@ -71,3 +70,9 @@
     </div>
   </section>
 </div>
+
+{{else}}
+<button {{on "click" this.auth.sign_in_with_popup}}>
+  <strong>Log in</strong>
+</button>
+{{/if}}

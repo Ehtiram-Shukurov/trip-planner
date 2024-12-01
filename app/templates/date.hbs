@@ -1,31 +1,3 @@
 {{page-title "Date"}}
 
-
-<div class="container d-flex justify-content-center align-items-center">
-  <div class="card shadow-lg w-100" style="max-width: 400px; border-radius: 10px;">
-    <div class="card-body text-center">
-
-      <h1 class="card-title mb-3">Generic Trip Title</h1>
-      <h5 class="card-subtitle mb-4 text-muted">Destinations</h5>
-
-      <div class="vertical-card-list">
-        {{#each this.model as |date|}}
-        <div class="carousel-card">
-          <button class="btn btn-light w-100" type="button">{{date}}</button>
-        </div>
-        {{/each}}
-      </div>
-
-      <div class="d-flex justify-content-between mt-4">
-        {{!-- replace be previous page link there --}}
-        <button class="btn btn-primary rounded-circle" type="button">
-          <i class="bi bi-arrow-left"></i>
-        </button>
-        {{!-- replace be next page link there --}}
-        <button class="btn btn-success rounded-circle" type="button">
-          <i class="bi bi-check"></i>
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
+{{outlet}}

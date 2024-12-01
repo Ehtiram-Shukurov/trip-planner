@@ -1,6 +1,6 @@
 import Route from '@ember/routing/route';
 
-export default class DayRoute extends Route {
+export default class DateDetailRoute extends Route {
   model(params) {
     const { date_id } = params;
 
