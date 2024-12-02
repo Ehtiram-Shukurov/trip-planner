@@ -1,8 +1,10 @@
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
+import { service } from '@ember/service';
 
-export default class AddactivityController extends Controller {
+export default class AddActivityController extends Controller {
+  @service router;
   @tracked time = '';
   @tracked budget = '';
   @tracked location = '';
@@ -35,6 +37,6 @@ export default class AddactivityController extends Controller {
     //TODO Saving part
 
     // Redirect back to the day route
-    this.RouterService.transitionTo('day', this.model.date_id);
+    this.router.transitionTo('date.detail', this.model.date_id);
   }
 }

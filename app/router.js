@@ -9,6 +9,7 @@ export default class Router extends EmberRouter {
 Router.map(function () {
   this.route('destination');
   this.route('test');
+  this.route('date-picker');
   this.route('date', function () {
     this.route('detail', {
       path: '/:date_id',

@@ -14,11 +14,16 @@
 
 <div class="d-flex justify-content-between mt-4">
     {{!-- replace be previous page link there --}}
+  <LinkTo @route="index">
     <button class="btn btn-primary rounded-circle" type="button">
-        <i class="bi bi-arrow-left"></i>
+      Cancel
     </button>
+  </LinkTo>
     {{!-- replace be next page link there --}}
+  <LinkTo @route="date-picker">
     <button class="btn btn-primary rounded-circle" type="button">
-        <i class="bi bi-arrow-right"></i>
+      <i class="bi bi-arrow-right"></i>
     </button>
+  </LinkTo>
+
 </div>
