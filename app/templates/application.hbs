@@ -1,21 +1,22 @@
 {{page-title "Project2BigChungus"}}
-  <header class="p-3">
-    <div class="container">
-      <h1 class="mb-0">My Travel Planner</h1>
-    </div>
-    <div>
-    <nav>
-      <LinkTo @route="index"style="color:white;">Home</LinkTo>
-      {{#if this.auth.user}}
-    <button class="button is-light" type="button" {{on "click" this.auth.sign_out}}>
-        Log out
-      </button>
-    {{/if}}
-    </nav>
-    
-    </div>
+  <nav class="navbar" role="navigation" aria-label="main navigation"  style="background-color:#235725">
+    <div id="navbarMenu" class="navbar-menu">
+      <div class="navbar-start">
+        <h1 class="navbar-item mb-0" style="color:white">My Travel Planner</h1>
+        <LinkTo @route="index" class="navbar-item" style="color:white">Home</LinkTo>
+      </div>
 
-  </header>
+      <div class="navbar-end">
+        <div class="navbar-item">
+          {{#if this.auth.user}}
+            <button class="button is-light" type="button" {{on "click" this.auth.sign_out}}>
+              Log out
+            </button>
+          {{/if}}
+        </div>
+      </div>
+    </div>
+  </nav>
 
   <main class="flex-grow-1 d-flex align-items-start justify-content-center py-4">
     <div class="container" style="max-width: 900px;">
