@@ -5,4 +5,8 @@ import { action } from '@ember/object';
 export default class IndexRoute extends Route {
   @service router;
   @service auth;
+  model() {
+    //TODO: create a new trip object model that is to be passed
+    // loads previous trips
+  }
 }

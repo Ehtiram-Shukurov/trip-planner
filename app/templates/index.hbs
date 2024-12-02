@@ -11,15 +11,17 @@
             <div class="card-content d-flex justify-content-center align-items-center">
               <LinkTo @route="destination"
                       class="btn btn-outline-primary d-flex justify-content-center align-items-center"
-                      style="width: 80px; height: 80px; border-radius: 50%;"></LinkTo>
-                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-plus">
-                  <path
-                    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-                </svg>
+                      style="width: 80px; height: 80px; border-radius: 50%; position: relative;">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-plus"  style="position: absolute; right: 7px; bottom: 10px;">
+                        <path
+                          d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                      </svg>
+              </LinkTo>
+
             </div>
           </div>
         </div>
-
+        {{!-- TODO: add for loop for past created trips --}}
         <!-- Existing Trip Cards -->
         <div class="carousel-card">
           <div class="card-content">
@@ -43,6 +45,7 @@
 
   <!-- Memories Section -->
   <section>
+    {{!-- TODO: add for loop for memories --}}
     <h1 class="mb-3">Memories</h1>
     <div class="carousel-container">
       <div class="carousel">
@@ -72,7 +75,11 @@
 </div>
 
 {{else}}
-<button {{on "click" this.auth.sign_in_with_popup}}>
-  <strong>Log in</strong>
+<div class=box>
+  <h1> Looks like you are not logged in</h1>
+  <br>
+<button class="button is-light" type="button" {{on "click" this.auth.sign_in_with_popup}}>
+  Log in
 </button>
+</div>
 {{/if}}

@@ -3,11 +3,18 @@
     <div class="container">
       <h1 class="mb-0">My Travel Planner</h1>
     </div>
-    {{#if this.auth.user}}
-    <button {{on "click" this.auth.sign_out}}>
+    <div>
+    <nav>
+      <LinkTo @route="index"style="color:white;">Home</LinkTo>
+      {{#if this.auth.user}}
+    <button class="button is-light" type="button" {{on "click" this.auth.sign_out}}>
         Log out
       </button>
     {{/if}}
+    </nav>
+    
+    </div>
+
   </header>
 
   <main class="flex-grow-1 d-flex align-items-start justify-content-center py-4">
@@ -19,3 +26,6 @@
   <footer class="bg-dark text-white text-center py-3">
     <p class="mb-0">&copy; 2024 My Travel Planner</p>
   </footer>
+
+
+  
