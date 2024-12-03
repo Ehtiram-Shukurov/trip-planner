@@ -11,7 +11,5 @@ export default class IndexRoute extends Route {
   }
 
   async model() {
-    const trips = await this.database.getUserTrips();
-    return trips;
   }
 }
