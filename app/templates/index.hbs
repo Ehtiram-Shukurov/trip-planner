@@ -1,75 +1,18 @@
 {{page-title "Index"}}
-{{#if this.auth.user}}
-
-<div class="content-wrapper container my-4" {{on-auth-change this.refreshHomeListener}}>
-  {{!-- Trips Section --}}
-  <section class="mb-4">
-    <h1 class="mb-3">Trips</h1>
-    <div class="carousel-container">
-      <div class="carousel">
-        <div class="carousel-card">
-          <div class="card-content d-flex justify-content-center align-items-center">
-            <button class="btn btn-outline-primary d-flex justify-content-center align-items-center"
-              style="width: 80px; height: 80px; border-radius: 50%; position: relative;" type="button" {{on "click"
-              this.createTrip}}>
-              <i class="bi bi-plus"></i>
-            </button>
-          </div>
+<section class="hero is-fullheight">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns">
+        <div class="column is-half" >
+          <p class="title">Welcome to Big Chungus's Travel App</p>
+          <p class="subtitle">Please login to continue</p>
         </div>
-
-          {{#each this.model as |trip|}}
-          <div class="carousel-card">
-            <div class="card-content d-flex flex-column justify-content-center align-items-center">
-              <LinkTo @route="date" @model={{trip.id}} class="btn btn-light w-100">
-                <h2 class="mb-0">{{trip.destination}}</h2>
-              </LinkTo>
-            </div>
-          </div>
-          {{/each}}
-
-      </div>
-    </div>
-  </section>
-
-  <hr class="my-4">
-
-  {{!-- Memories Section --}}
-  <section>
-    <h1 class="mb-3">Memories</h1>
-    <div class="carousel-container">
-      <div class="carousel">
-        {{!-- Placeholder images for the memories --}}
-        <div class="carousel-card">
-          <div class="card-content">
-            <img src="https://via.placeholder.com/100" class="img-fluid rounded" alt="Memory 1">
-          </div>
-        </div>
-        <div class="carousel-card">
-          <div class="card-content">
-            <img src="https://via.placeholder.com/100" class="img-fluid rounded" alt="Memory 2">
-          </div>
-        </div>
-        <div class="carousel-card">
-          <div class="card-content">
-            <img src="https://via.placeholder.com/100" class="img-fluid rounded" alt="Memory 3">
-          </div>
-        </div>
-        <div class="carousel-card">
-          <div class="card-content">
-            <img src="https://via.placeholder.com/100" class="img-fluid rounded" alt="Memory 4">
-          </div>
+        <div class="column is-half has-text-centered">
+          <!-- TODO: restyle button-->
+          <button class="button is-medium is-dark" type="button" {{on "click" this.signIn}}>Login</button>
         </div>
       </div>
     </div>
-  </section>
-</div>
+  </div>
+</section>
 
-{{else}}
-<div class="box">
-  <h1>Looks like you are not logged in</h1>
-  <br>
-  <button class="button is-light" type="button" {{on "click" this.auth.sign_in_with_popup}}>
-    Log in
-  </button>
-</div>
-{{/if}}

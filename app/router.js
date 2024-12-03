@@ -8,7 +8,6 @@ export default class Router extends EmberRouter {
 
 Router.map(function () {
   this.route('destination', { path: '/destination/:trip_id' });
-  this.route('test');
   this.route('date-picker', { path: '/date-picker/:trip_id' });
   this.route('date', function () {
     this.route('detail', {
@@ -28,4 +27,6 @@ Router.map(function () {
   this.route('memory', {
     path: '/memory/:id',
   });
+
+  this.route('home');
 });

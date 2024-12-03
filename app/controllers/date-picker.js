@@ -23,7 +23,7 @@ export default class DatePickerController extends Controller {
     super(...arguments);
     window.addEventListener('resize', this.handleResize);
   }
-
+  
   @action
   registerAPI(litepicker) {
     this.litepicker = litepicker;
