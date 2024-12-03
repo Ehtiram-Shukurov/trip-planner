@@ -1,11 +1,12 @@
 import Controller from '@ember/controller';
 import { service } from '@ember/service';
 import { action } from '@ember/object';
-import {onSnapshot, query, where} from "firebase/firestore";
+import { onSnapshot, query, where } from 'firebase/firestore';
 
 export default class IndexController extends Controller {
   @service firebase;
   @service auth;
+  @service router;
   @service database;
 
   @action
@@ -26,10 +27,16 @@ export default class IndexController extends Controller {
         // loop over them and pull the data out.
         this.trips = [];
         querySnapshot.forEach((doc) => {
-          const trip  = {"id": doc.id, data: doc.data()};
+          const trip = { id: doc.id, data: doc.data() };
           this.trips.push(trip);
         });
       });
     }
+  }
+
+  @action
+  async createTrip() {
+    const tripId = await this.database.createTrip();
+    this.router.transitionTo('destination', tripId);
   }
 }

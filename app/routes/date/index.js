@@ -1,20 +1,20 @@
 import Route from '@ember/routing/route';
+import { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 
 export default class DateIndexRoute extends Route {
+  @service database;
+  @service auth;
   @tracked dates;
-  model() {
+
+  async beforeModel() {
+    await this.auth.ensureInitialized();
+  }
+
+  async model(params) {
     //TODO: replace this with actual data later
     //randomly generate 5 dates
-    this.dates = [];
-
-    for (let i = 0; i < 5; i++) {
-      let date = new Date();
-      date.setDate(date.getDate() + i);
-      date = date.toLocaleDateString();
-      this.dates.push(date);
-    }
-
-    return this.dates;
+    this.dates = await this.database.getDays(params.trip_id);
+    return { trip_id: params.trip_id, dates: Object.values(this.dates) };
   }
 }

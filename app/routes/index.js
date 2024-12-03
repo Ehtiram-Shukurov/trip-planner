@@ -5,8 +5,15 @@ import { action } from '@ember/object';
 export default class IndexRoute extends Route {
   @service router;
   @service auth;
-  model() {
-    //TODO: create a new trip object model that is to be passed
-    // loads previous trips
+  @service database;
+
+  async beforeModel() {
+    await this.auth.ensureInitialized();
+  }
+
+  async model() {
+    const trips = await this.database.getUserTrips();
+    console.log(trips);
+    return trips;
   }
 }

@@ -7,20 +7,20 @@ export default class Router extends EmberRouter {
 }
 
 Router.map(function () {
-  this.route('destination');
+  this.route('destination', { path: '/destination/:trip_id' });
   this.route('test');
-  this.route('date-picker');
+  this.route('date-picker', { path: '/date-picker/:trip_id' });
   this.route('date', function () {
     this.route('detail', {
-      path: '/:date_id',
+      path: '/:trip_id/:date_id',
     });
 
     this.route('index', {
-      path: "/",
+      path: '/:trip_id',
     });
   });
 
-  this.route('addactivity', { path: '/addactivity/:date_id' });
+  this.route('addactivity', { path: '/addactivity/:trip_id/:date_id' });
   this.route('result');
 
   this.route('notFound', { path: '/*path' });
@@ -28,5 +28,4 @@ Router.map(function () {
   this.route('memory', {
     path: '/memory/:id',
   });
-
 });

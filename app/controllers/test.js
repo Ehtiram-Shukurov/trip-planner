@@ -16,7 +16,4 @@ import { getFirestore } from 'firebase/firestore';
 import { tracked } from '@glimmer/tracking';
 import { onSnapshot, query, where } from 'firebase/firestore';
 
-
-export default class TestController extends Controller {
-
-}
+export default class TestController extends Controller {}
