@@ -1,12 +1,13 @@
 import Controller from '@ember/controller';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
+import { service } from '@ember/service';
 import fetch from 'fetch';
 
 export default class DestinationsController extends Controller {
+  @service router;
   @tracked destinationQuery = '';
   @tracked selectedDestination = '';
-  @tracked errorMessage = '';
 
   GOOGLE_API_KEY = 'AIzaSyCiObBVhMw70C36XriG71n7aRDjnxyZkPQ';
 
@@ -17,7 +18,7 @@ export default class DestinationsController extends Controller {
 
     if (query === '') {
       alert('Please enter a destination');
-      return;
+      return false;
     }
 
     const apiURL = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(query)}&key=${this.GOOGLE_API_KEY}`;
@@ -40,20 +41,39 @@ export default class DestinationsController extends Controller {
 
         if (isValid) {
           this.selectedDestination = res.formatted_address;
-          this.errorMessage = '';
+          return true;
         } else {
           alert(
             'Only countries, regions, or cities are allowed. Please try again.',
           );
-          // this.destinationQuery = '';
+          this.destinationQuery = '';
+          document.querySelector('#search').value = '';
+          return false;
         }
       } else {
         alert(
           'Location not found. Please enter a valid country, region, or city.',
         );
+        this.destinationQuery = '';
+        document.querySelector('#search').value = '';
+        return false;
       }
     } catch (error) {
       console.error('Error with Google Maps Embed API: ', error);
+      return false;
     }
+  }
+
+  @action
+  async validateAndNavigate(){
+    let isValid;
+    if(!this.selectedDestination) {
+      isValid = await this.searchQuery();
+      if (!isValid) {
+        return;
+      }
+    }
+    
+    this.router.transitionTo("date-picker");
   }
 }
