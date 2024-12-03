@@ -41,7 +41,7 @@ export default class AuthService extends Service {
   async ensureLoggedIn() {
     await this.ensureInitialized;
     if (!this.user) {
-      throw new Error('NOT LOGGED IN');
+      this.router.transitionTo('index');
     }
   }
 
@@ -64,5 +64,4 @@ export default class AuthService extends Service {
   async sign_out() {
     signOut(this.auth);
   }
-  // professor Kluver code above ^^^
 }
