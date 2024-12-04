@@ -12,7 +12,7 @@ import {
   getDocs,
 } from 'firebase/firestore';
 
-export default class TodoService extends Service {
+export default class TripService extends Service {
   @service firebase;
   @service auth;
 
