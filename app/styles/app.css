@@ -179,9 +179,10 @@ main {
 }
 
 .custom-litepicker input {
-  padding: 0.5em;
-  width: 200px;
+  padding:0.5em;
+  width:250px;
   margin-bottom: 10px;
+  font-size: 15px;
 }
 
 .custom-litepicker {
@@ -207,4 +208,8 @@ main {
 
 .hidden-input {
   display: none;
+}
+
+.month-item-name{
+  color: black;
 }
