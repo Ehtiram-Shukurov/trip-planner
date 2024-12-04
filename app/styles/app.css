@@ -4,7 +4,6 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  overflow-x: auto;
   gap: 1rem;
   width: 100%;
 }
