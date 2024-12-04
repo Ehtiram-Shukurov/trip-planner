@@ -1,22 +1,57 @@
 {{page-title "Project2BigChungus"}}
-  <nav class="navbar" role="navigation" aria-label="main navigation"  style="background-color:#235725">
-    <div id="navbarMenu" class="navbar-menu">
-      <div class="navbar-start">
-        <h1 class="navbar-item mb-0" style="color:white">My Travel Planner</h1>
-        <LinkTo @route="index" class="navbar-item" style="color:white">Home</LinkTo>
-      </div>
+{{!-- TODO: Bug where the hamburgure is hugging to the left --}}
 
-      <div class="navbar-end">
-        <div class="navbar-item">
-          {{#if this.auth.user}}
-            <button class="button is-light" type="button" {{on "click" this.auth.sign_out}}>
-              Log out
-            </button>
-          {{/if}}
-        </div>
+{{#if this.mobile}}
+<nav class="navbar"  style="background-color:#235725">
+  <div class="navbar-brand">    
+    <div class="navbar-start">
+        <h1 class="navbar-item mb-0" style="color:white">My Travel Planner</h1>
+    </div>
+  </div>   
+  <div class="navbar-end">
+      <div class="navbar-burger js-burger {{if this.isActive "is-active"}}" style="margin-right: auto;" data-target="burerMenue" {{on 'click' this.burgerMenue}} >
+        <span style="color:white"></span>
+        <span style="color:white"></span>
+        <span style="color:white"></span>
+        <span style="color:white"></span>
       </div>
     </div>
-  </nav>
+</nav>
+
+
+<div id="burerMenue" class="navbar-menu {{if this.isActive "is-active"}}">
+  <div class="navbar-item">
+    <LinkTo @route="index" class="navbar-item">Home</LinkTo>
+  </div>
+
+  {{#if this.auth.user}}
+    <div class="navbar-item" {{on "click" this.auth.sign_out}}>
+      Log out
+    </div>
+  {{/if}}
+</div>
+
+
+{{else}}
+<nav class="navbar" role="navigation" aria-label="main navigation"  style="background-color:#235725">
+  <div id="navbarMenu" class="navbar-menu">
+    <div class="navbar-start">
+      <h1 class="navbar-item mb-0" style="color:white">My Travel Planner</h1>
+      <LinkTo @route="index" class="navbar-item" style="color:white">Home</LinkTo>
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        {{#if this.auth.user}}
+          <button class="button is-light" type="button" {{on "click" this.auth.sign_out}}>
+            Log out
+          </button>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</nav>
+{{/if}}
 
   <main class="flex-grow-1 d-flex align-items-start justify-content-center py-4">
     <div class="container" style="max-width: 900px;">
