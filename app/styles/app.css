@@ -5,6 +5,8 @@
   justify-content: flex-start;
   align-items: center;
   gap: 1rem;
+  overflow-y: hidden;
+  overflow-x: auto;
   width: 100%;
 }
 
