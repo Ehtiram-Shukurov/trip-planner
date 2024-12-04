@@ -17,7 +17,7 @@
 
   <div class="mt-4 text-center">
 
-    <LinkTo @route="addactivity" @model={{this.model.date}}>
+    <LinkTo @route="addactivity" @models={{array this.model.trip_id this.model.date_id}}>
       <button class="btn btn-primary w-100" style="max-width: 300px;" type="button">
         Add Activity +
       </button>
@@ -26,12 +26,12 @@
   </div>
 </div>
 <div class="d-flex justify-content-between mt-4">
-  <LinkTo @route="date"
+  <LinkTo @route="date" @model={{this.model.trip_id}}
   ><button class="btn btn-primary rounded-circle" type="button">
     <i class="bi bi-arrow-left"></i>
   </button>
   </LinkTo>
-  <!--TODO: make the next button go to the next day if possible. Currently do nothing -->
+  {{!--TODO: make the next button go to the next day if possible. Currently do nothing --}}
     <button class="btn btn-primary rounded-circle" type="button">
       <i class="bi bi-arrow-right"></i>
     </button>

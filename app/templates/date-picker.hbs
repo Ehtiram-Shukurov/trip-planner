@@ -24,13 +24,14 @@
 </div>
 
 <div class="d-flex justify-content-between mt-4">
-  <LinkTo @route="date"
-    ><button class="btn btn-primary rounded-circle" type="button">
+  <LinkTo @route="destination" @model={{this.model}}>
+    <button class="btn btn-primary rounded-circle" type="button">
       <i class="bi bi-arrow-left"></i>
     </button>
   </LinkTo>
-  <LinkTo @route="date">
-    <button class="btn btn-primary rounded-circle" type="button">
+
+  <LinkTo @route="date" @model={{this.model}}>
+    <button class="btn btn-primary rounded-circle" type="button" {{on "click" this.addDays}}>
       <i class="bi bi-arrow-right"></i>
     </button>
   </LinkTo>

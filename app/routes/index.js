@@ -1,12 +1,15 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
-import { tracked } from '@glimmer/tracking';
-import { action } from '@ember/object';
+
 export default class IndexRoute extends Route {
   @service router;
   @service auth;
-  model() {
-    //TODO: create a new trip object model that is to be passed
-    // loads previous trips
+  @service database;
+
+  async beforeModel() {
+    await this.auth.ensureInitialized();
+  }
+
+  async model() {
   }
 }
