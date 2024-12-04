@@ -4,22 +4,22 @@ import { tracked } from '@glimmer/tracking';
 import { service } from '@ember/service';
 
 export default class DatePickerController extends Controller {
+    @service database;
     @service router;
     @tracked litepicker;
     @tracked today = new Date()
     @tracked startDate = new Date();
     @tracked endDate = null;
-    @tracked isMobile = window.innerWidth <= 767;
     @tracked dates = [];
 
-    constructor() {
-        super(...arguments);
-        window.addEventListener('resize', this.handleResize);
-    }
-
-    @action
-    registerAPI(litepicker) {
-        this.litepicker = litepicker;
+  constructor() {
+    super(...arguments);
+    window.addEventListener('resize', this.handleResize);
+  }
+  
+  @action
+  registerAPI(litepicker) {
+    this.litepicker = litepicker;
 
         this.today.setHours(0, 0, 0, 0);
         this.litepicker.setOptions({
@@ -57,16 +57,27 @@ export default class DatePickerController extends Controller {
     }
 
     @action
-    handleResize() {
-        this.isMobile = window.innerWidth <= 767;
-    }
-
-    @action
     async validateAndNavigate(){
         if(!this.dates.length) {
             alert('Please enter a valid date range.')
             return;
         }
-        this.router.transitionTo("date");
+
+        await this.database.addDays(
+            this.startDate.dateInstance,
+            this.endDate.dateInstance,
+            this.model,
+        );
+
+        this.router.transitionTo("date", this.model);
+    }
+
+    get isMobile() {
+        // code below from https://dev.to/timhuang/a-simple-way-to-detect-if-browser-is-on-a-mobile-device-with-javascript-44j3
+        if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

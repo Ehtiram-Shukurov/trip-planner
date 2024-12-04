@@ -1,11 +1,13 @@
 import Controller from '@ember/controller';
 import { tracked } from '@glimmer/tracking';
-import { action } from '@ember/object';
 import { service } from '@ember/service';
+import { action } from '@ember/object';
 import fetch from 'fetch';
 
 export default class DestinationsController extends Controller {
   @service router;
+  @service database;
+
   @tracked destinationQuery = '';
   @tracked selectedDestination = '';
 
@@ -73,7 +75,9 @@ export default class DestinationsController extends Controller {
         return;
       }
     }
-    
-    this.router.transitionTo("date-picker");
+
+    await this.database.setDestination(this.model, this.selectedDestination);
+    this.router.transitionTo("date-picker", this.model);
   }
+
 }

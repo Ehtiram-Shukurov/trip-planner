@@ -1,0 +1,52 @@
+{{page-title "Home"}}
+<div class="content-wrapper container my-4" {{on-auth-change this.refreshHomeListener}}>
+  {{!-- Trips Section --}}
+  <section class="mb-4">
+    <h1 class="mb-3">Trips</h1>
+    <div class="carousel-container">
+      <div class="carousel">
+        <div class="carousel-card">
+          <div class="card-content d-flex justify-content-center align-items-center">
+            <button class="btn btn-outline-primary d-flex justify-content-center align-items-center"
+              style="width: 80px; height: 80px; border-radius: 50%; position: relative;" type="button" {{on "click"
+              this.createTrip}}>
+              <i class="bi bi-plus"></i>
+            </button>
+          </div>
+        </div>
+  
+        {{#each this.model as |trip|}}
+        <div class="carousel-card">
+          <div class="card-content d-flex flex-column justify-content-center align-items-center">
+            <LinkTo @route="date" @model={{trip.id}} class="btn btn-light w-100">
+              <h2 class="mb-0">{{trip.destination}}</h2>
+            </LinkTo>
+          </div>
+        </div>
+        {{/each}}
+  
+      </div>
+    </div>
+  </section>
+
+
+  <hr class="my-4">
+
+  {{!-- Memories Section --}}
+  <section>
+    <h1 class="mb-3">Memories</h1>
+    <div class="carousel-container">
+      <div class="carousel">
+        {{#each this.trips as |trip| }}
+          {{#if trip.completed}}
+            <div class="carousel-card">
+              <div class="card-content">
+                <img src="https://via.placeholder.com/100" class="img-fluid rounded" alt="Memory 1">
+              </div>
+            </div>
+          {{/if}}
+        {{/each}}
+      </div>
+    </div>
+  </section>
+</div>
