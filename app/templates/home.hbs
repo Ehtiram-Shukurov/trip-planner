@@ -7,31 +7,28 @@
       <div class="carousel">
         <div class="carousel-card">
           <div class="card-content d-flex justify-content-center align-items-center">
-            <LinkTo @route="destination"
-                    class="btn btn-outline-primary d-flex justify-content-center align-items-center"
-                    style="width: 80px; height: 80px; border-radius: 50%; position: relative;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-plus"  style="position: absolute; right: 7px; bottom: 10px;">
-                <path
-                  d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-              </svg>
-            </LinkTo>
-
+            <button class="btn btn-outline-primary d-flex justify-content-center align-items-center"
+              style="width: 80px; height: 80px; border-radius: 50%; position: relative;" type="button" {{on "click"
+              this.createTrip}}>
+              <i class="bi bi-plus"></i>
+            </button>
           </div>
         </div>
-      </div>
-      {{!-- TODO: add for loop for past created trips --}}
-      {{!-- Existing Trip Cards --}}
-      {{#each this.trips as |trip| }}
-        {{#unless trip.completed}}
-          <div class="carousel-card">
-            <div class="card-content">
-              <h2>Trip 1</h2>
-            </div>
+  
+        {{#each this.model as |trip|}}
+        <div class="carousel-card">
+          <div class="card-content d-flex flex-column justify-content-center align-items-center">
+            <LinkTo @route="date" @model={{trip.id}} class="btn btn-light w-100">
+              <h2 class="mb-0">{{trip.destination}}</h2>
+            </LinkTo>
           </div>
-        {{/unless}}
-      {{/each}}
+        </div>
+        {{/each}}
+  
+      </div>
     </div>
   </section>
+
 
   <hr class="my-4">
 

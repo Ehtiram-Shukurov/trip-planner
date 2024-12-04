@@ -1,8 +1,11 @@
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
+import { service } from '@ember/service';
 
 export default class DatePickerController extends Controller {
+  @service database;
+
   @tracked
   litepicker;
   @tracked
@@ -20,7 +23,7 @@ export default class DatePickerController extends Controller {
     super(...arguments);
     window.addEventListener('resize', this.handleResize);
   }
-
+  
   @action
   registerAPI(litepicker) {
     this.litepicker = litepicker;
@@ -49,12 +52,19 @@ export default class DatePickerController extends Controller {
       dates.push(new Date(currentDate.getTime()));
       currentDate.setDate(currentDate.getDate() + 1);
     }
-
-    console.log(dates);
   }
 
   @action
   handleResize() {
     this.isMobile = window.innerWidth <= 767;
+  }
+
+  @action
+  async addDays() {
+    await this.database.addDays(
+      this.startDate.dateInstance,
+      this.endDate.dateInstance,
+      this.model,
+    );
   }
 }

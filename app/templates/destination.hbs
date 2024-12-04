@@ -20,8 +20,8 @@
     </button>
   </LinkTo>
     {{!-- replace be next page link there --}}
-  <LinkTo @route="date-picker">
-    <button class="btn btn-primary rounded-circle" type="button">
+  <LinkTo @route="date-picker" @model={{this.model}} >
+    <button class="btn btn-primary rounded-circle" type="button" {{on "click" this.saveDestination}}>
       <i class="bi bi-arrow-right"></i>
     </button>
   </LinkTo>

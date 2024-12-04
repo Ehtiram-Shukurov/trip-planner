@@ -6,6 +6,7 @@ import { onSnapshot, query, where } from 'firebase/firestore';
 export default class HomeController extends Controller {
   @service firebase;
   @service auth;
+  @service router;
   @service database;
 
   @action
@@ -32,4 +33,11 @@ export default class HomeController extends Controller {
       });
     }
   }
+
+  @action
+  async createTrip() {
+    const tripId = await this.database.createTrip();
+    this.router.transitionTo('destination', tripId);
+  }
+
 }

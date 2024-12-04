@@ -1,9 +1,12 @@
 import Controller from '@ember/controller';
 import { tracked } from '@glimmer/tracking';
+import { service } from '@ember/service';
 import { action } from '@ember/object';
 import fetch from 'fetch';
 
 export default class DestinationsController extends Controller {
+  @service database;
+
   @tracked destinationQuery = '';
   @tracked selectedDestination = '';
   @tracked errorMessage = '';
@@ -55,5 +58,9 @@ export default class DestinationsController extends Controller {
     } catch (error) {
       console.error('Error with Google Maps Embed API: ', error);
     }
+  }
+  @action
+  async saveDestination() {
+    await this.database.setDestination(this.model, this.selectedDestination);
   }
 }

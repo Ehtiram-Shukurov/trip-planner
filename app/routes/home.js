@@ -3,7 +3,16 @@ import { service } from "@ember/service";
 
 export default class HomeRoute extends Route {
   @service auth;
-  beforeModel(_transition) {
-    this.auth.ensureLoggedIn();
+  @service database;
+  
+  async beforeModel(_transition) {
+    await this.auth.ensureLoggedIn();
+  }
+
+  async model() {
+    const trips = await this.database.getUserTrips();
+    console.log("Home", trips);
+    return trips;
+
   }
 }
