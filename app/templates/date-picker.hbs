@@ -30,9 +30,7 @@
     </button>
   </LinkTo>
 
-  <LinkTo @route="date" @model={{this.model}}>
-    <button class="btn btn-primary rounded-circle" type="button" {{on "click" this.addDays}}>
-      <i class="bi bi-arrow-right"></i>
-    </button>
-  </LinkTo>
+  <button class="btn btn-primary rounded-circle" type="button" {{on "click" this.validateAndNavigate}}>
+    <i class="bi bi-arrow-right"></i>
+  </button>
 </div>
