@@ -39,5 +39,4 @@ export default class HomeController extends Controller {
     const tripId = await this.database.createTrip();
     this.router.transitionTo('destination', tripId);
   }
-
 }

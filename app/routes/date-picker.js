@@ -6,5 +6,4 @@ export default class DatePickerRoute extends Route {
   model(params) {
     return params.trip_id;
   }
-  
 }

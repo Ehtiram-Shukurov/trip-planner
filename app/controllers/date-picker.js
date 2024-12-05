@@ -4,80 +4,86 @@ import { tracked } from '@glimmer/tracking';
 import { service } from '@ember/service';
 
 export default class DatePickerController extends Controller {
-    @service database;
-    @service router;
-    @tracked litepicker;
-    @tracked today = new Date()
-    @tracked startDate = new Date();
-    @tracked endDate = null;
-    @tracked dates = [];
+  @service database;
+  @service router;
+  @tracked litepicker;
+  @tracked today = new Date();
+  @tracked startDate = new Date();
+  @tracked endDate = null;
+  @tracked dates = [];
 
   constructor() {
     super(...arguments);
     window.addEventListener('resize', this.handleResize);
   }
-  
+
   @action
   registerAPI(litepicker) {
     this.litepicker = litepicker;
 
-        this.today.setHours(0, 0, 0, 0);
-        this.litepicker.setOptions({
-            minDate: this.today,
-        });
+    this.today.setHours(0, 0, 0, 0);
+    this.litepicker.setOptions({
+      minDate: this.today,
+    });
 
-        document.querySelector('#ember77').placeholder = "YYYY-MM-DD - YYYY-MM-DD";
+    document.querySelector('#ember77').placeholder = 'YYYY-MM-DD - YYYY-MM-DD';
+  }
+
+  @action
+  onDateChanged(startDate, endDate) {
+    if (
+      startDate.dateInstance < this.today ||
+      endDate.dateInstance < this.today
+    ) {
+      alert('Date has already passed.');
+      document.querySelector('#ember77').value = '';
+      this.dates = [];
+      this.litepicker.clearSelection();
+      this.litepicker.gotoDate(this.today);
+
+      return;
     }
 
+    this.startDate = startDate;
+    this.endDate = endDate;
 
-    @action
-    onDateChanged(startDate, endDate) {
-        if (startDate.dateInstance < this.today || endDate.dateInstance < this.today) {
-            alert("Date has already passed.")
-            document.querySelector('#ember77').value = '';
-            this.dates = [];
-            this.litepicker.clearSelection();
-            this.litepicker.gotoDate(this.today);
-            
-            return;
-        }
+    let currentDate = new Date(this.startDate.dateInstance);
 
-        this.startDate = startDate;
-        this.endDate = endDate;
-    
-        let currentDate = new Date(this.startDate.dateInstance);
-
-        //gets the range of dates from startDate to endDate
-        while (currentDate <= this.endDate.dateInstance) {
-            this.dates.push(new Date(currentDate.getTime())); 
-            currentDate.setDate(currentDate.getDate() + 1); 
-        }      
-
-        console.log(this.dates);
+    //gets the range of dates from startDate to endDate
+    while (currentDate <= this.endDate.dateInstance) {
+      this.dates.push(new Date(currentDate.getTime()));
+      currentDate.setDate(currentDate.getDate() + 1);
     }
 
-    @action
-    async validateAndNavigate(){
-        if(!this.dates.length) {
-            alert('Please enter a valid date range.')
-            return;
-        }
+    console.log(this.dates);
+  }
 
-        await this.database.addDays(
-            this.startDate.dateInstance,
-            this.endDate.dateInstance,
-            this.model,
-        );
-
-        this.router.transitionTo("date", this.model);
+  @action
+  async validateAndNavigate() {
+    if (!this.dates.length) {
+      alert('Please enter a valid date range.');
+      return;
     }
 
-    get isMobile() {
-        // code below from https://dev.to/timhuang/a-simple-way-to-detect-if-browser-is-on-a-mobile-device-with-javascript-44j3
-        if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
-            return true;
-        }else{
-            return false;
-        }
+    await this.database.addDays(
+      this.startDate.dateInstance,
+      this.endDate.dateInstance,
+      this.model,
+    );
+
+    this.router.transitionTo('date', this.model);
+  }
+
+  get isMobile() {
+    // code below from https://dev.to/timhuang/a-simple-way-to-detect-if-browser-is-on-a-mobile-device-with-javascript-44j3
+    if (
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent,
+      )
+    ) {
+      return true;
+    } else {
+      return false;
     }
+  }
 }

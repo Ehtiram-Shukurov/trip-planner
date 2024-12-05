@@ -10,6 +10,5 @@ export default class IndexRoute extends Route {
     await this.auth.ensureInitialized();
   }
 
-  async model() {
-  }
+  async model() {}
 }

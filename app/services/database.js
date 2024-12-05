@@ -31,7 +31,7 @@ export default class TripService extends Service {
     return doc(this.db, `user/${this.uid}/trips/${id}`);
   }
 
-  async getUserTrips(){
+  async getUserTrips() {
     const trips = [];
     const querySnapshot = await getDocs(this.tripsRef);
     querySnapshot.forEach((doc) => {
@@ -82,7 +82,7 @@ export default class TripService extends Service {
     const tripRef = await this.getTrip(tripId);
     const snap = await getDoc(tripRef);
     const tripSnap = snap.data();
-    
+
     //transfer days to MM/DD/YYYY format and sort
     const days = Object.keys(tripSnap.days)
       .map((key) => {
@@ -113,7 +113,7 @@ export default class TripService extends Service {
     return day;
   }
 
-  async addActivity (tripId, dateIndex, activity) {
+  async addActivity(tripId, dateIndex, activity) {
     const tripRef = await this.getTrip(tripId);
     const snap = await getDoc(tripRef);
     const tripSnap = snap.data();

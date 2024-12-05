@@ -37,9 +37,17 @@ export default class AddActivityController extends Controller {
     };
 
     //TODO Saving part
-    await this.database.addActivity(this.model.trip_id, this.model.date_id, newActivity);
+    await this.database.addActivity(
+      this.model.trip_id,
+      this.model.date_id,
+      newActivity,
+    );
 
     // Redirect back to the day route
-    this.router.transitionTo('date.detail', this.model.trip_id, this.model.date_id);
+    this.router.transitionTo(
+      'date.detail',
+      this.model.trip_id,
+      this.model.date_id,
+    );
   }
 }
