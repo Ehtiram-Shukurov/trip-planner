@@ -2,21 +2,21 @@
 <div class="container mt-4">
   <div class="row">
     <div class="col-12 text-center">
-      <h1 class="mb-3">Add Activity</h1>
+      <h1 class="mb-3 title" style="color:black">Add Activity</h1>
     </div>
   </div>
 
   <form {{on "submit" this.saveActivity}} class="needs-validation">
     <div class="mb-3">
-      <label for="timeInput" class="form-label">Time</label>
+      <label for="timeInput" class="form-label" style="color:black">Time</label>
       <input type="time" id="timeInput" class="form-control" {{on "input" this.updateTime}}>
     </div>
     <div class="mb-3">
-      <label for="budgetInput" class="form-label">Budget</label>
+      <label for="budgetInput" class="form-label" style="color:black">Budget</label>
       <input type="text" id="budgetInput" class="form-control" placeholder="$10" {{on "input" this.updateBudget}}>
     </div>
     <div class="mb-3">
-      <label for="locationInput" class="form-label">Location</label>
+      <label for="locationInput" class="form-label" style="color:black">Location</label>
       <input type="text" id="locationInput" class="form-control" placeholder="Enter location" {{on "input" this.updateLocation}}>
     </div>
     <button type="submit" class="btn btn-success w-100">Save</button>
