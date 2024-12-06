@@ -1,6 +1,49 @@
 {{page-title "Journal"}}
 
-<div class="card shadow p-3 mb-5">
+<BsCarousel
+  @autoPlay={{true}}
+  @wrap={{true}}
+  @index={{0}}
+  @interval={{0}}
+  @keyboard={{true}}
+  @ltr={{true}}
+  @pauseOnMouseEnter={{true}}
+  @showControls={{true}}
+  @showIndicators={{true}}
+  data-test-example="main"
+  as |card|
+>
+  {{#each this.model.activities as |activity|}}
+    <card.slide>
+      <div class="card shadow p-3 mb-5">
+        <div style="margin: 0% 10% 5%">
+            <h2 class="text-center mb-4">Date: {{this.model.date}}</h2>
+            <ul class="list-group">
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <div>
+                      <h2 class="text-center">{{activity.location}}</h2>
+                  </div>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <div>
+                      <CameraGallery/>
+                  </div>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+              <div class="mb-3">
+                  <textarea class="form-control" id="location_id" rows="5" cols="70">Journal Entry.....</textarea>
+              </div>
+              </li>
+              <button class="button is-primary" type="button">Save</button>
+            </ul>
+          </div>
+        </div>
+        
+    </card.slide>
+  {{/each}}
+</BsCarousel>
+
+{{!-- <div class="card shadow p-3 mb-5">
     <h2 class="text-center mb-4">Date: {{this.model.date}}</h2>
     <ul class="list-group">
         {{#each this.model.activities as |activity|}}
@@ -32,7 +75,7 @@
     </ul>
   
 
-  </div>
+  </div> --}}
   <div class="d-flex justify-content-between mt-4">
     <LinkTo @route="date" @model={{this.model.trip_id}}
     ><button class="btn btn-primary rounded-circle" type="button">
