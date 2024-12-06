@@ -2,6 +2,7 @@ import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import { service } from '@ember/service';
+import { later } from '@ember/runloop';
 
 export default class DatePickerController extends Controller {
     @service database;
@@ -12,23 +13,29 @@ export default class DatePickerController extends Controller {
     @tracked endDate = null;
     @tracked dates = [];
 
-  constructor() {
-    super(...arguments);
-    window.addEventListener('resize', this.handleResize);
-  }
+    constructor() {
+        super(...arguments);
+        window.addEventListener('resize', this.handleResize);
+    }
   
-  @action
-  registerAPI(litepicker) {
-    this.litepicker = litepicker;
-
+    @action
+    registerAPI(litepicker) {
+        this.litepicker = litepicker;
+        
         this.today.setHours(0, 0, 0, 0);
         this.litepicker.setOptions({
             minDate: this.today,
         });
 
-        document.querySelector('#ember77').placeholder = "YYYY-MM-DD - YYYY-MM-DD";
+        later(() => {
+            let input = document.querySelector('.litepicker-container input');
+            if (input) {
+                input.placeholder = "YYYY-MM-DD - YYYY-MM-DD";
+            } else {
+                console.error("Litepicker input field not found.");
+            }
+        }, 50);
     }
-
 
     @action
     onDateChanged(startDate, endDate) {
