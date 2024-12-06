@@ -2,45 +2,46 @@
 
 <div class="card shadow p-3 mb-5">
     <h2 class="text-center mb-4">Date: {{this.model.date}}</h2>
-  
     <ul class="list-group">
-      {{#each this.model.activities as |activity|}}
-      <li class="list-group-item d-flex justify-content-between align-items-center">
-        <div>
-          <strong>{{activity.time}}</strong>
-          <span class="text-muted d-block">{{activity.location}}</span>
+        {{#each this.model.activities as |activity|}}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div>
+                <h2 class="text-center">{{activity.location}}</h2>
+            </div>
+        </li>
+
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+
+            <div>
+                <CameraGallery/>
+            </div>
+        </li>
+
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+
+        <div class="mb-3">
+            <textarea class="form-control" id="location_id" rows="5">Journal Entry.....</textarea>
         </div>
-      </li>
+        
+        </li>
+
+
+      <button class="button is-primary" type="button">Save</button>
+
       {{/each}}
     </ul>
+  
 
-    <div class="mt-4 text-center">
-    </div>
-</div>
-
+  </div>
   <div class="d-flex justify-content-between mt-4">
-    <LinkTo @route="memory" @model={{this.model.trip_id}}
+    <LinkTo @route="date" @model={{this.model.trip_id}}
     ><button class="btn btn-primary rounded-circle" type="button">
       <i class="bi bi-arrow-left"></i>
     </button>
     </LinkTo>
-
+    {{!--TODO: make the next button go to the next day if possible. Currently do nothing --}}
+      <button class="btn btn-primary rounded-circle" type="button">
+        <i class="bi bi-arrow-right"></i>
+      </button>
   </div>
-
-
-
-  
-
-{{page-title "Memory"}}
-<div>
-    <h2 class="text-center"> Location 1</h2>
-    <div>
-        <CameraGallery/>
-    </div>
-    <div class="mb-3">
-        <textarea class="form-control" id="location_id" rows="5">Journal Entry.....</textarea>
-    </div>
-
-    <button class="button is-primary" type="button">Save</button>
-</div>
 {{outlet}}
