@@ -5,86 +5,93 @@ import { service } from '@ember/service';
 import { later } from '@ember/runloop';
 
 export default class DatePickerController extends Controller {
-    @service database;
-    @service router;
-    @tracked litepicker;
-    @tracked today = new Date()
-    @tracked startDate = new Date();
-    @tracked endDate = null;
-    @tracked dates = [];
+  @service database;
+  @service router;
+  @tracked litepicker;
+  @tracked today = new Date();
+  @tracked startDate = new Date();
+  @tracked endDate = null;
+  @tracked dates = [];
 
-    constructor() {
-        super(...arguments);
-        window.addEventListener('resize', this.handleResize);
-    }
-  
-    @action
-    registerAPI(litepicker) {
-        this.litepicker = litepicker;
-        
-        this.today.setHours(0, 0, 0, 0);
-        this.litepicker.setOptions({
-            minDate: this.today,
-        });
+  constructor() {
+    super(...arguments);
+    window.addEventListener('resize', this.handleResize);
+  }
 
-        later(() => {
-            let input = document.querySelector('.litepicker-container input');
-            if (input) {
-                input.placeholder = "YYYY-MM-DD - YYYY-MM-DD";
-            } else {
-                console.error("Litepicker input field not found.");
-            }
-        }, 50);
-    }
+  @action
+  registerAPI(litepicker) {
+    this.litepicker = litepicker;
 
-    @action
-    onDateChanged(startDate, endDate) {
-        if (startDate.dateInstance < this.today || endDate.dateInstance < this.today) {
-            alert("Date has already passed.")
-            document.querySelector('#ember77').value = '';
-            this.dates = [];
-            this.litepicker.clearSelection();
-            this.litepicker.gotoDate(this.today);
-            
-            return;
-        }
+    this.today.setHours(0, 0, 0, 0);
+    this.litepicker.setOptions({
+      minDate: this.today,
+    });
 
-        this.startDate = startDate;
-        this.endDate = endDate;
-    
-        let currentDate = new Date(this.startDate.dateInstance);
+    later(() => {
+      let input = document.querySelector('.litepicker-container input');
+      if (input) {
+        input.placeholder = 'YYYY-MM-DD - YYYY-MM-DD';
+      } else {
+        console.error('Litepicker input field not found.');
+      }
+    }, 50);
+  }
 
-        //gets the range of dates from startDate to endDate
-        while (currentDate <= this.endDate.dateInstance) {
-            this.dates.push(new Date(currentDate.getTime())); 
-            currentDate.setDate(currentDate.getDate() + 1); 
-        }      
+  @action
+  onDateChanged(startDate, endDate) {
+    if (
+      startDate.dateInstance < this.today ||
+      endDate.dateInstance < this.today
+    ) {
+      alert('Date has already passed.');
+      document.querySelector('#ember77').value = '';
+      this.dates = [];
+      this.litepicker.clearSelection();
+      this.litepicker.gotoDate(this.today);
 
-        console.log(this.dates);
+      return;
     }
 
-    @action
-    async validateAndNavigate(){
-        if(!this.dates.length) {
-            alert('Please enter a valid date range.')
-            return;
-        }
+    this.startDate = startDate;
+    this.endDate = endDate;
 
-        await this.database.addDays(
-            this.startDate.dateInstance,
-            this.endDate.dateInstance,
-            this.model,
-        );
+    let currentDate = new Date(this.startDate.dateInstance);
 
-        this.router.transitionTo("date", this.model);
+    //gets the range of dates from startDate to endDate
+    while (currentDate <= this.endDate.dateInstance) {
+      this.dates.push(new Date(currentDate.getTime()));
+      currentDate.setDate(currentDate.getDate() + 1);
     }
 
-    get isMobile() {
-        // code below from https://dev.to/timhuang/a-simple-way-to-detect-if-browser-is-on-a-mobile-device-with-javascript-44j3
-        if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
-            return true;
-        }else{
-            return false;
-        }
+    console.log(this.dates);
+  }
+
+  @action
+  async validateAndNavigate() {
+    if (!this.dates.length) {
+      alert('Please enter a valid date range.');
+      return;
     }
+
+    await this.database.addDays(
+      this.startDate.dateInstance,
+      this.endDate.dateInstance,
+      this.model,
+    );
+
+    this.router.transitionTo('date', this.model);
+  }
+
+  get isMobile() {
+    // code below from https://dev.to/timhuang/a-simple-way-to-detect-if-browser-is-on-a-mobile-device-with-javascript-44j3
+    if (
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent,
+      )
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

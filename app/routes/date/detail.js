@@ -4,16 +4,15 @@ import { service } from '@ember/service';
 export default class DateDetailRoute extends Route {
   @service auth;
   @service database;
-  
 
   async beforeModel(params) {
-    await this.auth.ensureInitialized();
+    await this.auth.ensureLoggedIn();
   }
 
   async model(params) {
     const { trip_id, date_id } = params;
     const day = await this.database.getDay(trip_id, date_id);
- 
+
     return {
       date: day.date,
       date_id: date_id,

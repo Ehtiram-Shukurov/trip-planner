@@ -67,9 +67,9 @@ export default class DestinationsController extends Controller {
   }
 
   @action
-  async validateAndNavigate(){
+  async validateAndNavigate() {
     let isValid;
-    if(!this.selectedDestination) {
+    if (!this.selectedDestination) {
       isValid = await this.searchQuery();
       if (!isValid) {
         return;
@@ -77,7 +77,6 @@ export default class DestinationsController extends Controller {
     }
 
     await this.database.setDestination(this.model, this.selectedDestination);
-    this.router.transitionTo("date-picker", this.model);
+    this.router.transitionTo('date-picker', this.model);
   }
-
 }

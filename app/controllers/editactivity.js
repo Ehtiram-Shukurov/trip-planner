@@ -3,13 +3,22 @@ import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import { service } from '@ember/service';
 
-export default class AddActivityController extends Controller {
+export default class EditActivityController extends Controller {
   @service router;
   @service database;
 
   @tracked time = '';
   @tracked budget = '';
   @tracked location = '';
+
+  @action
+  initializeFields() {
+    if (this.model.activity) {
+      this.time = this.model.activity.time || '';
+      this.budget = this.model.activity.budget || '';
+      this.location = this.model.activity.location || '';
+    }
+  }
 
   @action
   updateTime(event) {
@@ -29,6 +38,8 @@ export default class AddActivityController extends Controller {
   @action
   async saveActivity(event) {
     event.preventDefault();
+    event.preventDefault();
+
     if (!this.time) {
       alert('Please select a time');
       return;
@@ -42,16 +53,18 @@ export default class AddActivityController extends Controller {
       return;
     }
 
-    const newActivity = {
+
+    const updatedActivity = {
       time: this.time,
       budget: this.budget,
       location: this.location,
     };
 
-    await this.database.addActivity(
+    await this.database.editActivity(
       this.model.trip_id,
       this.model.date_id,
-      newActivity,
+      this.model.activityIndex,
+      updatedActivity,
     );
 
     this.router.transitionTo(
