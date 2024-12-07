@@ -7,61 +7,71 @@ import {
   getAuth,
   signOut,
   onAuthStateChanged,
-  authStateReady,
 } from 'firebase/auth';
 import { tracked } from '@glimmer/tracking';
-
-import { getFirestore } from 'firebase/firestore';
-import {
-  collection,
-  doc,
-  addDoc,
-  setDoc,
-  updateDoc,
-  arrayUnion,
-  arrayRemove,
-  Timestamp,
-  getDoc,
-} from 'firebase/firestore';
 
 export default class AuthService extends Service {
   @service firebase;
   @service router;
 
   auth = getAuth(this.firebase.app);
-  @tracked user = undefined;
+  @tracked user = null;
 
-  // await the result of this function to wait for the user data to be loaded.
-  // Otherwise you can run into issues accessing the data before it's loaded
-  async ensureInitialized() {
-    await this.auth.authStateReady();
-    this.user = this.auth.currentUser;
+  constructor() {
+    super(...arguments);
+    this.initializeAuthState();
+  }
+  initializeAuthState() {
+    onAuthStateChanged(this.auth, (user) => {
+      this.user = user;
+      if (user) {
+        console.log('User signed in:', user.email);
+      } else {
+        console.log('No user signed in.');
+      }
+    });
   }
 
-  async ensureLoggedIn() {
-    await this.ensureInitialized;
-    if (!this.user) {
-      this.router.transitionTo('index');
+  async ensureInitialized() {
+    if (this.auth.currentUser === null) {
+      return new Promise((resolve) =>
+        onAuthStateChanged(this.auth, () => resolve()),
+      );
     }
   }
 
-  async init() {
-    super.init(...arguments);
+  async ensureLoggedIn() {
     await this.ensureInitialized();
-    onAuthStateChanged(this.auth, (user) => (this.user = user));
+    if (!this.user) {
+      this.router.transitionTo('login');
+    }
   }
 
   @action
   async sign_in_with_popup() {
-    const provider = new GoogleAuthProvider();
-    provider.addScope('profile');
-    provider.addScope('email');
-    const result = await signInWithPopup(this.auth, provider);
-    return result;
+    try {
+      const provider = new GoogleAuthProvider();
+      provider.addScope('profile');
+      provider.addScope('email');
+      const result = await signInWithPopup(this.auth, provider);
+
+      console.log('User signed in:', result.user);
+      return result;
+    } catch (error) {
+      console.error('Error during sign in:', error);
+      throw error;
+    }
   }
 
   @action
   async sign_out() {
-    signOut(this.auth);
+    try {
+      await signOut(this.auth);
+      this.user = null;
+      this.router.transitionTo('index');
+      console.log('User signed out.');
+    } catch (error) {
+      console.error('Error during sign out:', error);
+    }
   }
 }

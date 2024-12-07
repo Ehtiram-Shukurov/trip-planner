@@ -21,7 +21,7 @@
 
 <div id="burerMenue" class="navbar-menu {{if this.isActive "is-active"}}">
   <div class="navbar-item">
-    <LinkTo @route="index" class="navbar-item">Home</LinkTo>
+    <LinkTo @route="home" class="navbar-item">Home</LinkTo>
   </div>
 
   {{#if this.auth.user}}
@@ -37,7 +37,7 @@
   <div id="navbarMenu" class="navbar-menu">
     <div class="navbar-start">
       <h1 class="navbar-item mb-0" style="color:white">My Travel Planner</h1>
-      <LinkTo @route="index" class="navbar-item" style="color:white">Home</LinkTo>
+      <LinkTo @route="home" class="navbar-item" style="color:white">Home</LinkTo>
     </div>
 
     <div class="navbar-end">

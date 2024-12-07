@@ -4,16 +4,28 @@
   <h2 class="text-center mb-4">Date: {{this.model.date}}</h2>
 
   <ul class="list-group">
-    {{#each this.model.activities as |activity|}}
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-      <div>
-        <strong>{{activity.time}}</strong>
-        <span class="text-muted d-block">{{activity.location}}</span>
-      </div>
-      <span class="badge bg-secondary">{{activity.budget}}</span>
-    </li>
-    {{/each}}
-  </ul>
+  {{#each this.model.activities as |activity index|}}
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    <div>
+      <strong style="color: black;">{{activity.time}}</strong>
+      <span class="text d-block">{{activity.location}}</span>
+    </div>
+    <span class="badge bg-secondary">{{activity.budget}}</span>
+
+    <LinkTo
+    @route="editactivity"
+    @models={{array this.model.trip_id this.model.date_id index}}
+    class="btn btn-outline-secondary btn-sm"
+  >
+    Edit
+  </LinkTo>
+    <button
+      class="btn btn-outline-danger btn-sm" type="button" {{on "click" (fn this.deleteActivity index)}}>
+      Delete
+    </button>
+  </li>
+  {{/each}}
+</ul>
 
   <div class="mt-4 text-center">
 

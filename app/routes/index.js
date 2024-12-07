@@ -8,8 +8,10 @@ export default class IndexRoute extends Route {
 
   async beforeModel() {
     await this.auth.ensureInitialized();
+    if (this.auth.user) {
+      this.router.transitionTo('home');
+    }
   }
 
-  async model() {
-  }
+  async model() {}
 }

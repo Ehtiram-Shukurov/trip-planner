@@ -5,8 +5,7 @@
   justify-content: flex-start;
   align-items: center;
   gap: 1rem;
-  overflow-y: hidden;
-  overflow-x: auto;
+  overflow: auto hidden;
   width: 100%;
 }
 
@@ -173,15 +172,14 @@ main {
 }
 
 .litepicker-container {
-  max-width: 100%;
   margin: auto;
   z-index: 9999;
   max-width: 600px;
 }
 
 .custom-litepicker input {
-  padding:0.5em;
-  width:250px;
+  padding: 0.5em;
+  width: 250px;
   margin-bottom: 10px;
   font-size: 15px;
 }
@@ -211,6 +209,6 @@ main {
   display: none;
 }
 
-.month-item-name{
+.month-item-name {
   color: black;
 }
