@@ -46,7 +46,7 @@ export default class EditTripController extends Controller {
     if (this.startDate && this.endDate) {
       this.litepicker.setDateRange(
         this.startDate.toISOString().split('T')[0],
-        this.endDate.toISOString().split('T')[0]
+        this.endDate.toISOString().split('T')[0],
       );
     }
   }
@@ -76,7 +76,7 @@ export default class EditTripController extends Controller {
     }
 
     const apiURL = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
-      query
+      query,
     )}&key=${this.GOOGLE_API_KEY}`;
 
     try {

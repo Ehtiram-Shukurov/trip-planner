@@ -47,4 +47,19 @@ export default class HomeController extends Controller {
       this.router.refresh();
     }
   }
+
+  @action
+  async continueSetup(tripId) {
+    const trip = await this.database.getTrip(tripId);
+
+    if(!trip.destination) {
+      this.router.transitionTo('destination', tripId);
+    } else if(!this.trips.days) {
+      this.router.transitionTo('date-picker', tripId);
+    }
+    else {
+      this.router.transitionTo('date', tripId);
+    }
+  }
+
 }
