@@ -26,13 +26,14 @@
                   </div>
               </li>
               <li class="list-group-item d-flex justify-content-between align-items-center">
-                  <div>
-                      <CameraGallery/>
-                  </div>
+                <div id="{{activity.location}}" >
+                  <CameraGallery @data={{activity.location}}>
+                  </CameraGallery>
+                </div>
               </li>
               <li class="list-group-item d-flex justify-content-between align-items-center">
               <div class="mb-3">
-                  <textarea class="form-control" id="location_id" rows="5" cols="70">Journal Entry.....</textarea>
+                  <textarea class="form-control" id="location_id" rows="5" cols="100">Journal Entry.....</textarea>
               </div>
               </li>
               <button class="button is-primary" type="button">Save</button>
@@ -56,8 +57,9 @@
 
         <li class="list-group-item d-flex justify-content-between align-items-center">
 
-            <div>
-                <CameraGallery/>
+            <div id="{{activity.location}}" >
+                <CameraGallery @data={{activity.location}}>
+                </CameraGallery>
             </div>
         </li>
 
@@ -78,14 +80,10 @@
 
   </div> --}}
   <div class="d-flex justify-content-between mt-4">
-    <LinkTo @route="date" @model={{this.model.trip_id}}
+    <LinkTo @route="memory" @model={{this.model.trip_id}}
     ><button class="btn btn-primary rounded-circle" type="button">
       <i class="bi bi-arrow-left"></i>
     </button>
     </LinkTo>
-    {{!--TODO: make the next button go to the next day if possible. Currently do nothing --}}
-      <button class="btn btn-primary rounded-circle" type="button">
-        <i class="bi bi-arrow-right"></i>
-      </button>
   </div>
 {{outlet}}
