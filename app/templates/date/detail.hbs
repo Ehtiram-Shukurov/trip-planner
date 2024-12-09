@@ -34,18 +34,19 @@
         Add Activity +
       </button>
     </LinkTo>
-    
+
   </div>
 </div>
 <div class="d-flex justify-content-between mt-4">
-  <LinkTo @route="date" @model={{this.model.trip_id}}
-  ><button class="btn btn-primary rounded-circle" type="button">
+  <LinkTo @route="date" @model={{this.model.trip_id}}>
+    <button class="btn btn-primary rounded-circle" type="button">
     <i class="bi bi-arrow-left"></i>
   </button>
   </LinkTo>
-  {{!--TODO: make the next button go to the next day if possible. Currently do nothing --}}
+  <LinkTo @route="date" @model={{this.model.trip_id}}>
     <button class="btn btn-primary rounded-circle" type="button">
-      <i class="bi bi-arrow-right"></i>
+      <i class="bi bi-check"></i>
     </button>
+  </LinkTo>
 </div>
 {{outlet}}
