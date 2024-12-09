@@ -9,6 +9,8 @@ export default class HomeController extends Controller {
   @service router;
   @service database;
 
+  trips = [];
+
   @action
   refreshHomeListener(user) {
     if (this.unsubscribe) {
@@ -23,8 +25,6 @@ export default class HomeController extends Controller {
       );
 
       this.unsubscribe = onSnapshot(q, (querySnapshot) => {
-        // for lists, each "change" has a bunch of data elements in it.
-        // loop over them and pull the data out.
         this.trips = [];
         querySnapshot.forEach((doc) => {
           const trip = { id: doc.id, data: doc.data() };
@@ -38,5 +38,14 @@ export default class HomeController extends Controller {
   async createTrip() {
     const tripId = await this.database.createTrip();
     this.router.transitionTo('destination', tripId);
+  }
+
+
+  @action
+  async deleteTrip(tripId) {
+    if (confirm('Are you sure you want to delete this trip?')) {
+      await this.database.deleteTrip(tripId);
+      this.router.refresh();
+    }
   }
 }

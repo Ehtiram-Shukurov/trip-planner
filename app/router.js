@@ -20,11 +20,13 @@ Router.map(function () {
   });
 
   this.route('addactivity', { path: '/addactivity/:trip_id/:date_id' });
+  this.route('editactivity', {
+    path: '/editactivity/:trip_id/:date_id/:activityIndex',
+  });
   this.route('result');
 
   this.route('notFound', { path: '/*path' });
 
-  this.route('home');
   this.route('memory', function () {
     this.route('journal', {
       path: '/:trip_id/:date_id',
@@ -34,4 +36,8 @@ Router.map(function () {
       path: '/:trip_id',
     });
   });
+
+  this.route('index', { path: '/' });
+  this.route('home');
+  this.route('edittrip', { path: '/edittrip/:trip_id' });
 });

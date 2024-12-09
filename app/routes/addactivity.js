@@ -4,7 +4,8 @@ import { service } from '@ember/service';
 export default class AddActivityRoute extends Route {
   @service auth;
   async beforeModel() {
-    this.auth.ensureInitialized();
+
+    await this.auth.ensureLoggedIn();
   }
 
   async model(params) {

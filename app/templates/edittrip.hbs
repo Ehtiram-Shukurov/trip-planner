@@ -1,0 +1,45 @@
+{{page-title "Edit Trip"}}
+
+<div class="container mt-4" {{did-insert this.initializeFields}}>
+  <div class="row">
+    <div class="col-12 text-center">
+      <h1 class="mb-3 title" style="color:black">Edit Trip</h1>
+    </div>
+  </div>
+
+  <form {{on "submit" this.saveChanges}}>
+    <div class="mb-4">
+      <label for="destinationInput" class="form-label">Destination</label>
+      <div class="d-flex">
+        <input
+  type="text"
+  id="destinationInput"
+  class="form-control me-2"
+  placeholder="Enter destination"
+  value={{this.destination}}
+  {{on "input" this.updateDestination}}
+/>
+
+        <button type="button" class="btn btn-primary" {{on "click" this.searchDestination}}>
+          Search
+        </button>
+      </div>
+      <div class="mt-3">
+        <GoogleMapsIframe @query={{this.destination}} />
+      </div>
+    </div>
+    <div class="mb-4">
+      <label class="form-label">Dates</label>
+      <Litepicker
+        class="custom-litepicker"
+        @singleMode={{false}}
+        @startDate={{this.startDate}}
+        @endDate={{this.endDate}}
+        @registerAPI={{this.registerAPI}}
+        @onSelected={{this.onDateChanged}}
+        @plugins={{array 'keyboardnav' 'mobilefriendly'}}
+      />
+    </div>
+    <button type="submit" class="btn btn-success w-100">Save Changes</button>
+  </form>
+</div>

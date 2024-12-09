@@ -6,7 +6,7 @@ export default class DateDetailRoute extends Route {
   @service database;
 
   async beforeModel(params) {
-    await this.auth.ensureInitialized();
+    await this.auth.ensureLoggedIn();
   }
 
   async model(params) {

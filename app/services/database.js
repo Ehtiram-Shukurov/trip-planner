@@ -6,6 +6,7 @@ import {
   collection,
   doc,
   addDoc,
+  deleteDoc,
   setDoc,
   updateDoc,
   getDoc,
@@ -82,8 +83,7 @@ export default class TripService extends Service {
     const tripRef = await this.getTrip(tripId);
     const snap = await getDoc(tripRef);
     const tripSnap = snap.data();
-
-    //transfer days to MM/DD/YYYY format and sort
+    
     const days = Object.keys(tripSnap.days)
       .map((key) => {
         const day = tripSnap.days[key];
@@ -121,6 +121,35 @@ export default class TripService extends Service {
     const key = `day${dateIndex}`;
     const day = tripSnap.days[key];
     day.activities.push(activity);
+
+    await setDoc(tripRef, { days: tripSnap.days }, { merge: true });
+  }
+  async deleteTrip(tripId) {
+    const tripRef = await this.getTrip(tripId);
+    await deleteDoc(tripRef);
+  }
+
+  async updateTrip(tripId, updatedFields) {
+    const tripRef = await this.getTrip(tripId);
+    await updateDoc(tripRef, updatedFields);
+  }
+  async deleteActivity(tripId, dateIndex, activityIndex) {
+    const tripRef = await this.getTrip(tripId);
+    const tripSnap = await (await getDoc(tripRef)).data();
+
+    const dayKey = `day${dateIndex}`;
+    const day = tripSnap.days[dayKey];
+
+    day.activities.splice(activityIndex, 1);
+    await setDoc(tripRef, { days: tripSnap.days }, { merge: true });
+  }
+  async editActivity(tripId, dateIndex, activityIndex, updatedActivity) {
+    const tripRef = await this.getTrip(tripId);
+    const snap = await getDoc(tripRef);
+    const tripSnap = snap.data();
+
+    const key = `day${dateIndex}`;
+    tripSnap.days[key].activities[activityIndex] = updatedActivity;
 
     await setDoc(tripRef, { days: tripSnap.days }, { merge: true });
   }

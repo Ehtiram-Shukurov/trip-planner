@@ -1,11 +1,10 @@
 {{page-title "Destination"}}
 
-<h1>Where do you want to go?</h1>
+<h1 class="title" style="color: black">Where do you want to go?</h1>
 
-<div>
-  <label for="search">Search for a destination:</label>
-  <input id="search" type="text" placeholder="Enter a destination"/>
-  <button type="button" {{on "click" this.searchQuery}}>Search</button>
+<div style="margin-bottom: 5px">
+  <input id="search" type="text" placeholder="Enter a country or city"/>
+  <button type="button" class="button is-primary" {{on "click" this.searchQuery}}>Search</button>
 </div>
 
 <div class="map-container">
