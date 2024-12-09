@@ -28,12 +28,12 @@ export default class TripService extends Service {
     return collection(this.db, `user/${this.uid}/trips`);
   }
 
-  async getTripDoc(id) {
+  async getTrip(id) {
     return doc(this.db, `user/${this.uid}/trips/${id}`);
   }
 
-  async getTrip(id){
-    const tripRef = await this.getTripDoc(id);
+  async getTripItem(id){
+    const tripRef = await this.getTrip(id);
     const tripSnap = await getDoc(tripRef);
     return tripSnap.data();
   }
@@ -59,7 +59,7 @@ export default class TripService extends Service {
   }
 
   async setDestination(tripId, destination) {
-    const tripRef = await this.getTripDoc(tripId);
+    const tripRef = await this.getTrip(tripId);
     await setDoc(
       tripRef,
       {destination: destination },
@@ -68,7 +68,7 @@ export default class TripService extends Service {
   }
 
   async addDays(startDate, endDate, tripId) {
-    const tripRef = await this.getTripDoc(tripId);
+    const tripRef = await this.getTrip(tripId);
     const start = new Date(startDate);
     const end = new Date(endDate);
 
@@ -91,7 +91,7 @@ export default class TripService extends Service {
   }
 
   async getDays(tripId) {
-    const tripRef = await this.getTripDoc(tripId);
+    const tripRef = await this.getTrip(tripId);
     const snap = await getDoc(tripRef);
     const tripSnap = snap.data();
     
@@ -113,20 +113,20 @@ export default class TripService extends Service {
   }
 
   async getTripTitle(tripId) {
-    const tripRef = await this.getTripDoc(tripId);
+    const tripRef = await this.getTrip(tripId);
     const snap = await getDoc(tripRef);
     const tripSnap = snap.data();
     return tripSnap.title;
   }
 
   async saveTripTitle(tripId, title) {
-    const tripRef = await this.getTripDoc(tripId);
+    const tripRef = await this.getTrip(tripId);
 
     await setDoc(tripRef, { title: title }, { merge: true });
   }
 
   async getDay(tripId, index) {
-    const tripRef = await this.getTripDoc(tripId);
+    const tripRef = await this.getTrip(tripId);
     const snap = await getDoc(tripRef);
     const tripSnap = snap.data();
 
@@ -138,7 +138,7 @@ export default class TripService extends Service {
   }
 
   async addActivity(tripId, dateIndex, activity) {
-    const tripRef = await this.getTripDoc(tripId);
+    const tripRef = await this.getTrip(tripId);
     const snap = await getDoc(tripRef);
     const tripSnap = snap.data();
 
@@ -149,16 +149,16 @@ export default class TripService extends Service {
     await setDoc(tripRef, { days: tripSnap.days }, { merge: true });
   }
   async deleteTrip(tripId) {
-    const tripRef = await this.getTripDoc(tripId);
+    const tripRef = await this.getTrip(tripId);
     await deleteDoc(tripRef);
   }
 
   async updateTrip(tripId, updatedFields) {
-    const tripRef = await this.getTripDoc(tripId);
+    const tripRef = await this.getTrip(tripId);
     await updateDoc(tripRef, updatedFields);
   }
   async deleteActivity(tripId, dateIndex, activityIndex) {
-    const tripRef = await this.getTripDoc(tripId);
+    const tripRef = await this.getTrip(tripId);
     const tripSnap = await (await getDoc(tripRef)).data();
 
     const dayKey = `day${dateIndex}`;
@@ -168,7 +168,7 @@ export default class TripService extends Service {
     await setDoc(tripRef, { days: tripSnap.days }, { merge: true });
   }
   async editActivity(tripId, dateIndex, activityIndex, updatedActivity) {
-    const tripRef = await this.getTripDoc(tripId);
+    const tripRef = await this.getTrip(tripId);
     const snap = await getDoc(tripRef);
     const tripSnap = snap.data();
 
@@ -179,7 +179,7 @@ export default class TripService extends Service {
   }
 
   async finishSetup(tripId) {
-    const tripRef = await this.getTripDoc(tripId);
+    const tripRef = await this.getTrip(tripId);
     await updateDoc(tripRef, { setup: true });
   }
 }
