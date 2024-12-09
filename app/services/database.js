@@ -113,14 +113,14 @@ export default class TripService extends Service {
   }
 
   async getTripTitle(tripId) {
-    const tripRef = await this.getTrip(tripId);
+    const tripRef = await this.getTripDoc(tripId);
     const snap = await getDoc(tripRef);
     const tripSnap = snap.data();
     return tripSnap.title;
   }
 
   async saveTripTitle(tripId, title) {
-    const tripRef = await this.getTrip(tripId);
+    const tripRef = await this.getTripDoc(tripId);
 
     await setDoc(tripRef, { title: title }, { merge: true });
   }
