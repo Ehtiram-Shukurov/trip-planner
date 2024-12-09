@@ -20,6 +20,7 @@ export default class CameraGallery extends Component {
   @action
   handleGalleryInput(event) {
     const file = event.target.files[0];
+    console.log(this.args.data);
     if (file) {
       this.displayImage(file);
     }
@@ -36,6 +37,9 @@ export default class CameraGallery extends Component {
 
       const container = document.getElementById('image-preview-container');
       container.innerHTML = '';
+      container.setAttribute("id", this.args.data);
+      imageElement.setAttribute("id", this.args.data);
+
       container.appendChild(imageElement);
     };
 
