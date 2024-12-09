@@ -23,7 +23,9 @@ export default class EditTripRoute extends Route {
 
     const tripData = tripSnapshot.data();
 
-    const days = Object.values(tripData.days || {}).map((day) => new Date(day.date));
+    const days = Object.values(tripData.days || {}).map(
+      (day) => new Date(day.date),
+    );
     days.sort((a, b) => a - b);
 
     return {

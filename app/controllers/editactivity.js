@@ -53,7 +53,6 @@ export default class EditActivityController extends Controller {
       return;
     }
 
-
     const updatedActivity = {
       time: this.time,
       budget: this.budget,
