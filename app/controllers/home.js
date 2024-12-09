@@ -40,6 +40,7 @@ export default class HomeController extends Controller {
     this.router.transitionTo('destination', tripId);
   }
 
+
   @action
   async deleteTrip(tripId) {
     if (confirm('Are you sure you want to delete this trip?')) {

@@ -1,17 +1,20 @@
-{{page-title "Index"}}
-
 <div class="container d-flex justify-content-center align-items-center">
   <div class="card shadow-lg w-100" style="max-width: 400px; border-radius: 10px;">
     <div class="card-body text-center">
 
-      <h1 class="card-title mb-3">Generic Trip Title</h1>
+      <h1 class="card-title mb-3" contenteditable="true" id="title">
+        {{#if this.model.title}}
+          {{this.model.title}}
+        {{else}}
+          Untitled Trip
+        {{/if}}</h1>
       <h5 class="card-subtitle mb-4 text-muted">Destinations</h5>
 
       <div class="vertical-card-list">
         {{#each this.model.dates as |date index|}}
         <div class="carousel-card">
-        <LinkTo @route="date.detail" 
-                @models={{array this.model.trip_id (add index 1)}} 
+        <LinkTo @route="date.detail"
+                @models={{array this.model.trip_id (add index 1)}}
                 class="btn btn-light w-100">
 
           {{date.date}}
@@ -26,12 +29,9 @@
             <i class="bi bi-arrow-left"></i>
           </button>
         </LinkTo>
-        
-        <LinkTo @route="index">
-          <button class="btn btn-success rounded-circle" type="button" {{on "click" this.finishSetup}}>
-            <i class="bi bi-check"></i>
-          </button>
-        </LinkTo>
+        <button class="btn btn-success rounded-circle" type="button" {{on "click" this.saveAndNavigate}}>
+          <i class="bi bi-check"></i>
+        </button>
       </div>
     </div>
   </div>

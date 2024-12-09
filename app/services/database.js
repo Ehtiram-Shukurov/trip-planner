@@ -94,6 +94,7 @@ export default class TripService extends Service {
     const tripRef = await this.getTripDoc(tripId);
     const snap = await getDoc(tripRef);
     const tripSnap = snap.data();
+    
     const days = Object.keys(tripSnap.days)
       .map((key) => {
         const day = tripSnap.days[key];
@@ -109,6 +110,19 @@ export default class TripService extends Service {
       });
 
     return days;
+  }
+
+  async getTripTitle(tripId) {
+    const tripRef = await this.getTrip(tripId);
+    const snap = await getDoc(tripRef);
+    const tripSnap = snap.data();
+    return tripSnap.title;
+  }
+
+  async saveTripTitle(tripId, title) {
+    const tripRef = await this.getTrip(tripId);
+
+    await setDoc(tripRef, { title: title }, { merge: true });
   }
 
   async getDay(tripId, index) {
