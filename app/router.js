@@ -27,9 +27,16 @@ Router.map(function () {
 
   this.route('notFound', { path: '/*path' });
 
-  this.route('memory', {
-    path: '/memory/:id',
+  this.route('memory', function () {
+    this.route('journal', {
+      path: '/:trip_id/:date_id',
+    });
+
+    this.route('index', {
+      path: '/:trip_id',
+    });
   });
+
   this.route('index', { path: '/' });
   this.route('home');
   this.route('edittrip', { path: '/edittrip/:trip_id' });
