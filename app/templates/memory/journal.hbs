@@ -27,7 +27,7 @@
               </li>
               <li class="list-group-item d-flex justify-content-between align-items-center">
                 <div id="{{activity.location}}">
-                  <CameraGallery @data={{activity.location}}>
+                  <CameraGallery @data={{activity.location}} @saveImage={{this.setImage}}>
                   </CameraGallery>
                 </div>
               </li>
@@ -36,11 +36,11 @@
                   <textarea class="form-control" id="location_id" rows="5" cols="100" placeholder="Journal Entry....."></textarea>
               </div>
               </li>
-              <button class="button is-primary" type="button">Save</button>
+              <button class="button is-primary" type="button" {{on "click" this.saveMemory}}>Save</button>
             </ul>
           </div>
         </div>
-        
+
     </card.slide>
   {{/each}}
 </BsCarousel>
@@ -68,7 +68,7 @@
         <div class="mb-3">
             <textarea class="form-control" id="location_id" rows="5">Journal Entry.....</textarea>
         </div>
-        
+
         </li>
 
 
@@ -76,14 +76,14 @@
 
       {{/each}}
     </ul>
-  
+
 
   </div> --}}
   <div class="d-flex justify-content-between mt-4">
-    <LinkTo @route="memory" @model={{this.model.trip_id}}
-    ><button class="btn btn-primary rounded-circle" type="button">
-      <i class="bi bi-arrow-left"></i>
-    </button>
+    <LinkTo @route="memory" @model={{this.model.trip_id}}>
+      <button class="btn btn-primary rounded-circle" type="button">
+        Cancel
+      </button>
     </LinkTo>
   </div>
 {{outlet}}

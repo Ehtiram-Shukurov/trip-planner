@@ -1,9 +1,12 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
+import {service} from "@ember/service";
 
 export default class CameraGallery extends Component {
   @tracked mobile;
+  @service memory;
+  @tracked images;
 
   constructor() {
     super(...arguments);
@@ -14,6 +17,7 @@ export default class CameraGallery extends Component {
     const file = event.target.files[0];
     if (file) {
       this.displayImage(file);
+      this.memory.setImage(file);
     }
   }
 
@@ -23,6 +27,7 @@ export default class CameraGallery extends Component {
     console.log(this.args.data);
     if (file) {
       this.displayImage(file);
+      this.memory.setImage(file);
     }
   }
 
@@ -30,17 +35,7 @@ export default class CameraGallery extends Component {
     const reader = new FileReader();
 
     reader.onload = (e) => {
-      const imageElement = document.createElement('img');
-      imageElement.src = e.target.result;
-      imageElement.style.maxWidth = '100%';
-      imageElement.style.height = 'auto';
-
-      const container = document.getElementById('image-preview-container');
-      container.innerHTML = '';
-      container.setAttribute("id", this.args.data);
-      imageElement.setAttribute("id", this.args.data);
-
-      container.appendChild(imageElement);
+      this.images = e.target.result;
     };
 
     reader.readAsDataURL(file);
