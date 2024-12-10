@@ -1,17 +1,25 @@
-import Service from "@ember/service";
-import {tracked} from "@glimmer/tracking";
+import Service, {service} from "@ember/service";
 
-export default class MemoryService extends Service {
-  @tracked image;
-  @tracked journalEntry;
+export default class Memory extends Service {
+  @service database;
+  images = [];
+  journalEntry;
 
   setImage(file) {
-    this.image = file;
+    this.images.push(file);
   }
 
   save(tripId, date) {
-    // save image
+    // save images
+    this.images.forEach(async (image) => {
+      this.database.saveImage(image, tripId, date);
+    })
     // save journal entry
+    this.database.saveJournalEntry(this.journalEntry, tripId, date);
+
+    // reset images and journal entry
+    this.images = [];
+    this.journalEntry = '';
   }
 }
 

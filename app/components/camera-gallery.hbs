@@ -20,8 +20,9 @@
 
 {{!-- TDOD: placeholder of displaying image and testing--}}
 {{!-- TODO: Change the style later --}}
+{{!-- TODO: handle multiple images, edit/delete images, should the upload replace or add to?, styling --}}
 <div id="image-preview-container" class="d-flex justify-content-center mt-1">
-  {{#for images as |image|}}
+  {{#each this.images as |image|}}
     <img src={{image.src}}>
-  {{/for}}
+  {{/each}}
 </div>

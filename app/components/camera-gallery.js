@@ -6,7 +6,8 @@ import {service} from "@ember/service";
 export default class CameraGallery extends Component {
   @tracked mobile;
   @service memory;
-  @tracked images;
+  @tracked src;
+  @tracked images = [];
 
   constructor() {
     super(...arguments);
@@ -35,7 +36,11 @@ export default class CameraGallery extends Component {
     const reader = new FileReader();
 
     reader.onload = (e) => {
-      this.images = e.target.result;
+      this.src = e.target.result;
+      this.images = [...this.images, {
+        src: e.target.result
+      }];
+      console.log(this.images);
     };
 
     reader.readAsDataURL(file);

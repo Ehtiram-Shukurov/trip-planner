@@ -11,7 +11,6 @@ export default class HomeRoute extends Route {
 
   async model() {
     const trips = await this.database.getUserTrips();
-    console.log('Home', trips);
     return trips;
   }
 }
