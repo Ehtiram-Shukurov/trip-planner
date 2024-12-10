@@ -8,11 +8,11 @@
     class="hidden-input" />
 
   <label for="gallery-input" class="file-input-label">Upload from Gallery</label>
-  <input id="gallery-input" type="file" accept="image/*" {{on "change" this.handleGalleryInput}} class="hidden-input" />
+  <input id="gallery-input" type="file" accept="image/*" {{on "change" this.handleGalleryInput}} class="hidden-input" multiple/>
   {{else}}
 
   <label for="gallery-input" class="file-input-label">Upload from Gallery</label>
-  <input id="gallery-input" type="file" accept="image/*" {{on "change" this.handleGalleryInput}} class="hidden-input" />
+  <input id="gallery-input" type="file" accept="image/*" {{on "change" this.handleGalleryInput}} class="hidden-input" multiple/>
 
   {{/if}}
 </div>

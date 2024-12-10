@@ -15,32 +15,35 @@ export default class CameraGallery extends Component {
   }
   @action
   handleCameraInput(event) {
-    const file = event.target.files[0];
-    if (file) {
-      this.displayImage(file);
-      this.memory.setImage(file);
-    }
+    this.images = [];
+    let files = Array.from(event.target.files);
+    this.memory.setImages(files);
+    files.forEach((file) => {
+      if (file) {
+        this.displayImage(file);
+      }
+    });
   }
 
   @action
   handleGalleryInput(event) {
-    const file = event.target.files[0];
-    console.log(this.args.data);
-    if (file) {
-      this.displayImage(file);
-      this.memory.setImage(file);
-    }
+    this.images = [];
+    let files = Array.from(event.target.files);
+    this.memory.setImages(files);
+    files.forEach((file) => {
+      if (file) {
+        this.displayImage(file);
+      }
+    });
   }
 
   displayImage(file) {
     const reader = new FileReader();
-
     reader.onload = (e) => {
       this.src = e.target.result;
       this.images = [...this.images, {
         src: e.target.result
       }];
-      console.log(this.images);
     };
 
     reader.readAsDataURL(file);

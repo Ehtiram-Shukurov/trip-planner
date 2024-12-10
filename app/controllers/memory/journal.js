@@ -9,7 +9,6 @@ export default class MemoryJournalController extends Controller {
 
   @action
   async saveMemory(trip_id, date) {
-    console.log(trip_id, date);
-   // this.memory.save(trip_id, date);
+    this.memory.save(trip_id, date);
   }
 }

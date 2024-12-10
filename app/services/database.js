@@ -1,6 +1,5 @@
 import Service from '@ember/service';
 import { service } from '@ember/service';
-import { tracked } from '@glimmer/tracking';
 import {
   getFirestore,
   collection,
@@ -12,6 +11,7 @@ import {
   getDoc,
   getDocs,
 } from 'firebase/firestore';
+import { getStorage, ref, uploadBytes } from 'firebase/storage';
 
 export default class TripService extends Service {
   @service firebase;
@@ -19,6 +19,7 @@ export default class TripService extends Service {
 
   db = getFirestore(this.firebase.app);
   uid = this.auth.user.uid;
+  storage = getStorage();
 
   getUserRef() {
     return doc(this.db, `user/${this.uid}`);
@@ -47,7 +48,6 @@ export default class TripService extends Service {
       owner: this.auth.user.uid,
       complete: false,
     });
-
     return docRef.id;
   }
 
@@ -83,7 +83,7 @@ export default class TripService extends Service {
     const tripRef = await this.getTrip(tripId);
     const snap = await getDoc(tripRef);
     const tripSnap = snap.data();
-    
+
     const days = Object.keys(tripSnap.days)
       .map((key) => {
         const day = tripSnap.days[key];
@@ -137,6 +137,7 @@ export default class TripService extends Service {
 
     await setDoc(tripRef, { days: tripSnap.days }, { merge: true });
   }
+
   async deleteTrip(tripId) {
     const tripRef = await this.getTrip(tripId);
     await deleteDoc(tripRef);
@@ -146,6 +147,7 @@ export default class TripService extends Service {
     const tripRef = await this.getTrip(tripId);
     await updateDoc(tripRef, updatedFields);
   }
+
   async deleteActivity(tripId, dateIndex, activityIndex) {
     const tripRef = await this.getTrip(tripId);
     const tripSnap = await (await getDoc(tripRef)).data();
@@ -156,6 +158,7 @@ export default class TripService extends Service {
     day.activities.splice(activityIndex, 1);
     await setDoc(tripRef, { days: tripSnap.days }, { merge: true });
   }
+
   async editActivity(tripId, dateIndex, activityIndex, updatedActivity) {
     const tripRef = await this.getTrip(tripId);
     const snap = await getDoc(tripRef);
@@ -165,5 +168,14 @@ export default class TripService extends Service {
     tripSnap.days[key].activities[activityIndex] = updatedActivity;
 
     await setDoc(tripRef, { days: tripSnap.days }, { merge: true });
+  }
+
+  async saveImage(image, tripId, date) {
+    console.log(image);
+    const tripsStorageRef = ref(this.storage, `user/${this.uid}/trips/${tripId}/${date}/${image.name}`);
+    uploadBytes(tripsStorageRef, image).then(() => {
+      console.log('Uploaded a blob or file!');
+    });
+
   }
 }
