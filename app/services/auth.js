@@ -24,11 +24,6 @@ export default class AuthService extends Service {
   initializeAuthState() {
     onAuthStateChanged(this.auth, (user) => {
       this.user = user;
-      if (user) {
-        console.log('User signed in:', user.email);
-      } else {
-        console.log('No user signed in.');
-      }
     });
   }
 
@@ -55,10 +50,8 @@ export default class AuthService extends Service {
       provider.addScope('email');
       const result = await signInWithPopup(this.auth, provider);
 
-      console.log('User signed in:', result.user);
       return result;
     } catch (error) {
-      console.error('Error during sign in:', error);
       throw error;
     }
   }
@@ -69,7 +62,6 @@ export default class AuthService extends Service {
       await signOut(this.auth);
       this.user = null;
       this.router.transitionTo('index');
-      console.log('User signed out.');
     } catch (error) {
       console.error('Error during sign out:', error);
     }

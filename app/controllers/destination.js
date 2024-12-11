@@ -28,8 +28,6 @@ export default class DestinationsController extends Controller {
     try {
       const response = await fetch(apiURL);
       const data = await response.json();
-      console.log('Geocoding API Response:', data);
-      console.log(data.status);
 
       if (data.status === 'OK') {
         const res = data.results[0];
