@@ -37,8 +37,8 @@ export default class CameraGallery extends Component {
 
       const container = document.getElementById('image-preview-container');
       container.innerHTML = '';
-      container.setAttribute("id", this.args.data);
-      imageElement.setAttribute("id", this.args.data);
+      container.setAttribute('id', this.args.data);
+      imageElement.setAttribute('id', this.args.data);
 
       container.appendChild(imageElement);
     };

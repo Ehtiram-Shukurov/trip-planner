@@ -27,7 +27,6 @@ export default class DatePickerController extends Controller {
       minDate: this.today,
     });
 
-
     later(() => {
       let input = document.querySelector('.litepicker-container input');
       if (input) {

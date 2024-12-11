@@ -80,7 +80,7 @@ export default class DestinationsController extends Controller {
     this.router.transitionTo('date-picker', this.model);
   }
 
-  @action 
+  @action
   cancel() {
     this.database.deleteTrip(this.model);
     this.router.transitionTo('home');
