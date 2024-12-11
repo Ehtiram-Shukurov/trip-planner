@@ -5,26 +5,25 @@
 
   <ul class="list-group">
   {{#each this.model.activities as |activity index|}}
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    <div>
-      <strong style="color: black;">{{activity.time}}</strong>
-      <span class="text d-block">{{activity.location}}</span>
-    </div>
-    <span class="badge bg-secondary">{{activity.budget}}</span>
+  <LinkTo @route="editactivity" @models={{array this.model.trip_id this.model.date_id index}}
+    class="text-decoration-none">
 
-    <LinkTo
-    @route="editactivity"
-    @models={{array this.model.trip_id this.model.date_id index}}
-    class="btn btn-outline-secondary btn-sm"
-  >
-    Edit
+    <li class="list-group-item d-flex justify-content-between align-items-center shadow-sm p-3 mb-2 rounded">
+      <div>
+        <strong class="text-dark">{{activity.time}}</strong>
+        <span class="text-muted d-block">{{activity.location}}</span>
+      </div>
+      <span class="badge bg-secondary">{{activity.budget}} $</span>
+
+      <button class="btn btn-outline-danger btn-sm" type="button" {{on "click" (fn this.deleteActivity index)}}>
+        <i class="bi bi-trash"></i> Delete
+      </button>
+    </li>
+
   </LinkTo>
-    <button
-      class="btn btn-outline-danger btn-sm" type="button" {{on "click" (fn this.deleteActivity index)}}>
-      Delete
-    </button>
-  </li>
   {{/each}}
+
+
 </ul>
 
   <div class="mt-4 text-center">

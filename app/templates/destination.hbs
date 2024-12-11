@@ -11,6 +11,11 @@
   <GoogleMapsIframe @query={{this.selectedDestination}} />
 </div>
 
+<div class="map-container">
+  <h1>Hi</h1>
+  <GoogleMapsJs />
+</div>
+
 <div class="d-flex justify-content-between mt-4">
   <LinkTo @route="index">
     <button class="btn btn-primary rounded-circle" type="button" {{on "click" this.cancel}}>

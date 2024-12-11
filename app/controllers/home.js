@@ -40,7 +40,6 @@ export default class HomeController extends Controller {
     this.router.transitionTo('destination', tripId);
   }
 
-
   @action
   async deleteTrip(tripId) {
     if (confirm('Are you sure you want to delete this trip?')) {
@@ -53,14 +52,12 @@ export default class HomeController extends Controller {
   async continueSetup(tripId) {
     const trip = await this.database.getTripItem(tripId);
 
-    if(!trip.destination) {
+    if (!trip.destination) {
       this.router.transitionTo('destination', tripId);
-    } else if(!this.trips.days) {
+    } else if (!this.trips.days) {
       this.router.transitionTo('date-picker', tripId);
-    }
-    else {
+    } else {
       this.router.transitionTo('date', tripId);
     }
   }
-
 }
