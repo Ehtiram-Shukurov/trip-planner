@@ -132,7 +132,7 @@ export default class EditTripController extends Controller {
   }
 
   @action
-  updateDestination(event) {
-    this.destination = event.target.value;
+  updateDestination(value) {
+    this.destination = value;
   }
 }

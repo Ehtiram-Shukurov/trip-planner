@@ -2,18 +2,8 @@
 
 <h1 class="title" style="color: black">Where do you want to go?</h1>
 
-<div style="margin-bottom: 5px">
-  <input id="search" type="text" placeholder="Enter a country or city"/>
-  <button type="button" class="button is-primary" {{on "click" this.searchQuery}}>Search</button>
-</div>
-
 <div class="map-container">
-  <GoogleMapsIframe @query={{this.selectedDestination}} />
-</div>
-
-<div class="map-container">
-  <h1>Hi</h1>
-  <GoogleMapsJs />
+  <GoogleMapsJs @onPlaceChange={{this.updateDestination}} />
 </div>
 
 <div class="d-flex justify-content-between mt-4">

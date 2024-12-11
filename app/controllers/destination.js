@@ -12,6 +12,11 @@ export default class DestinationsController extends Controller {
   @tracked selectedDestination = '';
 
   GOOGLE_API_KEY = 'AIzaSyCiObBVhMw70C36XriG71n7aRDjnxyZkPQ';
+  
+  @action
+  updateDestination(value) {
+    this.selectedDestination = value;
+  }
 
   @action
   async searchQuery() {

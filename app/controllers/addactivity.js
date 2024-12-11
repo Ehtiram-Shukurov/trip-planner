@@ -22,8 +22,9 @@ export default class AddActivityController extends Controller {
   }
 
   @action
-  updateLocation(event) {
-    this.location = event.target.value;
+  updateLocation(value) {
+    this.location = value;
+    console.log(`Updated location: ${this.location}`);
   }
 
   @action

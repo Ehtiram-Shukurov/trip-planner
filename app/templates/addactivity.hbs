@@ -7,21 +7,26 @@
   </div>
 
   <form {{on "submit" this.saveActivity}} class="needs-validation">
+
     <div class="mb-3">
       <label for="timeInput" class="form-label" style="color:black">Time</label>
       <input type="time" id="timeInput" class="form-control" {{on "input" this.updateTime}}>
     </div>
+
     <div class="mb-3">
       <label for="budgetInput" class="form-label" style="color:black">Budget</label>
       <input type="text" id="budgetInput" class="form-control" placeholder="$10" {{on "input" this.updateBudget}}>
     </div>
-    <div class="mb-3">
-      <label for="locationInput" class="form-label" style="color:black">Location</label>
-      <input type="text" id="locationInput" class="form-control" placeholder="Enter location" {{on "input" this.updateLocation}}>
+
+    <div class="map-container">
+      <GoogleMapsJs @onPlaceChange={{this.updateLocation}} />
     </div>
+
     <button type="submit" class="btn btn-success w-100">Save</button>
   </form>
+
   <LinkTo @route="date" @model={{this.model.trip_id}}>
     <button class="btn btn-danger w-100" style="margin-top:.5em;" type="button">Cancel</button>
   </LinkTo>
+
 </div>

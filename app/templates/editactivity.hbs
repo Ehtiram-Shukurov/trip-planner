@@ -4,7 +4,9 @@
       <h1 class="mb-3 title" style="color:black">Edit Activity</h1>
     </div>
   </div>
+
   <form {{on "submit" this.saveActivity}} class="needs-validation">
+
     <div class="mb-3">
       <label for="timeInput" class="form-label">Time</label>
       <input
@@ -15,6 +17,7 @@
         value={{this.time}}
       />
     </div>
+
     <div class="mb-3">
       <label for="budgetInput" class="form-label">Budget</label>
       <input
@@ -26,17 +29,11 @@
         value={{this.budget}}
       />
     </div>
-    <div class="mb-3">
-      <label for="locationInput" class="form-label">Location</label>
-      <input
-        type="text"
-        id="locationInput"
-        class="form-control"
-        placeholder="Enter location"
-        {{on "input" this.updateLocation}}
-        value={{this.location}}
-      />
+
+    <div class="map-container mb-3">
+      <GoogleMapsJs @onPlaceChange={{this.updateLocation}}  @defaultLocation={{this.location}}/>
     </div>
+
     <button type="submit" class="btn btn-success w-100">Save</button>
   </form>
 </div>
