@@ -4,27 +4,29 @@
   <h2 class="text-center mb-4">Date: {{this.model.date}}</h2>
 
   <ul class="list-group">
+
   {{#each this.model.activities as |activity index|}}
-  <LinkTo @route="editactivity" @models={{array this.model.trip_id this.model.date_id index}}
-    class="text-decoration-none">
-
-    <li class="list-group-item d-flex justify-content-between align-items-center shadow-sm p-3 mb-2 rounded">
-      <div>
-        <strong class="text-dark">{{activity.time}}</strong>
-        <span class="text-muted d-block">{{activity.location}}</span>
-      </div>
-      <span class="badge bg-secondary">{{activity.budget}} $</span>
-
-      <button class="btn btn-outline-danger btn-sm" type="button" {{on "click" (fn this.deleteActivity index)}}>
-        <i class="bi bi-trash"></i> Delete
-      </button>
-    </li>
-
-  </LinkTo>
+    <LinkTo @route="editactivity" @models={{array this.model.trip_id this.model.date_id index}}
+      class="text-decoration-none">
+      <li class="list-group-item d-flex justify-content-between align-items-center shadow-sm p-3 mb-2 rounded">
+        <div class="d-flex flex-column flex-grow-1">
+          <div>
+            <strong class="text-dark">{{activity.time}}</strong>
+            <span class="badge bg-secondary">{{activity.budget}} $</span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-muted">{{activity.location}}</span>
+          </div>
+        </div>
+        <button class="btn btn-outline-danger btn-sm ms-3" type="button" {{on "click" (fn this.deleteActivity index)}}>
+          <i class="bi bi-trash"></i> Delete
+        </button>
+      </li>
+    </LinkTo>
   {{/each}}
 
 
-</ul>
+  </ul>
 
   <div class="mt-4 text-center">
 
