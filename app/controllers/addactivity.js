@@ -10,6 +10,12 @@ export default class AddActivityController extends Controller {
   @tracked time = '';
   @tracked budget = '';
   @tracked location = '';
+  @tracked finalDestination = null; // Track the selected destination
+
+  @action
+  updateLocation(location) {
+    this.finalDestination = location;
+  }
 
   @action
   updateTime(event) {
@@ -22,13 +28,8 @@ export default class AddActivityController extends Controller {
   }
 
   @action
-  updateLocation(value) {
-    this.location = value;
-    console.log(`Updated location: ${this.location}`);
-  }
-
-  @action
   async saveActivity(event) {
+    console.log("triggerd");
     event.preventDefault();
     if (!this.time) {
       alert('Please select a time');

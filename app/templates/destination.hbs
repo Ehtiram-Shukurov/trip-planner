@@ -3,7 +3,7 @@
 <h1 class="title" style="color: black">Where do you want to go?</h1>
 
 <div class="map-container">
-  <GoogleMapsJs @onPlaceChange={{this.updateDestination}} />
+  <GoogleMapsJs @onPlaceChange={{this.updateDestination}} @searchNearby={{false}}/>
 </div>
 
 <div class="d-flex justify-content-between mt-4">

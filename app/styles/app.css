@@ -212,3 +212,28 @@ main {
 .month-item-name {
   color: black;
 }
+
+@keyframes highlight {
+  0% {
+    background-color: #d4edda;
+    /* Light green */
+  }
+
+  50% {
+    background-color: #c3e6cb;
+    /* Slightly darker green */
+  }
+
+  100% {
+    background-color: transparent;
+    /* Back to normal */
+  }
+}
+
+.final-destination-container {
+  transition: background-color 0.3s ease;
+}
+
+.animate-highlight {
+  animation: highlight 1.5s ease-in-out;
+}
