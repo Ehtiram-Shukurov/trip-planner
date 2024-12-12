@@ -53,6 +53,7 @@ export default class TripService extends Service {
       owner: this.auth.user.uid,
       complete: false,
       setup: false,
+      lastEdited: new Date().getTime(),
     });
 
     return docRef.id;
@@ -153,6 +154,7 @@ export default class TripService extends Service {
     const tripRef = await this.getTrip(tripId);
     await updateDoc(tripRef, updatedFields);
   }
+
   async deleteActivity(tripId, dateIndex, activityIndex) {
     const tripRef = await this.getTrip(tripId);
     const tripSnap = await (await getDoc(tripRef)).data();
@@ -163,6 +165,7 @@ export default class TripService extends Service {
     day.activities.splice(activityIndex, 1);
     await setDoc(tripRef, { days: tripSnap.days }, { merge: true });
   }
+
   async editActivity(tripId, dateIndex, activityIndex, updatedActivity) {
     const tripRef = await this.getTrip(tripId);
     const snap = await getDoc(tripRef);
@@ -171,7 +174,7 @@ export default class TripService extends Service {
     const key = `day${dateIndex}`;
     tripSnap.days[key].activities[activityIndex] = updatedActivity;
 
-    await setDoc(tripRef, { days: tripSnap.days }, { merge: true });
+    await setDoc(tripRef, { days: tripSnap.days, lastEdited: new Date().getTime() }, { merge: true });
   }
 
   async finishSetup(tripId) {
