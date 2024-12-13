@@ -77,4 +77,10 @@ export default class DestinationsController extends Controller {
     await this.database.setDestination(this.model, this.selectedDestination);
     this.router.transitionTo('date-picker', this.model);
   }
+
+  @action
+  cancel() {
+    this.database.deleteTrip(this.model);
+    this.router.transitionTo('home');
+  }
 }

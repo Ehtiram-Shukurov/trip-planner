@@ -33,6 +33,12 @@ export default class TripService extends Service {
     return doc(this.db, `user/${this.uid}/trips/${id}`);
   }
 
+  async getTripItem(id) {
+    const tripRef = await this.getTrip(id);
+    const tripSnap = await getDoc(tripRef);
+    return tripSnap.data();
+  }
+
   async getUserTrips() {
     const trips = [];
     const querySnapshot = await getDocs(this.tripsRef);
@@ -47,6 +53,8 @@ export default class TripService extends Service {
     const docRef = await addDoc(this.tripsRef, {
       owner: this.auth.user.uid,
       complete: false,
+      setup: false,
+      lastEdited: new Date().getTime(),
     });
     return docRef.id;
   }
@@ -167,7 +175,12 @@ export default class TripService extends Service {
     const key = `day${dateIndex}`;
     tripSnap.days[key].activities[activityIndex] = updatedActivity;
 
-    await setDoc(tripRef, { days: tripSnap.days }, { merge: true });
+    await setDoc(tripRef, { days: tripSnap.days, lastEdited: new Date().getTime() }, { merge: true });
+  }
+
+  async finishSetup(tripId) {
+    const tripRef = await this.getTrip(tripId);
+    await updateDoc(tripRef, { setup: true });
   }
 
   async saveImage(image, tripId, date) {

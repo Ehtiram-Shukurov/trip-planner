@@ -9,6 +9,7 @@ export default class IndexDateController extends Controller {
   async saveAndNavigate() {
     let title = document.getElementById('title');
     await this.database.saveTripTitle(this.model.trip_id, title.innerText);
+    await this.database.finishSetup(this.model.trip_id);
     this.router.transitionTo('home');
   }
 }

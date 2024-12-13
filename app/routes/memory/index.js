@@ -7,7 +7,6 @@ export default class MemoryIndexRoute extends Route {
     @tracked dates;
     @tracked title;
 
-
   async beforeModel() {
       await this.auth.ensureInitialized();
     }
