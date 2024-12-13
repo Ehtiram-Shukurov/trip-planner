@@ -67,12 +67,4 @@ export default class HomeController extends Controller {
       this.router.refresh();
     }
   }
-
-  @action
-  async tmp()
-  {
-    const tripId = await this.database.getUserTrips();
-
-    console.log(tripId[0].days);
-  }
 }
