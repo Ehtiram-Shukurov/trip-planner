@@ -62,7 +62,7 @@
     <div class="carousel-container">
       <div class="carousel">
         {{#each this.model as |trip| }}
-          {{#if trip.start}}
+          {{#if (trip.start)}}
           <div class="carousel-card">
             <div class="card-content d-flex flex-column justify-content-center align-items-center">
               <LinkTo @route="memory" @model={{trip.id}} class="btn btn-light w-100">

@@ -11,13 +11,13 @@
       <h5 class="card-subtitle mb-4 text-muted">Destinations</h5>
 
       <div class="vertical-card-list">
-        {{#each this.model.dates as |date index|}}
+        {{#each this.model.dates as |date|}}
         <div class="carousel-card">
         <LinkTo @route="date.detail"
-                @models={{array this.model.trip_id (add index 1)}}
+                @models={{array this.model.trip_id date.id}}
                 class="btn btn-light w-100">
 
-          {{date.date}}
+          {{date.data.date}}
         </LinkTo>
         </div>
         {{/each}}

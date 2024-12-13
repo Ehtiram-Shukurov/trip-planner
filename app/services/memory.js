@@ -9,13 +9,13 @@ export default class Memory extends Service {
     this.images = files;
   }
 
-  save(tripId, date) {
+  save(trip_id, date_id) {
     // save images
     this.images.forEach(async (image) => {
-      await this.database.saveImage(image, tripId, date);
+      await this.database.saveImage(image, trip_id, date_id);
     })
     // save journal entry
-    //this.database.saveJournalEntry(this.journalEntry, tripId, date);
+    //this.database.saveJournalEntry(this.journalEntry, tripId, dateId);
 
     // reset images and journal entry
     this.images = [];

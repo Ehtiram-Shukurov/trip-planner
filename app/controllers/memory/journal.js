@@ -8,7 +8,7 @@ export default class MemoryJournalController extends Controller {
   @service memory;
 
   @action
-  async saveMemory(trip_id, date) {
-    this.memory.save(trip_id, date);
+  async saveMemory(trip_id, date_id) {
+    this.memory.save(trip_id, date_id);
   }
 }
