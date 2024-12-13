@@ -1,4 +1,5 @@
 {{page-title "Journal"}}
+{{#if this.model.seeActivity}}
 
 {{!-- Inspired by: https://www.ember-bootstrap.com/components/carousel/ --}}
 <BsCarousel
@@ -87,3 +88,13 @@
     </LinkTo>
   </div>
 {{outlet}}
+
+{{else}}
+
+<div class="box">
+    <h1>looks like you dont have any activities to post pictures</h1>
+</div>
+{{outlet}}
+
+{{/if}}
+
