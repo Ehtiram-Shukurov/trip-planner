@@ -12,6 +12,9 @@ export default class MemoryIndexRoute extends Route {
 
   async model(params) {
     this.dates = await this.database.getDays(params.trip_id);
-    return { trip_id: params.trip_id, dates: Object.values(this.dates) };
+    this.title = await this.database.getTripTitle(params.trip_id);
+
+    return { trip_id: params.trip_id, dates: Object.values(this.dates), title: this.title,
+    };
   }
 }

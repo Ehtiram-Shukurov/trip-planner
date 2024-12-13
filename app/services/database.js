@@ -86,6 +86,12 @@ export default class TripService extends Service {
 
     await updateDoc(tripRef, { days: days });
   }
+  
+  async startTrip(tripId)
+  {
+    const tripRef = await this.getTrip(tripId);
+    await updateDoc(tripRef, { start: true });
+  }
 
   async getDays(tripId) {
     const tripRef = await this.getTrip(tripId);
@@ -181,4 +187,5 @@ export default class TripService extends Service {
     const tripRef = await this.getTrip(tripId);
     await updateDoc(tripRef, { setup: true });
   }
+
 }
