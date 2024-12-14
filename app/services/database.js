@@ -11,6 +11,9 @@ import {
   getDoc,
   getDocs,
   arrayUnion,
+  query,
+  orderBy,
+  limit,
 } from 'firebase/firestore';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
@@ -47,7 +50,46 @@ export default class TripService extends Service {
       trips.push({ id: doc.id, ...doc.data() });
     });
 
+    trips.forEach((trip) => {
+      if (!trip.started) {
+        this.determineStarted(trip);
+      }
+      if (!trip.complete) {
+        this.determineComplete(trip);
+      }
+    });
+
     return trips;
+  }
+
+  async determineComplete(trip) {
+    const q = query(
+      collection(this.db, `user/${this.uid}/trips/${trip.id}/days`),
+      orderBy('date', 'desc'),
+      limit(1),
+    );
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      if (new Date(doc.data().date.seconds * 1000) < new Date()) {
+        this.markTripComplete(trip.id);
+      }
+    });
+  }
+
+  async determineStarted(trip) {
+    const q = query(
+      collection(this.db, `user/${this.uid}/trips/${trip.id}/days`),
+      orderBy('date'),
+      limit(1),
+    );
+
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      console.log(doc.data());
+      if (new Date(doc.data().date.seconds * 1000) <= new Date()) {
+        this.markTripStarted(trip.id);
+      }
+    });
   }
 
   async createTrip() {
@@ -66,24 +108,30 @@ export default class TripService extends Service {
   }
 
   async addDays(startDate, endDate, tripId) {
-    const tripRef = await this.getTrip(tripId);
     const start = new Date(startDate);
     const end = new Date(endDate);
     let currentDate = new Date(start);
 
     while (currentDate <= end) {
-      const dayRef = collection(this.db, `user/${this.uid}/trips/${tripId}/days`);
+      const dayRef = collection(
+        this.db,
+        `user/${this.uid}/trips/${tripId}/days`,
+      );
       await addDoc(dayRef, {
-        date: currentDate.toISOString(),
+        date: currentDate,
       });
-      currentDate.setDate(currentDate.getDate() + 1);
+      currentDate = new Date(currentDate.setDate(currentDate.getDate() + 1));
     }
   }
 
-  async startTrip(tripId)
-  {
+  async markTripStarted(tripId) {
     const tripRef = await this.getTrip(tripId);
-    await updateDoc(tripRef, { start: true });
+    await updateDoc(tripRef, { started: true });
+  }
+
+  async markTripComplete(tripId) {
+    const tripRef = await this.getTrip(tripId);
+    await updateDoc(tripRef, { complete: true });
   }
 
   async getDays(tripId) {
@@ -92,9 +140,9 @@ export default class TripService extends Service {
       `user/${this.uid}/trips/${tripId}/days`,
     );
     const querySnapshot = await getDocs(daysRef);
-    const dates = []
+    const dates = [];
     querySnapshot.forEach((doc) => {
-      dates.push({ id: doc.id, data: doc.data() });
+      dates.push({ id: doc.id, date: new Date(doc.data().date.seconds * 1000).toLocaleDateString() });
     });
     return dates;
   }
@@ -118,7 +166,6 @@ export default class TripService extends Service {
       `user/${this.uid}/trips/${tripId}/days/${day_id}`,
     );
     const snap = await getDoc(dayRef);
-    // day.date = new Date(day.date).toLocaleDateString('en-US');
     return snap.data();
   }
 
@@ -132,7 +179,7 @@ export default class TripService extends Service {
     await updateDoc(tripRef, updatedFields);
   }
 
-  async getActivities(trip_id, date_id){
+  async getActivities(trip_id, date_id) {
     const activitiesRef = await collection(
       this.db,
       `user/${this.uid}/trips/${trip_id}/days/${date_id}/activities`,
@@ -164,7 +211,11 @@ export default class TripService extends Service {
 
   async deleteActivity(tripId, date_id, activity_id) {
     await deleteDoc(
-      doc(this.db, `user/${this.uid}/trips/${tripId}/days/${date_id}/activities`, activity_id),
+      doc(
+        this.db,
+        `user/${this.uid}/trips/${tripId}/days/${date_id}/activities`,
+        activity_id,
+      ),
     );
   }
 

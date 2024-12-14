@@ -18,7 +18,7 @@ export default class DateDetailRoute extends Route {
     console.log(activities);
 
     return {
-      date: day.date,
+      date: new Date(day.date),
       date_id: date_id,
       trip_id: trip_id,
       activities: activities,

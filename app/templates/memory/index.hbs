@@ -11,12 +11,11 @@
       </h1>
       <h5 class="card-subtitle mb-4 text-muted">Destinations</h5>
 
-      {{!-- {{TODO: Might need to add a unique ID for journal}} --}}
       <div class="vertical-card-list">
-        {{#each this.model.dates as |date index|}}
+        {{#each this.model.dates as |date|}}
         <div class="carousel-card">
         <LinkTo @route="memory.journal"
-                @models={{array this.model.trip_id (add index 1)}}
+                @models={{array this.model.trip_id date.id}}
                 class="btn btn-light w-100">
 
           {{date.date}}
