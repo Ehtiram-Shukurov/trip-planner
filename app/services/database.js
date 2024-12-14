@@ -111,16 +111,42 @@ export default class TripService extends Service {
     const end = new Date(endDate);
     let currentDate = new Date(start);
 
+    // Reference to the collection
+    const dayRef = collection(this.db, `user/${this.uid}/trips/${tripId}/days`);
+
+    // Step 1: Fetch all existing days
+    const existingDaysSnapshot = await getDocs(dayRef);
+    const existingDays = existingDaysSnapshot.docs.map((doc) => ({
+      id: doc.id, // Firestore document ID
+      date: new Date(doc.data().date).toISOString(), // Ensure consistent date format
+    }));
+
+    // Step 2: Calculate the new range of days
+    const newDaysSet = new Set(); // To track dates in the new range
+    const addPromises = [];
+
     while (currentDate <= end) {
-      const dayRef = collection(
-        this.db,
-        `user/${this.uid}/trips/${tripId}/days`,
-      );
-      await addDoc(dayRef, {
-        date: currentDate,
-      });
+      const isoDate = currentDate.toISOString(); // Use ISO format for comparison
+      newDaysSet.add(isoDate);
+
+      // If the date does not exist in the database, add it
+      if (!existingDays.some((day) => day.date === isoDate)) {
+        addPromises.push(
+          addDoc(dayRef, {
+            date: isoDate,
+          })
+        );
+      }
       currentDate = new Date(currentDate.setDate(currentDate.getDate() + 1));
     }
+
+    // Step 3: Remove days that are no longer in the range
+    const deletePromises = existingDays
+      .filter((day) => !newDaysSet.has(day.date)) // Find dates outside the new range
+      .map((day) => deleteDoc(doc(this.db, dayRef.path, day.id))); // Delete those documents
+
+    // Execute all add and delete operations in parallel
+    await Promise.all([...addPromises, ...deletePromises]);
   }
 
   async markTripStarted(tripId) {
@@ -141,7 +167,16 @@ export default class TripService extends Service {
     const querySnapshot = await getDocs(daysRef);
     const dates = [];
     querySnapshot.forEach((doc) => {
-      dates.push({ id: doc.id, date: new Date(doc.data().date.seconds * 1000).toLocaleDateString() });
+
+      const formatter = new Intl.DateTimeFormat('en-US', {
+        month: '2-digit',
+        day: '2-digit',
+        year: 'numeric',
+      });
+      
+      const date = formatter.format(new Date(doc.data().date));
+
+      dates.push({ id: doc.id, date: date });
     });
     return dates;
   }
