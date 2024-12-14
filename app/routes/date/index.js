@@ -16,6 +16,7 @@ export default class DateIndexRoute extends Route {
   async model(params) {
     this.dates = await this.database.getDays(params.trip_id);
     this.title = await this.database.getTripTitle(params.trip_id);
+    console.log(this.dates);
     return {
       trip_id: params.trip_id,
       dates: this.dates,

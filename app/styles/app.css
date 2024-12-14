@@ -172,14 +172,15 @@ main {
 }
 
 .litepicker-container {
+  justify-content: center;
   margin: auto;
+  width: 100%;
   z-index: 9999;
-  max-width: 600px;
 }
 
 .custom-litepicker input {
   padding: 0.5em;
-  width: 250px;
+  width: 100%;
   margin-bottom: 10px;
   font-size: 15px;
 }
@@ -189,7 +190,6 @@ main {
   max-width: 100%;
 }
 
-/* camera input styles */
 .file-input-label {
   display: inline-block;
   padding: 10px 20px;
@@ -224,17 +224,14 @@ main {
 @keyframes highlight {
   0% {
     background-color: #d4edda;
-    /* Light green */
   }
 
   50% {
     background-color: #c3e6cb;
-    /* Slightly darker green */
   }
 
   100% {
     background-color: transparent;
-    /* Back to normal */
   }
 }
 
@@ -257,3 +254,35 @@ main {
   animation-duration: 1s;
 }
 
+.date-display-container {
+  border: 1px solid #e0e0e0;
+  transition: box-shadow 0.3s ease;
+}
+
+.date-display-container:hover {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.date-display-container p {
+  color: #333;
+}
+
+.date-display-container span {
+  font-style: italic;
+}
+
+.calendar-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.calendar-wrapper:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
