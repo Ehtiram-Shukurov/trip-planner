@@ -13,10 +13,6 @@ export default class DateDetailRoute extends Route {
     const { trip_id, date_id } = params;
     const day = await this.database.getDay(trip_id, date_id);
     const activities = await this.database.getActivities(trip_id, date_id);
-
-    console.log(day);
-    console.log(activities);
-
     return {
       date: new Date(day.date),
       date_id: date_id,

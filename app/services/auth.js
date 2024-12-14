@@ -43,7 +43,7 @@ export default class AuthService extends Service {
   async ensureLoggedIn() {
     await this.ensureInitialized();
     if (!this.user) {
-      this.router.transitionTo('login');
+      this.router.transitionTo('index');
     }
   }
 

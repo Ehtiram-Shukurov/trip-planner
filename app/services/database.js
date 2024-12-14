@@ -85,7 +85,6 @@ export default class TripService extends Service {
 
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
-      console.log(doc.data());
       if (new Date(doc.data().date.seconds * 1000) <= new Date()) {
         this.markTripStarted(trip.id);
       }
@@ -255,7 +254,6 @@ export default class TripService extends Service {
       getDownloadURL(tripsStorageRef).then(async (url) => {
         // saves the image data to the db for later retrieval
         const imageData = { id: image.name, url: url };
-        console.log(dateRef);
         await updateDoc(dateRef, {
           images: arrayUnion(imageData),
         }).then(() => {
