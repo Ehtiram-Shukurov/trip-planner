@@ -1,24 +1,30 @@
 {{page-title "Destination"}}
-
-<h1 class="title" style="color: black">Where do you want to go?</h1>
-
-<div style="margin-bottom: 5px">
-  <input id="search" type="text" placeholder="Enter a country or city"/>
-  <button type="button" class="button is-primary" {{on "click" this.searchQuery}}>Search</button>
+<div class="d-flex align-items-center">
+  <div class="flex-grow-1">
+    <h1 class="fs-1 text-dark title mb-3">
+      Where<br>
+      is your destination?
+    </h1>
+  </div>
+  <div class="flex-grow-1 ms-2">
+    <button class="btn w-100" type="button" style="background-color: #F1DCA7; color: #000;" {{on "click"
+      this.validateAndNavigate}}>
+      <i class="bi bi-arrow-right"></i>
+    </button>
+  </div>
 </div>
 
-<div class="map-container">
-  <GoogleMapsIframe @query={{this.selectedDestination}} />
+
+
+<div class="map-container animate__animated animate__fadeIn animate__slow"> 
+  <GoogleMapsJs @onPlaceChange={{this.updateDestination}} @searchNearby={{false}}/>
 </div>
 
 <div class="d-flex justify-content-between mt-4">
   <LinkTo @route="index">
-    <button class="btn btn-primary rounded-circle" type="button" {{on "click" this.cancel}}>
+    <button class="btn btn-primary" type="button" {{on "click" this.cancel}}>
       Cancel
     </button>
   </LinkTo>
   
-  <button class="btn btn-primary rounded-circle" type="button" {{on "click" this.validateAndNavigate}}>
-    <i class="bi bi-arrow-right"></i>
-  </button>
 </div>
