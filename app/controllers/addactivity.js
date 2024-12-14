@@ -10,11 +10,10 @@ export default class AddActivityController extends Controller {
   @tracked time = '';
   @tracked budget = '';
   @tracked location = '';
-  @tracked finalDestination = null; // Track the selected destination
 
   @action
   updateLocation(location) {
-    this.finalDestination = location;
+    this.location = location;
   }
 
   @action

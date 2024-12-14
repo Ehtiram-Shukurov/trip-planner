@@ -17,7 +17,7 @@ export default class DatePickerController extends Controller {
     super(...arguments);
     window.addEventListener('resize', this.handleResize);
   }
-
+  
   @action
   registerAPI(litepicker) {
     this.litepicker = litepicker;
@@ -29,11 +29,7 @@ export default class DatePickerController extends Controller {
 
     later(() => {
       let input = document.querySelector('.litepicker-container input');
-      if (input) {
-        input.placeholder = 'YYYY-MM-DD - YYYY-MM-DD';
-      } else {
-        console.error('Litepicker input field not found.');
-      }
+      input.placeholder = 'YYYY-MM-DD - YYYY-MM-DD';
     }, 50);
   }
 

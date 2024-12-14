@@ -213,6 +213,14 @@ main {
   color: black;
 }
 
+@media (prefers-color-scheme: light) {
+  .carousel-control-next,
+  .carousel-control-prev, 
+  .carousel-indicators{
+      filter: invert(100%);
+  }
+}
+
 @keyframes highlight {
   0% {
     background-color: #d4edda;

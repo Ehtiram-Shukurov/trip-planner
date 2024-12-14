@@ -19,11 +19,14 @@ export default class CameraGallery extends Component {
 
   @action
   handleGalleryInput(event) {
-    const file = event.target.files[0];
-    console.log(this.args.data);
-    if (file) {
-      this.displayImage(file);
+    const file = event.target.files;
+    for (let key in file) {
+
+      if (file[key]) {
+        this.displayImage(file[key]);
+      }
     }
+
   }
 
   displayImage(file) {
@@ -34,13 +37,19 @@ export default class CameraGallery extends Component {
       imageElement.src = e.target.result;
       imageElement.style.maxWidth = '100%';
       imageElement.style.height = 'auto';
+      // if this is 2nd + time the code is ran
+      if (document.getElementById('image-preview-container'))
+      {
+        const container= document.getElementById('image-preview-container');
+        container.appendChild(imageElement);
+      }
+      // if the this is the first time the code is ran change and set the id.
+      else{
+        const container = document.getElementById('image-preview-container');
+        container.setAttribute("id", this.args.data);
+        container.appendChild(imageElement);
+      }
 
-      const container = document.getElementById('image-preview-container');
-      container.innerHTML = '';
-      container.setAttribute('id', this.args.data);
-      imageElement.setAttribute('id', this.args.data);
-
-      container.appendChild(imageElement);
     };
 
     reader.readAsDataURL(file);

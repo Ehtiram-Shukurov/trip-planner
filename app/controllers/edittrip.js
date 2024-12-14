@@ -125,6 +125,7 @@ export default class EditTripController extends Controller {
     const updatedTrip = {
       destination: this.destination,
       days: updatedDays,
+      lastEdited: new Date().getTime(),
     };
 
     await this.database.updateTrip(this.model.id, updatedTrip);
