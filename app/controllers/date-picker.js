@@ -21,27 +21,44 @@ export default class DatePickerController extends Controller {
   @action
   registerAPI(litepicker) {
     this.litepicker = litepicker;
-
     this.today.setHours(0, 0, 0, 0);
     this.litepicker.setOptions({
       minDate: this.today,
     });
 
+    const formatDate = (date) => {
+      if (!date) return 'Not selected';
+      const options = { day: '2-digit', month: 'long', year: 'numeric' };
+      return new Intl.DateTimeFormat('en-US', options).format(date);
+    };
+    
+    this.litepicker.on('selected', (startDate, endDate) => {
+      const startDateDisplay = document.querySelector('#startDateDisplay span');
+      const endDateDisplay = document.querySelector('#endDateDisplay span');
+
+      const start = startDate?.dateInstance || null;
+      const end = endDate?.dateInstance || null;
+
+      startDateDisplay.textContent = formatDate(start);
+      endDateDisplay.textContent = formatDate(end);
+    });
+
     later(() => {
       let input = document.querySelector('.litepicker-container input');
-      input.placeholder = 'YYYY-MM-DD - YYYY-MM-DD';
+      input.style = 'display: none';
     }, 50);
   }
 
   @action
   onDateChanged(startDate, endDate) {
+    this.dates = [];
     if (
       startDate.dateInstance < this.today ||
       endDate.dateInstance < this.today
     ) {
       alert('Date has already passed.');
       document.querySelector('#ember77').value = '';
-      this.dates = [];
+  
       this.litepicker.clearSelection();
       this.litepicker.gotoDate(this.today);
 
