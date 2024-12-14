@@ -190,7 +190,6 @@ main {
   max-width: 100%;
 }
 
-/* camera input styles */
 .file-input-label {
   display: inline-block;
   padding: 10px 20px;
@@ -225,17 +224,14 @@ main {
 @keyframes highlight {
   0% {
     background-color: #d4edda;
-    /* Light green */
   }
 
   50% {
     background-color: #c3e6cb;
-    /* Slightly darker green */
   }
 
   100% {
     background-color: transparent;
-    /* Back to normal */
   }
 }
 
@@ -260,24 +256,19 @@ main {
 
 .date-display-container {
   border: 1px solid #e0e0e0;
-  /* Subtle border */
   transition: box-shadow 0.3s ease;
-  /* Smooth hover effect */
 }
 
 .date-display-container:hover {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  /* Add hover shadow */
 }
 
 .date-display-container p {
   color: #333;
-  /* Improve readability of text */
 }
 
 .date-display-container span {
   font-style: italic;
-  /* Distinct style for placeholders */
 }
 
 .calendar-wrapper {
@@ -293,7 +284,5 @@ main {
 
 .calendar-wrapper:hover {
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-  /* Slightly stronger shadow on hover */
   transform: translateY(-2px);
-  /* Lift effect */
 }
