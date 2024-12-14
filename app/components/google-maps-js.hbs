@@ -1,13 +1,15 @@
 {{yield}}
 
-<div class="place-picker-container">
+
   <gmpx-api-loader key="AIzaSyCJOJEWNIpSsVDOScXozsAeqV63HmiQwOM" solution-channel="GMP_GE_mapsandplacesautocomplete_v1">
   </gmpx-api-loader>
+
+  <div class="place-picker justify-content-center d-flex mb-3">
+    <gmpx-place-picker id="search" placeholder="Enter an address"></gmpx-place-picker>
+  </div>
+
   <gmp-map style="height: 500px; width: 100%" center="40.749933,-73.98633" zoom="13" map-id="DEMO_MAP_ID" {{did-insert
     this.initMap}}>
-    <div slot="control-block-start-inline-start">
-      <gmpx-place-picker id="placePicker" placeholder="Enter an address"></gmpx-place-picker>
-    </div>
     <gmp-advanced-marker></gmp-advanced-marker>
   </gmp-map>
 
@@ -37,5 +39,3 @@
       {{/if}}
     {{/if}}
   {{/if}}
-
-</div>

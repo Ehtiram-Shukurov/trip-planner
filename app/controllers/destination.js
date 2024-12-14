@@ -21,6 +21,12 @@ export default class DestinationsController extends Controller {
   @action
   async searchQuery() {
     this.destinationQuery = document.querySelector('#search').value;
+
+    if(!this.destinationQuery){
+      alert('Please enter a destination');
+      return false;
+    }
+    
     const query = this.destinationQuery.trim();
 
     if (query === '') {

@@ -237,3 +237,15 @@ main {
 .animate-highlight {
   animation: highlight 1.5s ease-in-out;
 }
+
+.place-picker{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.title{
+  animation: fadeIn;
+  animation-duration: 1s;
+}
+
