@@ -18,10 +18,10 @@
       <input type="text" id="budgetInput" class="form-control" placeholder="$10" {{on "input" this.updateBudget}}>
     </div>
 
-    {{#if this.finalDestination}}
+    {{#if this.location}}
       <div class="final-destination-container border rounded p-3 mb-3">
         <h5 class="mb-2 text-success">Selected Destination</h5>
-        <p class="text-dark fw-bold">{{this.finalDestination}}</p>
+        <p class="text-dark fw-bold">{{this.location}}</p>
       </div>
       
       {{else}}
