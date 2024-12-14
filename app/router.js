@@ -21,7 +21,7 @@ Router.map(function () {
 
   this.route('addactivity', { path: '/addactivity/:trip_id/:date_id' });
   this.route('editactivity', {
-    path: '/editactivity/:trip_id/:date_id/:activityIndex',
+    path: '/editactivity/:trip_id/:date_id/:activity_id',
   });
   this.route('result');
 

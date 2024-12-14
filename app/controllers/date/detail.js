@@ -6,12 +6,12 @@ export default class DateDetailController extends Controller {
   @service database;
   @service router;
   @action
-  async deleteActivity(activityIndex) {
+  async deleteActivity(activity_id) {
     if (confirm('Are you sure you want to delete this activity?')) {
       await this.database.deleteActivity(
         this.model.trip_id,
         this.model.date_id,
-        activityIndex,
+        activity_id,
       );
       this.router.refresh();
     }

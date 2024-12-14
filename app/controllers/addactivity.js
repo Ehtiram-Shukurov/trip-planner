@@ -28,7 +28,6 @@ export default class AddActivityController extends Controller {
 
   @action
   async saveActivity(event) {
-    console.log("triggerd");
     event.preventDefault();
     if (!this.time) {
       alert('Please select a time');

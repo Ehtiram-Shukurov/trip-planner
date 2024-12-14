@@ -76,7 +76,6 @@ export default class DatePickerController extends Controller {
       currentDate.setDate(currentDate.getDate() + 1);
     }
 
-    console.log(this.dates);
   }
 
   @action
