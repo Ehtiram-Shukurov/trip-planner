@@ -12,4 +12,9 @@ export default class IndexDateController extends Controller {
     await this.database.finishSetup(this.model.trip_id);
     this.router.transitionTo('home');
   }
+
+  getAnimationDelay(index) {
+    const delay = index * 0.2; // Calculate delay based on index
+    return htmlSafe(`animation-delay: ${delay}s;`);
+  }
 }

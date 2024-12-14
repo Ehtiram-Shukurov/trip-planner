@@ -1,4 +1,4 @@
-import Service, {service} from "@ember/service";
+import Service, { service } from '@ember/service';
 
 export default class Memory extends Service {
   @service database;
@@ -13,7 +13,7 @@ export default class Memory extends Service {
     // save images
     this.images.forEach(async (image) => {
       await this.database.saveImage(image, trip_id, date_id);
-    })
+    });
     // save journal entry
     //this.database.saveJournalEntry(this.journalEntry, tripId, dateId);
 
@@ -22,4 +22,3 @@ export default class Memory extends Service {
     this.journalEntry = '';
   }
 }
-
