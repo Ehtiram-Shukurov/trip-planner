@@ -116,10 +116,9 @@ export default class TripService extends Service {
 
     const existingDaysSnapshot = await getDocs(dayRef);
     const existingDays = existingDaysSnapshot.docs.map((doc) => ({
-      id: doc.id,
+      id: doc.id, // Firestore document ID
       date: new Date(doc.data().date).toISOString(), 
     }));
-
 
     const newDaysSet = new Set();
     const addPromises = [];
