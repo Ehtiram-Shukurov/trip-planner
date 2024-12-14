@@ -5,19 +5,17 @@ export default class EditActivityRoute extends Route {
   @service database;
   @service auth;
 
-  async beforeModel(){
+  async beforeModel() {
     await this.auth.ensureLoggedIn();
   }
-
   async model(params) {
-    const { trip_id, date_id, activityIndex } = params;
+    const { trip_id, date_id, activity_id } = params;
 
-    if (!trip_id || !date_id || activityIndex === undefined) {
+    if (!trip_id || !date_id || activity_id === undefined) {
       throw new Error('Missing route parameters');
     }
 
-    const day = await this.database.getDay(trip_id, parseInt(date_id, 10));
-    const activity = day.activities[parseInt(activityIndex, 10)];
+    const activity = await this.database.getActivity(trip_id, date_id, activity_id);
 
     if (!activity) {
       throw new Error('Activity not found');
@@ -26,7 +24,7 @@ export default class EditActivityRoute extends Route {
     return {
       trip_id,
       date_id,
-      activityIndex: parseInt(activityIndex, 10),
+      activity_id,
       activity,
     };
   }

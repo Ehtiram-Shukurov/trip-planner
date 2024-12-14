@@ -1,6 +1,4 @@
-{{page-title "Index"}}
-
-<div class="container d-flex justify-content-center align-items-center" data-theme="light">
+<div class="container d-flex justify-content-center align-items-center">
   <div class="card shadow-lg w-100" style="max-width: 400px; border-radius: 10px;">
     <div class="card-body text-center">
 
@@ -13,12 +11,11 @@
       </h1>
       <h5 class="card-subtitle mb-4 text-muted">Destinations</h5>
 
-      {{!-- {{TODO: Might need to add a unique ID for journal}} --}}
       <div class="vertical-card-list">
-        {{#each this.model.dates as |date index|}}
+        {{#each this.model.dates as |date|}}
         <div class="carousel-card">
-        <LinkTo @route="memory.journal" 
-                @models={{array this.model.trip_id (add index 1)}} 
+        <LinkTo @route="memory.journal"
+                @models={{array this.model.trip_id date.id}}
                 class="btn btn-light w-100">
 
           {{date.date}}
@@ -27,7 +24,7 @@
         {{/each}}
       </div>
 
-      <div class="d-flex justify-content-between mt-4">        
+      <div class="d-flex justify-content-end mt-4">
         <LinkTo @route="index">
           <button class="btn btn-success rounded-circle" type="button">
             <i class="bi bi-check"></i>

@@ -3,10 +3,7 @@ import { service } from '@ember/service';
 import { action } from '@ember/object';
 
 export default class IndexController extends Controller {
-  @service firebase;
   @service auth;
-  @service router;
-  @service database;
   @service router;
 
   @action

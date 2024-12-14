@@ -62,7 +62,7 @@ export default class EditActivityController extends Controller {
     await this.database.editActivity(
       this.model.trip_id,
       this.model.date_id,
-      this.model.activityIndex,
+      this.model.activity_id,
       updatedActivity,
     );
 

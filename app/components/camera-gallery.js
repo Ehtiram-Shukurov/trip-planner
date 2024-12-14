@@ -1,9 +1,13 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
+import {service} from "@ember/service";
 
 export default class CameraGallery extends Component {
   @tracked mobile;
+  @service memory;
+  @tracked src;
+  @tracked images = [];
 
   constructor() {
     super(...arguments);
@@ -11,45 +15,35 @@ export default class CameraGallery extends Component {
   }
   @action
   handleCameraInput(event) {
-    const file = event.target.files[0];
-    if (file) {
-      this.displayImage(file);
-    }
+    this.images = [];
+    let files = Array.from(event.target.files);
+    this.memory.setImages(files);
+    files.forEach((file) => {
+      if (file) {
+        this.displayImage(file);
+      }
+    });
   }
 
   @action
   handleGalleryInput(event) {
-    const file = event.target.files;
-    for (let key in file) {
-
-      if (file[key]) {
-        this.displayImage(file[key]);
+    this.images = [];
+    let files = Array.from(event.target.files);
+    this.memory.setImages(files);
+    files.forEach((file) => {
+      if (file) {
+        this.displayImage(file);
       }
-    }
-
+    });
   }
 
   displayImage(file) {
     const reader = new FileReader();
-
     reader.onload = (e) => {
-      const imageElement = document.createElement('img');
-      imageElement.src = e.target.result;
-      imageElement.style.maxWidth = '100%';
-      imageElement.style.height = 'auto';
-      // if this is 2nd + time the code is ran
-      if (document.getElementById('image-preview-container'))
-      {
-        const container= document.getElementById('image-preview-container');
-        container.appendChild(imageElement);
-      }
-      // if the this is the first time the code is ran change and set the id.
-      else{
-        const container = document.getElementById('image-preview-container');
-        container.setAttribute("id", this.args.data);
-        container.appendChild(imageElement);
-      }
-
+      this.src = e.target.result;
+      this.images = [...this.images, {
+        src: e.target.result
+      }];
     };
 
     reader.readAsDataURL(file);
