@@ -7,21 +7,38 @@
   </div>
 
   <form {{on "submit" this.saveActivity}} class="needs-validation">
+
     <div class="mb-3">
       <label for="timeInput" class="form-label" style="color:black">Time</label>
       <input type="time" id="timeInput" class="form-control" {{on "input" this.updateTime}}>
     </div>
+
     <div class="mb-3">
       <label for="budgetInput" class="form-label" style="color:black">Budget</label>
       <input type="text" id="budgetInput" class="form-control" placeholder="$10" {{on "input" this.updateBudget}}>
     </div>
-    <div class="mb-3">
-      <label for="locationInput" class="form-label" style="color:black">Location</label>
-      <input type="text" id="locationInput" class="form-control" placeholder="Enter location" {{on "input" this.updateLocation}}>
+
+    {{#if this.location}}
+      <div class="final-destination-container border rounded p-3 mb-3">
+        <h5 class="mb-2 text-success">Selected Destination</h5>
+        <p class="text-dark fw-bold">{{this.location}}</p>
+      </div>
+      
+      {{else}}
+      <div class="alert alert-warning text-center mb-3">
+        <p>Pick a place to go!</p>
+      </div>
+    {{/if}}
+
+    <div class="map-container mb-3">
+      <GoogleMapsJs @onPlaceChange={{this.updateLocation}} @onLocationPick={{this.updateLocation}} @searchNearby={{true}} />
     </div>
+
     <button type="submit" class="btn btn-success w-100">Save</button>
   </form>
+
   <LinkTo @route="date" @model={{this.model.trip_id}}>
-    <button class="btn btn-danger w-100" style="margin-top:.5em;">Cancel</button>
+    <button class="btn btn-danger w-100 mt-2" type="button">Cancel</button>
   </LinkTo>
+
 </div>

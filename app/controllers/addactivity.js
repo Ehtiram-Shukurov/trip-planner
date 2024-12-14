@@ -12,6 +12,11 @@ export default class AddActivityController extends Controller {
   @tracked location = '';
 
   @action
+  updateLocation(location) {
+    this.location = location;
+  }
+
+  @action
   updateTime(event) {
     this.time = event.target.value;
   }
@@ -22,12 +27,8 @@ export default class AddActivityController extends Controller {
   }
 
   @action
-  updateLocation(event) {
-    this.location = event.target.value;
-  }
-
-  @action
   async saveActivity(event) {
+    console.log("triggerd");
     event.preventDefault();
     if (!this.time) {
       alert('Please select a time');

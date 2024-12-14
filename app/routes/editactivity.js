@@ -20,7 +20,6 @@ export default class EditActivityRoute extends Route {
     if (!activity) {
       throw new Error('Activity not found');
     }
-    console.log(activity);
 
     return {
       trip_id,

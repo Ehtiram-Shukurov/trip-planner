@@ -66,6 +66,7 @@ export default class TripService extends Service {
   }
 
   async addDays(startDate, endDate, tripId) {
+    const tripRef = await this.getTrip(tripId);
     const start = new Date(startDate);
     const end = new Date(endDate);
     let currentDate = new Date(start);
@@ -77,6 +78,12 @@ export default class TripService extends Service {
       });
       currentDate.setDate(currentDate.getDate() + 1);
     }
+  }
+
+  async startTrip(tripId)
+  {
+    const tripRef = await this.getTrip(tripId);
+    await updateDoc(tripRef, { start: true });
   }
 
   async getDays(tripId) {
