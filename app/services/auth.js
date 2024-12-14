@@ -25,7 +25,7 @@ export default class AuthService extends Service {
     onAuthStateChanged(this.auth, (user) => {
       this.user = user;
       if (user) {
-        console.log('User signed in:', user.email);
+        console.log('User signed in:', user);
       } else {
         console.log('No user signed in.');
       }
@@ -55,7 +55,7 @@ export default class AuthService extends Service {
       provider.addScope('email');
       const result = await signInWithPopup(this.auth, provider);
 
-      console.log('User signed in:', result.user);
+      console.log(result.user);
       return result;
     } catch (error) {
       console.error('Error during sign in:', error);

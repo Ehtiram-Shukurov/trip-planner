@@ -31,8 +31,8 @@ export default class EditActivityController extends Controller {
   }
 
   @action
-  updateLocation(event) {
-    this.location = event.target.value;
+  updateLocation(value) {
+    this.location = value;
   }
 
   @action

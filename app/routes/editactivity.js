@@ -3,6 +3,11 @@ import { service } from '@ember/service';
 
 export default class EditActivityRoute extends Route {
   @service database;
+  @service auth;
+
+  async beforeModel(){
+    await this.auth.ensureLoggedIn();
+  }
 
   async model(params) {
     const { trip_id, date_id, activityIndex } = params;
