@@ -1,7 +1,8 @@
 import Controller from '@ember/controller';
+import { tracked } from '@glimmer/tracking';
 import { service } from '@ember/service';
 import { action } from '@ember/object';
-import { onSnapshot, query, where } from 'firebase/firestore';
+import { onSnapshot, query, where, orderBy} from 'firebase/firestore';
 
 export default class HomeController extends Controller {
   @service firebase;
@@ -9,7 +10,7 @@ export default class HomeController extends Controller {
   @service router;
   @service database;
 
-  trips = [];
+  @tracked trips = [];
 
   @action
   refreshHomeListener(user) {
@@ -22,14 +23,17 @@ export default class HomeController extends Controller {
       const q = query(
         this.database.tripsRef,
         where('owner', '==', this.auth.user.uid),
+        orderBy('lastEdited', 'desc'),
       );
 
       this.unsubscribe = onSnapshot(q, (querySnapshot) => {
         this.trips = [];
         querySnapshot.forEach((doc) => {
           const trip = { id: doc.id, data: doc.data() };
+          console.log(trip.setup);
           this.trips.push(trip);
         });
+        console.log(this.trips);
       });
     }
   }
