@@ -15,7 +15,7 @@
 <div class="activity-container card shadow-lg mb-3 mx-auto" style="max-width: 600px;">
   <div class="card-body text-center">
     <h1 class="card-title mb-3 editable-title bg-light border rounded p-2 text-dark mx-auto" contenteditable="true"
-      id="title" style="width: 80%;">
+      id="title" style="width: 80%;" {{on "focusout" this.saveTitle}}>
       {{#if this.model.title}}
       {{this.model.title}}
       {{else}}
