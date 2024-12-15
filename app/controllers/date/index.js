@@ -10,7 +10,6 @@ export default class IndexDateController extends Controller {
   @action
   async saveTitle() {
     let title = document.getElementById('title').innerText;
-    console.log(title);
     await this.database.saveTripTitle(this.model.trip_id, title);
   }
 

@@ -30,10 +30,8 @@ export default class HomeController extends Controller {
         this.trips = [];
         querySnapshot.forEach((doc) => {
           const trip = { id: doc.id, data: doc.data() };
-          console.log(trip.setup);
           this.trips.push(trip);
         });
-        console.log(this.trips);
       });
     }
   }

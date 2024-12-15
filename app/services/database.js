@@ -229,6 +229,18 @@ export default class TripService extends Service {
     return snap.data();
   }
 
+  async saveJournal(trip_id, date_id, activity_id, journalEntry) {
+    const activityDoc = await doc(
+      this.db,
+      `user/${this.uid}/trips/${trip_id}/days/${date_id}/activities/${activity_id}`,
+    );
+  
+    await updateDoc(
+      activityDoc,
+      { journal: journalEntry},
+    );
+  }
+
   async addActivity(tripId, date_id, activity) {
     const activitiesRef = collection(
       this.db,

@@ -17,6 +17,9 @@ export default class EditActivityController extends Controller {
       this.time = this.model.activity.time || '';
       this.budget = this.model.activity.budget || '';
       this.location = this.model.activity.location || '';
+      // This code might need to be changed ^^^
+      // the fields might no longer be in this order or structure
+
     }
   }
 

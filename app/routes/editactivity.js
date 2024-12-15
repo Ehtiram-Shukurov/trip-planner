@@ -14,7 +14,6 @@ export default class EditActivityRoute extends Route {
     if (!trip_id || !date_id || activity_id === undefined) {
       throw new Error('Missing route parameters');
     }
-
     const activity = await this.database.getActivity(
       trip_id,
       date_id,
