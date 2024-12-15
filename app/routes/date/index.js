@@ -1,14 +1,12 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
-import { action } from '@ember/object';
 
 export default class DateIndexRoute extends Route {
   @service database;
   @service auth;
   @tracked dates;
   @tracked title;
-
   async beforeModel() {
     await this.auth.ensureLoggedIn();
   }
@@ -20,11 +18,18 @@ export default class DateIndexRoute extends Route {
       return new Date(a.date) - new Date(b.date);
     });
 
+    this.dates.forEach(async (date) => {
+      date.empty =
+        (await this.database.getActivities(params.trip_id, date.id)).length === 0;
+    });
+
     this.title = await this.database.getTripTitle(params.trip_id);
+
     return {
       trip_id: params.trip_id,
       dates: this.dates,
-      title: this.title,
+      title: this.title.title,
+      setup: this.title.setup,
     };
   }
 }

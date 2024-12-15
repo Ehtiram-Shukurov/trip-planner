@@ -6,7 +6,7 @@ import { htmlSafe } from '@ember/template';
 export default class IndexDateController extends Controller {
   @service database;
   @service router;
-  
+
   @action
   async saveTitle() {
     let title = document.getElementById('title').innerText;

@@ -65,7 +65,7 @@
 }
 
 .vertical-card-list {
-  width:100%;
+  width: 100%;
   max-height: 400px;
   overflow-y: auto;
   margin-left: 5%;
@@ -89,7 +89,9 @@
 .vertical-card-list .carousel-card:hover {
   transform: scale(1.02);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .vertical-card-list::-webkit-scrollbar {
@@ -113,7 +115,7 @@
   background-color: transparent;
 }
 
-.carousel-card-activity{
+.carousel-card-activity {
   width: 100%;
   max-width: 350px;
   margin-bottom: 5px;
@@ -125,12 +127,6 @@
   max-height: 80px;
   overflow: hidden;
   text-align: center;
-}
-
-.carousel-card-activity:hover{
-  transform: scale(1.02);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .card-body {
@@ -347,18 +343,18 @@ main {
   }
 }
 
-
 .fade-in {
   animation: fadeIn 0.6s ease-in-out;
   animation-fill-mode: both;
   opacity: 0;
 }
 
-
 .editable-title {
-  width:100%;
+  width: 100%;
   cursor: text;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .editable-title:focus {
@@ -367,16 +363,25 @@ main {
   outline: none;
 }
 
-
 .destination-highlight {
   position: relative;
   display: inline-block;
   padding-bottom: 4px;
   border-bottom: 2px solid #007bff;
-  transition: color 0.3s ease, border-color 0.3s ease;
+  transition:
+    color 0.3s ease,
+    border-color 0.3s ease;
 }
 
 .destination-highlight:hover {
   color: #0056b3;
   border-color: #0056b3;
+}
+
+.date-alert {
+  width: 1.5rem; 
+  height: 1.5rem; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
 }

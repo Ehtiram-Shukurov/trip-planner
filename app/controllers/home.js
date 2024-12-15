@@ -2,7 +2,7 @@ import Controller from '@ember/controller';
 import { tracked } from '@glimmer/tracking';
 import { service } from '@ember/service';
 import { action } from '@ember/object';
-import { onSnapshot, query, where, orderBy} from 'firebase/firestore';
+import { onSnapshot, query, where, orderBy } from 'firebase/firestore';
 
 export default class HomeController extends Controller {
   @service firebase;

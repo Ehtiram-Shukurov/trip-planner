@@ -81,7 +81,8 @@ export default class GoogleMapsJs extends Component {
 
   @action
   async searchNearby() {
-    const { Place, SearchNearbyRankPreference } = await google.maps.importLibrary("places");
+    const { Place, SearchNearbyRankPreference } =
+      await google.maps.importLibrary('places');
 
     const center = this.map.center;
 

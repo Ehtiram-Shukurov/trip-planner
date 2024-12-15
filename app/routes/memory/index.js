@@ -15,6 +15,6 @@ export default class MemoryIndexRoute extends Route {
     this.dates = await this.database.getDays(params.trip_id);
     this.title = await this.database.getTripTitle(params.trip_id);
 
-    return { trip_id: params.trip_id, dates: this.dates, title: this.title };
+    return { trip_id: params.trip_id, dates: this.dates, title: this.title.title };
   }
 }
