@@ -5,8 +5,8 @@ CSCI 5117, Fall 2024, [assignment description](https://canvas.umn.edu/courses/46
 ## App Info:
 
 * Team Name: Big Chungus
-* App Name: 
-* App Link: <h
+* App Name:  Big Chungus Travel App
+* App Link: https://big-chungus-project2.web.app/
 
 ### Students
 
