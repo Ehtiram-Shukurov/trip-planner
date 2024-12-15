@@ -15,7 +15,11 @@ export default class EditActivityRoute extends Route {
       throw new Error('Missing route parameters');
     }
 
-    const activity = await this.database.getActivity(trip_id, date_id, activity_id);
+    const activity = await this.database.getActivity(
+      trip_id,
+      date_id,
+      activity_id,
+    );
 
     if (!activity) {
       throw new Error('Activity not found');

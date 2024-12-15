@@ -15,9 +15,13 @@ export default class DateIndexRoute extends Route {
 
   async model(params) {
     this.dates = await this.database.getDays(params.trip_id);
+    //sort dates by date
+    this.dates.sort((a, b) => {
+      return new Date(a.date) - new Date(b.date);
+    });
+
     this.title = await this.database.getTripTitle(params.trip_id);
     this.dates.sort((a, b) => new Date(a.date) - new Date(b.date));
-    console.log(this.dates);
     return {
       trip_id: params.trip_id,
       dates: this.dates,

@@ -3,11 +3,11 @@ import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 
 export default class GoogleMapsJs extends Component {
-  @tracked places = []; 
+  @tracked places = [];
   @tracked selectedLocation = null;
 
-  map = null; 
-  marker = null; 
+  map = null;
+  marker = null;
   search = this.args.searchNearby;
   infoWindow = null;
 
@@ -81,21 +81,22 @@ export default class GoogleMapsJs extends Component {
 
   @action
   async searchNearby() {
-    console.log("triggerd searchNearyby");
-    const { Place, SearchNearbyRankPreference } = await google.maps.importLibrary("places");
+    console.log('triggerd searchNearyby');
+    const { Place, SearchNearbyRankPreference } =
+      await google.maps.importLibrary('places');
     const center = this.map.center;
 
     const request = {
-      fields: ["displayName", "location", "businessStatus"],
+      fields: ['displayName', 'location', 'businessStatus'],
       locationRestriction: {
         center: center,
         radius: 500,
       },
-      includedPrimaryTypes: ["restaurant"],
+      includedPrimaryTypes: ['restaurant'],
       maxResultCount: 5,
       rankPreference: SearchNearbyRankPreference.POPULARITY,
-      language: "en-US",
-      region: "us",
+      language: 'en-US',
+      region: 'us',
     };
 
     try {
@@ -107,22 +108,25 @@ export default class GoogleMapsJs extends Component {
           location: place.location,
         }));
       } else {
-        console.log("No results");
+        console.log('No results');
         this.places = [];
       }
     } catch (error) {
-      console.error("Error fetching nearby places:", error);
+      console.error('Error fetching nearby places:', error);
     }
   }
 
   @action
   async centerMapOnPlace(place) {
-    if(this.infowindow){
+    if (this.infowindow) {
       this.infowindow.close();
-    } 
-    this.infoWindow= new google.maps.InfoWindow();
-    
-    const formatted = await this.reverseGeocode(place.location.lat(), place.location.lng());
+    }
+    this.infoWindow = new google.maps.InfoWindow();
+
+    const formatted = await this.reverseGeocode(
+      place.location.lat(),
+      place.location.lng(),
+    );
 
     this.map.center = place.location;
     this.map.zoom = 17;
@@ -143,13 +147,14 @@ export default class GoogleMapsJs extends Component {
     console.log(placePicker.value);
 
     this.selectedLocation = place.displayName;
-    const formatted = await this.reverseGeocode(place.location.lat(), place.location.lng());
-
+    const formatted = await this.reverseGeocode(
+      place.location.lat(),
+      place.location.lng(),
+    );
 
     if (this.args.onLocationPick) {
       this.args.onLocationPick(formatted);
     }
-
   }
 
   @action
@@ -157,7 +162,9 @@ export default class GoogleMapsJs extends Component {
     const geocoder = new google.maps.Geocoder();
 
     try {
-      const response = await geocoder.geocode({ location: { lat: latitude, lng: longitude } });
+      const response = await geocoder.geocode({
+        location: { lat: latitude, lng: longitude },
+      });
       if (response.results && response.results.length > 0) {
         const address = response.results[0].formatted_address;
         this.formattedAddress = address;
@@ -173,5 +180,4 @@ export default class GoogleMapsJs extends Component {
       throw error;
     }
   }
-
 }
