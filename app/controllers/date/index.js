@@ -1,6 +1,7 @@
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
+import { htmlSafe } from '@ember/template';
 
 export default class IndexDateController extends Controller {
   @service database;
@@ -14,7 +15,7 @@ export default class IndexDateController extends Controller {
   }
 
   getAnimationDelay(index) {
-    const delay = index * 0.2; // Calculate delay based on index
+    const delay = index * 0.1; // Calculate delay based on index
     return htmlSafe(`animation-delay: ${delay}s;`);
   }
 }
