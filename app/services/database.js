@@ -113,20 +113,20 @@ export default class TripService extends Service {
 
     // Reference to the collection
     const dayRef = collection(this.db, `user/${this.uid}/trips/${tripId}/days`);
-
+  
     const existingDaysSnapshot = await getDocs(dayRef);
     const existingDays = existingDaysSnapshot.docs.map((doc) => ({
       id: doc.id, // Firestore document ID
-      date: new Date(doc.data().date).toISOString(), 
+      date: new Date(doc.data().date).toISOString(),
     }));
-
+  
     const newDaysSet = new Set();
     const addPromises = [];
-
+  
     while (currentDate <= end) {
-      const isoDate = currentDate.toISOString(); 
+      const isoDate = currentDate.toISOString();
       newDaysSet.add(isoDate);
-
+  
       if (!existingDays.some((day) => day.date === isoDate)) {
         addPromises.push(
           addDoc(dayRef, {
@@ -136,13 +136,26 @@ export default class TripService extends Service {
       }
       currentDate = new Date(currentDate.setDate(currentDate.getDate() + 1));
     }
-
-    const deletePromises = existingDays
-      .filter((day) => !newDaysSet.has(day.date))
-      .map((day) => deleteDoc(doc(this.db, dayRef.path, day.id)));
-
+    const deleteDays = existingDays.filter((day) => !newDaysSet.has(day.date));
+  
+    const deletePromises = deleteDays.map(async (day) => {
+      const activitiesRef = collection(
+        this.db,
+        `user/${this.uid}/trips/${tripId}/days/${day.id}/activities`
+      );
+      const activitiesSnapshot = await getDocs(activitiesRef);
+  
+      const activityDeletePromises = activitiesSnapshot.docs.map((activityDoc) =>
+        deleteDoc(activityDoc.ref)
+      );
+  
+      await Promise.all(activityDeletePromises);
+      return deleteDoc(doc(this.db, dayRef.path, day.id));
+    });
+  
     await Promise.all([...addPromises, ...deletePromises]);
   }
+  
 
   async markTripStarted(tripId) {
     const tripRef = await this.getTrip(tripId);
@@ -200,6 +213,22 @@ export default class TripService extends Service {
 
   async deleteTrip(tripId) {
     const tripRef = await this.getTrip(tripId);
+  
+    const daysRef = collection(this.db, `user/${this.uid}/trips/${tripId}/days`);
+    const daysSnapshot = await getDocs(daysRef);
+  
+    const deleteDaysPromises = daysSnapshot.docs.map(async (dayDoc) => {
+      const dayId = dayDoc.id;
+  
+      const activitiesRef = collection(this.db, `user/${this.uid}/trips/${tripId}/days/${dayId}/activities`);
+      const activitiesSnapshot = await getDocs(activitiesRef);
+      const deleteActivitiesPromises = activitiesSnapshot.docs.map((activityDoc) =>
+        deleteDoc(activityDoc.ref)
+      );
+      await Promise.all(deleteActivitiesPromises);
+      return deleteDoc(dayDoc.ref);
+    });
+    await Promise.all(deleteDaysPromises);
     await deleteDoc(tripRef);
   }
 
@@ -231,9 +260,16 @@ export default class TripService extends Service {
   }
 
   async addActivity(tripId, date_id, activity) {
+  const daysRef = collection(this.db, `user/${this.uid}/trips/${tripId}/days`);
+  const daySnapshot = await getDocs(daysRef);
+  const validDates = daySnapshot.docs.map((doc) => doc.id);
+
+  if (!validDates.includes(date_id)) {
+    throw new Error(`Invalid date_id: ${date_id} is not part of the trip.`);
+  }
     const activitiesRef = collection(
       this.db,
-      `user/${this.uid}/trips/${tripId}/days/${date_id}/activities`,
+      `user/${this.uid}/trips/${tripId}/days/${date_id}/activities`
     );
     await addDoc(activitiesRef, activity);
   }
@@ -248,19 +284,20 @@ export default class TripService extends Service {
     );
   }
 
-  async editActivity(tripId, dateIndex, activity_id, updatedActivity) {
+  async editActivity(tripId, date_id, activity_id, updatedActivity) {
+    const daysRef = collection(this.db, `user/${this.uid}/trips/${tripId}/days`);
+    const daySnapshot = await getDocs(daysRef);
+    const validDates = daySnapshot.docs.map((doc) => doc.id);
+  
+    if (!validDates.includes(date_id)) {
+      throw new Error(`Invalid date_id: ${date_id} is not part of the trip.`);
+    }
+  
     const activitiesRef = doc(
       this.db,
-      `user/${this.uid}/trips/${tripId}/days/${dateIndex}/activities/${activity_id}`,
+      `user/${this.uid}/trips/${tripId}/days/${date_id}/activities/${activity_id}`
     );
-    const tripRef = await this.getTrip(tripId);
-
     await updateDoc(activitiesRef, updatedActivity);
-    await setDoc(
-      tripRef,
-      { lastEdited: new Date().getTime() },
-      { merge: true },
-    );
   }
 
   async finishSetup(tripId) {
