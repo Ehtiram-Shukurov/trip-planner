@@ -117,21 +117,21 @@ export default class TripService extends Service {
     const existingDaysSnapshot = await getDocs(dayRef);
     const existingDays = existingDaysSnapshot.docs.map((doc) => ({
       id: doc.id, // Firestore document ID
-      date: new Date(doc.data().date).toISOString(), 
+      date: new Date(doc.data().date).toISOString(),
     }));
 
     const newDaysSet = new Set();
     const addPromises = [];
 
     while (currentDate <= end) {
-      const isoDate = currentDate.toISOString(); 
+      const isoDate = currentDate.toISOString();
       newDaysSet.add(isoDate);
 
       if (!existingDays.some((day) => day.date === isoDate)) {
         addPromises.push(
           addDoc(dayRef, {
             date: isoDate,
-          })
+          }),
         );
       }
       currentDate = new Date(currentDate.setDate(currentDate.getDate() + 1));
@@ -162,13 +162,12 @@ export default class TripService extends Service {
     const querySnapshot = await getDocs(daysRef);
     const dates = [];
     querySnapshot.forEach((doc) => {
-
       const formatter = new Intl.DateTimeFormat('en-US', {
         month: '2-digit',
         day: '2-digit',
         year: 'numeric',
       });
-      
+
       const date = formatter.format(new Date(doc.data().date));
 
       dates.push({ id: doc.id, date: date });

@@ -12,7 +12,7 @@ export default class DestinationsController extends Controller {
   @tracked selectedDestination = '';
 
   GOOGLE_API_KEY = 'AIzaSyCiObBVhMw70C36XriG71n7aRDjnxyZkPQ';
-  
+
   @action
   updateDestination(value) {
     this.selectedDestination = value;
@@ -22,11 +22,11 @@ export default class DestinationsController extends Controller {
   async searchQuery() {
     this.destinationQuery = document.querySelector('#search').value;
 
-    if(!this.destinationQuery){
+    if (!this.destinationQuery) {
       alert('Please enter a destination');
       return false;
     }
-    
+
     const query = this.destinationQuery.trim();
 
     if (query === '') {
