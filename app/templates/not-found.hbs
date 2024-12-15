@@ -1,13 +1,18 @@
 {{page-title "NotFound"}}
-<div>
-    <h1>404</h1>
-    <div>
-        <button type="button">
-            <LinkTo @route ="index">Lets go back to somewhere safe</LinkTo>
-        </button> 
-    </div>
-</div>
-{{outlet}}
+<div class="d-flex flex-column justify-content-center align-items-center vh-100 text-center">
+  <h1 style="font-size: 6rem; font-weight: bold; color: #333;">404</h1>
+  <p style="font-size: 1.25rem; color: #555;">
+    Oops! The page you're looking for doesn't exist.
+  </p>
 
-{{!-- {{404 page}} --}}
-{{!-- {{TODO: needs styling}} --}}
+  <LinkTo @route="index">
+    <button 
+      type="button" 
+      class="btn btn-primary mt-4 px-4 py-2" 
+      style="font-size: 1.25rem; border-radius: 8px; transition: transform 0.2s ease, background-color 0.3s;">
+      Let's go back to somewhere safe
+    </button>
+  </LinkTo>
+</div>
+
+{{outlet}}
