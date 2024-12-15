@@ -37,7 +37,7 @@
                   <textarea class="form-control" id="journal_id" rows="5" cols="100" placeholder="Journal Entry....."></textarea>
               </div>
               </li>
-              <button class="button is-primary" type="button" {{on "click" (fn this.saveMemory this.model.trip_id this.model.date_id )}}>Save</button>
+              <button class="btn btn-success w-100" type="button" {{on "click" (fn this.saveMemory this.model.trip_id this.model.date_id )}}>Save</button>
             </ul>
           </div>
         </div>
@@ -48,7 +48,7 @@
 
   <div class="d-flex justify-content-between mt-4">
     <LinkTo @route="memory" @model={{this.model.trip_id}}>
-      <button class="btn btn-primary rounded-circle" type="button">
+      <button class="btn btn-primary w-100" type="button">
         Cancel
       </button>
     </LinkTo>
