@@ -25,8 +25,8 @@ export default class EditTripController extends Controller {
   initializeFields() {
     if (this.model) {
       this.destination = this.model.destination || '';
-      this.startDate = this.model.startDate || null;
-      this.endDate = this.model.endDate || null;
+      this.startDate = this.model.startDate ? new Date(this.model.startDate) : null;
+      this.endDate = this.model.endDate ? new Date(this.model.endDate) : null;
 
       this.dates = [];
       if (this.startDate && this.endDate) {
@@ -42,18 +42,22 @@ export default class EditTripController extends Controller {
   @action
   registerAPI(litepicker) {
     this.litepicker = litepicker;
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    this.litepicker.setOptions({
+      minDate: today,
+    });
 
     if (this.startDate && this.endDate) {
       this.litepicker.setDateRange(
         this.startDate.toISOString().split('T')[0],
-        this.endDate.toISOString().split('T')[0],
+        this.endDate.toISOString().split('T')[0]
       );
     }
   }
 
   @action
   onDateChanged(startDate, endDate) {
-    if (startDate && endDate) {
       this.startDate = startDate.dateInstance;
       this.endDate = endDate.dateInstance;
 
@@ -64,7 +68,6 @@ export default class EditTripController extends Controller {
         currentDate.setDate(currentDate.getDate() + 1);
       }
     }
-  }
 
   @action
   async searchDestination() {
@@ -108,29 +111,19 @@ export default class EditTripController extends Controller {
       return;
     }
 
-    const updatedDays = {};
-    let currentDate = new Date(this.startDate);
-    let dayCounter = 1;
-
-    while (currentDate <= this.endDate) {
-      const key = `day${dayCounter}`;
-      updatedDays[key] = {
-        date: currentDate.toISOString(),
-        activities: this.model.days[key]?.activities || [],
-      };
-      currentDate.setDate(currentDate.getDate() + 1);
-      dayCounter++;
-    }
-
+  try {
     const updatedTrip = {
       destination: this.destination,
-      days: updatedDays,
       lastEdited: new Date().getTime(),
     };
-
     await this.database.updateTrip(this.model.id, updatedTrip);
+    await this.database.addDays(this.startDate, this.endDate, this.model.id);
+  
     this.router.transitionTo('home');
+  } catch (error) {
+    alert('Failed to save changes. Please try again.');
   }
+}
 
   @action
   updateDestination(value) {
