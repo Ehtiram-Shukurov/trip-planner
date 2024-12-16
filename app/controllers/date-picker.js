@@ -17,7 +17,7 @@ export default class DatePickerController extends Controller {
     super(...arguments);
     window.addEventListener('resize', this.handleResize);
   }
-  
+
   @action
   registerAPI(litepicker) {
     this.litepicker = litepicker;
@@ -31,7 +31,7 @@ export default class DatePickerController extends Controller {
       const options = { day: '2-digit', month: 'long', year: 'numeric' };
       return new Intl.DateTimeFormat('en-US', options).format(date);
     };
-    
+
     this.litepicker.on('selected', (startDate, endDate) => {
       const startDateDisplay = document.querySelector('#startDateDisplay span');
       const endDateDisplay = document.querySelector('#endDateDisplay span');
@@ -58,7 +58,7 @@ export default class DatePickerController extends Controller {
     ) {
       alert('Date has already passed.');
       document.querySelector('#ember77').value = '';
-  
+
       this.litepicker.clearSelection();
       this.litepicker.gotoDate(this.today);
 
@@ -75,7 +75,6 @@ export default class DatePickerController extends Controller {
       this.dates.push(new Date(currentDate.getTime()));
       currentDate.setDate(currentDate.getDate() + 1);
     }
-
   }
 
   @action

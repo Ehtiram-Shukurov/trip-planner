@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
-import {service} from "@ember/service";
+import { service } from '@ember/service';
 
 export default class CameraGallery extends Component {
   @tracked mobile;
@@ -41,9 +41,12 @@ export default class CameraGallery extends Component {
     const reader = new FileReader();
     reader.onload = (e) => {
       this.src = e.target.result;
-      this.images = [...this.images, {
-        src: e.target.result
-      }];
+      this.images = [
+        ...this.images,
+        {
+          src: e.target.result,
+        },
+      ];
     };
 
     reader.readAsDataURL(file);

@@ -131,7 +131,7 @@ export default class TripService extends Service {
         addPromises.push(
           addDoc(dayRef, {
             date: isoDate,
-          })
+          }),
         );
       }
       currentDate = new Date(currentDate.setDate(currentDate.getDate() + 1));
@@ -175,13 +175,12 @@ export default class TripService extends Service {
     const querySnapshot = await getDocs(daysRef);
     const dates = [];
     querySnapshot.forEach((doc) => {
-
       const formatter = new Intl.DateTimeFormat('en-US', {
         month: '2-digit',
         day: '2-digit',
         year: 'numeric',
       });
-      
+
       const date = formatter.format(new Date(doc.data().date));
 
       dates.push({ id: doc.id, date: date });
