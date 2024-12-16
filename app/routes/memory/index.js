@@ -18,6 +18,8 @@ export default class MemoryIndexRoute extends Route {
       this.title = await this.database.getTripTitle(params.trip_id);
       this.dates.sort((a, b) => new Date(a.date) - new Date(b.date));
       const data = await this.database.getTripItem(params.trip_id);
-    return { trip_id: params.trip_id, dates: this.dates, title: this.title.title, started: data.started};
+      const destination = await this.database.getTripDestination(params.trip_id);
+
+    return { trip_id: params.trip_id, dates: this.dates, title: this.title.title, started: data.started, destination: destination};
   }
 }
