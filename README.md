@@ -22,16 +22,17 @@ CSCI 5117, Fall 2024, [assignment description](https://canvas.umn.edu/courses/46
 **Describe the most challenging features you implemented
 (one sentence per bullet, maximum 4 bullets):**
 
-* ...
+* Uploading/downloading/deleting images
+* Integrating the google maps/places API to provide suggestions
+* Rotating carousel display of images for each day
 
 Which (if any) device integration(s) does your app support?
-
-* ...
+  
+* Photo taking
 
 Which (if any) progressive web app feature(s) does your app support?
 
-* ...
-
+* None
 
 
 ## Mockup images
@@ -77,8 +78,7 @@ along with a very brief caption:**
 **Document integrations with 3rd Party code or services here.
 Please do not document required libraries (e.g., React, Azure serverless functions, Azure nosql).**
 
-* Library or service name: description of use
-* ...
+* Google Places/Maps API: used to display a map for location selection, suggestions, and activity finding
 
 **If there's anything else you would like to disclose about how your project
 relied on external code, expertise, or anything else, please disclose that

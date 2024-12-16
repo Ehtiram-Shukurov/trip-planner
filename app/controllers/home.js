@@ -53,7 +53,6 @@ export default class HomeController extends Controller {
   @action
   async continueSetup(tripId) {
     const trip = await this.database.getTripItem(tripId);
-    console.log(trip);
     if (!trip.destination) {
       this.router.transitionTo('destination', tripId);
     } else if (trip.days.length === 0) {

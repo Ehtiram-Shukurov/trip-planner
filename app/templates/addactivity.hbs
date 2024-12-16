@@ -1,4 +1,4 @@
-{{page-title "AddActivity"}}
+{{page-title "Add Activity"}}
 <div class="container mt-4">
   <div class="row">
     <div class="col-12 text-center">
@@ -11,11 +11,11 @@
   <form {{on "submit" this.saveActivity}} class="needs-validation">
     <div class="mb-3">
       <label for="timeInput" class="form-label" style="color: #333; font-weight: bold;">Time</label>
-      <input 
-        type="time" 
-        id="timeInput" 
-        class="form-control shadow-sm" 
-        style="border-radius: 8px;" 
+      <input
+        type="time"
+        id="timeInput"
+        class="form-control shadow-sm"
+        style="border-radius: 8px;"
         {{on "input" this.updateTime}}
         required>
       <div class="invalid-feedback">Please select a time.</div>
@@ -23,12 +23,12 @@
 
     <div class="mb-3">
       <label for="budgetInput" class="form-label" style="color: #333; font-weight: bold;">Budget</label>
-      <input 
-        type="text" 
-        id="budgetInput" 
-        class="form-control shadow-sm" 
-        placeholder="10" 
-        style="border-radius: 8px;" 
+      <input
+        type="text"
+        id="budgetInput"
+        class="form-control shadow-sm"
+        placeholder="10"
+        style="border-radius: 8px;"
         {{on "input" this.updateBudget}}
         required>
       <div class="invalid-feedback">Please enter a budget.</div>
@@ -49,18 +49,18 @@
       <GoogleMapsJs @onPlaceChange={{this.updateLocation}} @onLocationPick={{this.updateLocation}} @searchNearby={{true}} />
     </div>
 
-    <button 
-      type="submit" 
-      class="btn btn-success w-100 py-2" 
+    <button
+      type="submit"
+      class="btn btn-success w-100 py-2"
       style="font-size: 1.25rem; font-weight: bold; border-radius: 8px; transition: transform 0.2s ease, background-color 0.3s;">
       Save
     </button>
   </form>
 
   <LinkTo @route="date" @model={{this.model.trip_id}}>
-    <button 
-      class="btn btn-danger w-100 py-2 mt-2" 
-      style="font-size: 1.25rem; font-weight: bold; border-radius: 8px; transition: transform 0.2s ease, background-color 0.3s;" 
+    <button
+      class="btn btn-danger w-100 py-2 mt-2"
+      style="font-size: 1.25rem; font-weight: bold; border-radius: 8px; transition: transform 0.2s ease, background-color 0.3s;"
       type="button">
       Cancel
     </button>
