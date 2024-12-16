@@ -1,27 +1,24 @@
 {{page-title "Project2BigChungus"}}
-{{!-- TODO: Bug where the hamburgure is hugging to the left --}}
 <div class="d-flex flex-column vh-100">
 {{#if this.mobile}}
-<nav class="navbar"  style="background-color:#235725">
-  <div class="navbar-brand">    
+<nav class="navbar is-fixed-top" style="background-color: #235725;">
+  <div class="navbar-brand">
     <div class="navbar-start">
-        <h1 class="navbar-item mb-0" style="color:white">My Travel Planner</h1>
+      <h1 class="navbar-item mb-0" style="color:white;font-weight:bold;">My Travel Planner</h1>
     </div>
-  </div>   
+  </div>
   <div class="navbar-end">
-      <div class="navbar-burger js-burger {{if this.isActive "is-active"}}" style="margin-right: auto;" data-target="burerMenue" {{on 'click' this.burgerMenue}} >
-        <span style="color:white"></span>
-        <span style="color:white"></span>
-        <span style="color:white"></span>
-        <span style="color:white"></span>
-      </div>
+    <div class="navbar-burger js-burger {{if this.isActive "is-active"}}" style="margin-right: 1rem; margin-left: auto;" data-target="burerMenue" {{on 'click' this.burgerMenue}}>
+      <span></span>
+      <span></span>
+      <span></span>
     </div>
+  </div>
 </nav>
-
 
 <div id="burerMenue" class="navbar-menu {{if this.isActive "is-active"}}">
   <div class="navbar-item">
-    <LinkTo @route="home" class="navbar-item">Home</LinkTo>
+    <LinkTo @route="home" class="navbar-item" style="color: white;">Home</LinkTo>
   </div>
 
   {{#if this.auth.user}}
@@ -31,15 +28,13 @@
   {{/if}}
 </div>
 
-
 {{else}}
-<nav class="navbar" role="navigation" aria-label="main navigation"  style="background-color:#235725">
-  <div id="navbarMenu" class="navbar-menu">
+<nav class="navbar is-fixed-top" style="background-color: #235725;">
+  <div class="navbar-menu">
     <div class="navbar-start">
-      <h1 class="navbar-item mb-0" style="color:white">My Travel Planner</h1>
-      <LinkTo @route="home" class="navbar-item" style="color:white">Home</LinkTo>
+      <h1 class="navbar-item mb-0" style="color:white;font-weight:bold; font-size:25px">My Travel Planner</h1>
+      <LinkTo @route="home" class="navbar-item" style="color: white;">Home</LinkTo>
     </div>
-
     <div class="navbar-end">
       <div class="navbar-item">
         {{#if this.auth.user}}
@@ -53,15 +48,13 @@
 </nav>
 {{/if}}
 
-  <main class="flex-grow-1 d-flex align-items-start justify-content-center py-4">
-    <div class="container" style="max-width: 900px;">
-      {{outlet}}
-    </div>
-  </main>
+<main class="flex-grow-1 d-flex align-items-start justify-content-center py-4">
+  <div class="container" style="max-width: 900px;">
+    {{outlet}}
+  </div>
+</main>
 
-  <footer class="bg-dark text-white text-center py-3">
-    <p class="mb-0">&copy; 2024 My Travel Planner</p>
-  </footer>
-
+<footer class="text-white text-center py-3" style="background-color: #235725;">
+  <p class="mb-0">&copy; 2024 My Travel Planner</p>
+</footer>
 </div>
-  

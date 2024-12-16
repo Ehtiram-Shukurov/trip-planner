@@ -1,22 +1,37 @@
 {{yield}}
-<div class="d-flex flex-column justify-content-center align-items-center">
+<div class="d-flex flex-column justify-content-center align-items-center gap-3">
   {{#if this.mobile}}
+    <label for="camera-input" class="file-input-label mb-2">Take a Picture</label>
+    <input
+      id="camera-input"
+      type="file"
+      accept="image/*"
+      capture="environment"
+      {{on "change" this.handleCameraInput}}
+      class="hidden-input"
+    />
 
-  <label for="camera-input" class="file-input-label">Take a Picture</label>
-
-  <input id="camera-input" type="file" accept="image/*" capture="environment" {{on "change" this.handleCameraInput}}
-    class="hidden-input" />
-
-  <label for="gallery-input" class="file-input-label">Upload from Gallery</label>
-  <input id="gallery-input" type="file" accept="image/*" {{on "change" this.handleGalleryInput}} class="hidden-input" multiple/>
+    <label for="gallery-input" class="file-input-label mb-2">Upload from Gallery</label>
+    <input
+      id="gallery-input"
+      type="file"
+      accept="image/*"
+      {{on "change" this.handleGalleryInput}}
+      class="hidden-input"
+      multiple
+    />
   {{else}}
-
-  <label for="gallery-input" class="file-input-label">Upload from Gallery</label>
-  <input id="gallery-input" type="file" accept="image/*" {{on "change" this.handleGalleryInput}} class="hidden-input" multiple/>
-
+    <label for="gallery-input" class="file-input-label mb-2">Upload from Gallery</label>
+    <input
+      id="gallery-input"
+      type="file"
+      accept="image/*"
+      {{on "change" this.handleGalleryInput}}
+      class="hidden-input"
+      multiple
+    />
   {{/if}}
 </div>
-
 
 {{!-- TDOD: placeholder of displaying image and testing--}}
 {{!-- TODO: Change the style later --}}

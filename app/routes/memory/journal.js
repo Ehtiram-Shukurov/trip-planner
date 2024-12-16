@@ -18,7 +18,7 @@ export default class MemoryJournalRoute extends Route {
       seeActivity = true;
     }
     return {
-      date: new Date(day.date).toLocaleDateString(),
+      date: new Date(day.date).toLocaleDateString("en-US"),
       date_id: date_id,
       trip_id: trip_id,
       activities: activities,

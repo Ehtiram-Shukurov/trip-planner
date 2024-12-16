@@ -1,17 +1,20 @@
 {{page-title "DatePicker"}}
 
-<div class="d-flex align-items-center">
-  <div class="flex-grow-1">
-    <h1 class="fs-1 text-dark title mb-3">
+<div class="d-flex flex-column flex-md-row align-items-center mb-4">
+  <div class="flex-grow-1 text-center text-md-start mb-3 mb-md-0">
+    <h1 class="fs-1 text-dark title mb-3" >
       When<br>
       do you want to go?
     </h1>
   </div>
 
-  <div class="flex-grow-1 ms-2">
-    <button class="btn w-100" type="button" style="background-color: #F1DCA7; color: #000;" {{on "click"
-      this.validateAndNavigate}}>
-      <i class="bi bi-arrow-right"></i>
+  <div class="flex-grow-1 ms-0 ms-md-2">
+    <button 
+      class="btn w-100 py-2" 
+      type="button" 
+      style="background-color: #F1DCA7; color: #000; font-size: 1.25rem; font-weight: bold; transition: transform 0.2s, background-color 0.3s;" 
+      {{on "click" this.validateAndNavigate}}>
+      <i class="bi bi-arrow-right"></i> Next
     </button>
   </div>
 </div>
@@ -50,7 +53,7 @@
 
 <div class="d-flex justify-content-between mt-4">
   <LinkTo @route="destination" @model={{this.model}}>
-    <button class="btn btn-primary" type="button">
+    <button class="btn btn-primary" type="button" style="padding: 0.5rem 1.5rem;">
       Back
     </button>
   </LinkTo>

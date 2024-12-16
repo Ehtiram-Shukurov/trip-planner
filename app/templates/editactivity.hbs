@@ -1,39 +1,64 @@
-<div {{did-insert this.initializeFields}}>
-    <div class="row">
+<div {{did-insert this.initializeFields}} class="container mt-4">
+  <div class="row">
     <div class="col-12 text-center">
-      <h1 class="mb-3 title" style="color:black">Edit Activity</h1>
+      <h1 class="mb-3  title" style="color: #242424;">
+        Edit Activity
+      </h1>
     </div>
   </div>
 
   <form {{on "submit" this.saveActivity}} class="needs-validation">
-
     <div class="mb-3">
-      <label for="timeInput" class="form-label">Time</label>
+      <label for="timeInput" class="form-label" style="color: #333; font-weight: bold;">Time</label>
       <input
         type="time"
         id="timeInput"
-        class="form-control"
+        class="form-control shadow-sm"
+        style="border-radius: 8px;"
         {{on "input" this.updateTime}}
         value={{this.time}}
+        required
       />
+      <div class="invalid-feedback">Please select a time.</div>
     </div>
 
     <div class="mb-3">
-      <label for="budgetInput" class="form-label">Budget</label>
+      <label for="budgetInput" class="form-label" style="color: #333; font-weight: bold;">Budget</label>
       <input
         type="text"
         id="budgetInput"
-        class="form-control"
+        class="form-control shadow-sm"
         placeholder="$10"
+        style="border-radius: 8px;"
         {{on "input" this.updateBudget}}
         value={{this.budget}}
+        required
+      />
+      <div class="invalid-feedback">Please enter a budget.</div>
+    </div>
+    <div class="map-container mb-3">
+      <GoogleMapsJs 
+        @onPlaceChange={{this.updateLocation}}
+        @defaultLocation={{this.location}} 
       />
     </div>
 
-    <div class="map-container mb-3">
-      <GoogleMapsJs @onPlaceChange={{this.updateLocation}}  @defaultLocation={{this.location}}/>
-    </div>
+    <div class="d-flex flex-column gap-2">
+      <button 
+        type="submit" 
+        class="btn btn-success w-100 py-2"
+        style="font-size: 1.25rem; font-weight: bold; border-radius: 8px; transition: transform 0.2s ease, background-color 0.3s;">
+        Save
+      </button>
 
-    <button type="submit" class="btn btn-success w-100">Save</button>
+      <LinkTo @route="date" @model={{this.model.trip_id}}>
+        <button 
+          class="btn btn-danger w-100 py-2"
+          style="font-size: 1.25rem; font-weight: bold; border-radius: 8px; transition: transform 0.2s ease, background-color 0.3s;"
+          type="button">
+          Cancel
+        </button>
+      </LinkTo>
+    </div>
   </form>
 </div>
