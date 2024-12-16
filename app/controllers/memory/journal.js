@@ -12,13 +12,15 @@ export default class MemoryJournalController extends Controller {
   @action
   async saveMemory(trip_id, date_id, journal) {
     this.memory.save(trip_id, date_id);
-    this.router.transitionTo('memory', trip_id);
     await this.database.saveJournal(trip_id, date_id, journal);
+    this.router.refresh();
   }
 
   @action
   async deleteImage(trip_id, date_id, image_index) {
     await this.database.deleteImage(trip_id, date_id, image_index);
     this.images = await this.database.getImages(trip_id, date_id);
+    this.router.refresh();
   }
+
 }
