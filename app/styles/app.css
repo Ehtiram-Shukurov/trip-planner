@@ -8,6 +8,7 @@ body {
   font-family: Georgia, "Times New Roman", Times, serif;
   display: flex;
   flex-direction: column;
+  padding-top: 65px !important;
 }
 
 .content-wrapper {

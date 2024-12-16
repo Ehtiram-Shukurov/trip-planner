@@ -1,58 +1,60 @@
 {{page-title "Project2BigChungus"}}
 <div class="d-flex flex-column vh-100">
-{{#if this.mobile}}
-<nav class="navbar is-fixed-top" style="background-color: #235725;">
-  <div class="navbar-brand">
-    <div class="navbar-start">
-      <h1 class="navbar-item mb-0" style="color:white;font-weight:bold;">My Travel Planner</h1>
-    </div>
-  </div>
-  <div class="navbar-end">
-    <div class="navbar-burger js-burger {{if this.isActive "is-active"}}" style="margin-right: 1rem; margin-left: auto;" data-target="burerMenue" {{on 'click' this.burgerMenue}}>
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-  </div>
-</nav>
+    {{#if this.mobile}}
 
-<div id="burerMenue" class="navbar-menu {{if this.isActive "is-active"}}">
-  <div class="navbar-item">
-    <LinkTo @route="home" class="navbar-item" style="color: black;">Home</LinkTo>
-  </div>
+      <nav class="navbar is-fixed-top" style="background-color: #235725;">
+        <div class="navbar-brand">
+          <div class="navbar-start">
+            <h1 class="navbar-item mb-0" style="color:white;font-weight:bold;">My Travel Planner</h1>
+          </div>
+        </div>
+        <div class="navbar-end">
+          <div class="navbar-burger js-burger {{if this.isActive "is-active"}}" style="margin-right: 1rem; margin-left: auto;" data-target="burgerMenu" {{on 'click' this.burgerMenue}}>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+      </nav>
 
-  {{#if this.auth.user}}
-    <div class="navbar-item" style="color: black;"{{on "click" this.auth.sign_out}}>
-      Log out
-    </div>
-  {{/if}}
-</div>
+      <div id="burgerMenu" class="navbar-menu {{if this.isActive "is-active"}}">
+        <div class="navbar-item">
+          <LinkTo @route="home" class="navbar-item" style="color: black;">Home</LinkTo>
+        </div>
 
-{{else}}
-<nav class="navbar is-fixed-top" style="background-color: #235725;">
-  <div class="navbar-menu">
-    <div class="navbar-start">
-      <h1 class="navbar-item mb-0" style="color:white;font-weight:bold; font-size:25px">My Travel Planner</h1>
-      <LinkTo @route="home" class="navbar-item" style="color: white;">Home</LinkTo>
-    </div>
-    <div class="navbar-end">
-      <div class="navbar-item">
         {{#if this.auth.user}}
-          <button class="button is-light" type="button" {{on "click" this.auth.sign_out}}>
+          <div class="navbar-item" style="color: black;"{{on "click" this.auth.sign_out}}>
             Log out
-          </button>
+          </div>
         {{/if}}
       </div>
-    </div>
-  </div>
-</nav>
-{{/if}}
 
-<main class="flex-grow-1 d-flex align-items-start justify-content-center py-4">
-  <div class="container" style="max-width: 900px;">
-    {{outlet}}
-  </div>
-</main>
+    {{else}}
+      <nav class="navbar is-fixed-top" style="background-color: #235725;">
+        <div class="navbar-menu">
+          <div class="navbar-start">
+            <h1 class="navbar-item mb-0" style="color:white;font-weight:bold; font-size:25px">My Travel Planner</h1>
+            <LinkTo @route="home" class="navbar-item" style="color: white;">Home</LinkTo>
+          </div>
+          <div class="navbar-end">
+            <div class="navbar-item">
+              {{#if this.auth.user}}
+                <button class="button is-light" type="button" {{on "click" this.auth.sign_out}}>
+                  Log out
+                </button>
+              {{/if}}
+            </div>
+          </div>
+        </div>
+      </nav>
+    {{/if}}
+
+  <main class="flex-grow-1 d-flex align-items-start justify-content-center py-4">
+    <div class="container" style="max-width: 900px;">
+      {{outlet}}
+    </div>
+  </main>
+
 
 <footer class="text-white text-center py-3" style="background-color: #235725;">
   <p class="mb-0">&copy; 2024 My Travel Planner</p>

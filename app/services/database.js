@@ -189,7 +189,7 @@ export default class TripService extends Service {
       const date = formatter.format(new Date(doc.data().date));
       //activiies is the collection udnreneath the days
       const isEmpty = doc.data().activities === undefined;
-      dates.push({ id: doc.id, date: date, empty: isEmpty });
+      dates.push({ id: doc.id, date: date, empty: isEmpty, images: doc.data().images });
     });
 
     return dates;
@@ -328,20 +328,16 @@ export default class TripService extends Service {
     const tripRef = await this.getTrip(tripId);
     await updateDoc(tripRef, { setup: true });
   }
-  async getImages(trip_id, date_id) {
-    const imagesRef = await collection(
-      this.db,
-      `user/${this.uid}/trips/${trip_id}/days/${date_id}/images`,
-    );
-    const images = [];
-    const imagesSnapshot = await getDocs(imagesRef);
-    imagesSnapshot.forEach((doc) => {
-      const image = { id: doc.id, data: doc.data() };
-      images.push(image);
-    });
-    return images;
 
+  async getImages(trip_id, date_id) {
+    const dateRef = await doc(
+      this.db,
+      `user/${this.uid}/trips/${trip_id}/days/${date_id}`,
+    );
+    const dateSnap = await getDoc(dateRef);
+    return dateSnap.data().images;
   }
+
   async saveImage(image, tripId, date_id) {
     // saves to storage ref
     const tripsStorageRef = await ref(

@@ -6,6 +6,7 @@ export default class MemoryJournalRoute extends Route {
   @service auth;
   @service database;
   @tracked images = [];
+  @tracked journal = '';
 
   async beforeModel(params) {
     await this.auth.ensureInitialized();
@@ -14,20 +15,15 @@ export default class MemoryJournalRoute extends Route {
   async model(params) {
     const { trip_id, date_id } = params;
     const day = await this.database.getDay(trip_id, date_id);
-    const journal = await this.database.getJournal(trip_id, date_id);
-    var seeActivity = false;
-    if (activities.length !== 0) {
-      seeActivity = true;
-    }
-    console.log(activities);
+    this.journal = await this.database.getJournal(trip_id, date_id);
     this.images = await this.database.getImages(trip_id, date_id);
+    console.log(this.images);
     return {
       date: new Date(day.date).toLocaleDateString("en-US"),
       date_id: date_id,
       trip_id: trip_id,
-      journal: journal,
+      journal: this.journal,
       images: this.images,
-      seeActivity,
     };
   }
 }
