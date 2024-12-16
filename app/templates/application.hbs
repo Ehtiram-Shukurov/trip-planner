@@ -18,11 +18,11 @@
 
 <div id="burerMenue" class="navbar-menu {{if this.isActive "is-active"}}">
   <div class="navbar-item">
-    <LinkTo @route="home" class="navbar-item" style="color: white;">Home</LinkTo>
+    <LinkTo @route="home" class="navbar-item" style="color: black;">Home</LinkTo>
   </div>
 
   {{#if this.auth.user}}
-    <div class="navbar-item" {{on "click" this.auth.sign_out}}>
+    <div class="navbar-item" style="color: black;"{{on "click" this.auth.sign_out}}>
       Log out
     </div>
   {{/if}}
