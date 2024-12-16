@@ -111,6 +111,12 @@ export default class TripService extends Service {
     await setDoc(tripRef, { destination: destination }, { merge: true });
   }
 
+  async getTripDestination(tripId) {
+    const tripRef = await this.getTrip(tripId);
+    const snap = await getDoc(tripRef);
+    return snap.data().destination;
+  }
+
   async addDays(startDate, endDate, tripId) {
     const start = new Date(startDate);
     const end = new Date(endDate);

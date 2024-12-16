@@ -24,9 +24,11 @@ export default class DateIndexRoute extends Route {
     });
 
     this.title = await this.database.getTripTitle(params.trip_id);
+    const destination = await this.database.getTripDestination(params.trip_id);
 
     return {
       trip_id: params.trip_id,
+      destination: destination,
       dates: this.dates,
       title: this.title.title,
       setup: this.title.setup,
