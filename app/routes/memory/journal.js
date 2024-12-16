@@ -17,6 +17,7 @@ export default class MemoryJournalRoute extends Route {
     const day = await this.database.getDay(trip_id, date_id);
     this.journal = await this.database.getJournal(trip_id, date_id);
     this.images = await this.database.getImages(trip_id, date_id);
+    console.log("images",this.images);
     return {
       date: new Date(day.date).toLocaleDateString("en-US"),
       date_id: date_id,
