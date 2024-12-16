@@ -1,6 +1,6 @@
 {{page-title "Home"}}
 <div class="content-wrapper container my-4" {{on-auth-change this.refreshHomeListener}}>
-  {{!-- Trips Section --}}
+
   <section class="mb-4">
     <h1 class="mb-3">Trips</h1>
     <div class="carousel-container">
@@ -15,38 +15,36 @@
           </div>
         </div>
 
-
-        {{!-- Trip content card--}}
         {{#each this.trips as |trip|}}
           {{#unless trip.complete}}
-        <div class="carousel-card">
-          <div class="card-content d-flex flex-column justify-content-center align-items-center">
-            {{#if trip.data.setup}}
-            <LinkTo @route="date" @model={{trip.id}} class="btn btn-light w-100">
-              <h2 class="mb-0">{{trip.data.title}}</h2>
-            </LinkTo>
-            <div class="mt-3 d-flex gap-2">
-              <LinkTo @route="edittrip" @model={{trip.id}} class="btn btn-outline-secondary">
-                Edit Trip
-              </LinkTo>
-              <button class="btn btn-danger btn-sm" type="button" {{on "click" (fn this.deleteTrip trip.id)}}>
-                <i class="bi bi-trash"></i> Delete
-              </button>
+            <div class="carousel-card">
+              <div class="card-content d-flex flex-column justify-content-center align-items-center">
+                {{#if trip.data.setup}}
+                <LinkTo @route="date" @model={{trip.id}} class="btn btn-light w-100">
+                  <h2 class="mb-0">{{trip.data.title}}</h2>
+                </LinkTo>
+                <div class="mt-3 d-flex gap-2">
+                  <LinkTo @route="edittrip" @model={{trip.id}} class="btn btn-outline-secondary">
+                    Edit Trip
+                  </LinkTo>
+                  <button class="btn btn-danger btn-sm" type="button" {{on "click" (fn this.deleteTrip trip.id)}}>
+                    <i class="bi bi-trash"></i> Delete
+                  </button>
+                </div>
+                {{else}}
+                <h2 class="mb-0">Setup incomplete {{trip.destination}}</h2>
+                <div class="mt-3 d-flex gap-2">
+                  <button class="btn btn-primary btn-sm" type="button" {{on "click" (fn this.continueSetup trip.id)}}>
+                    Continue
+                  </button>
+                  <button class="btn btn-danger btn-sm" type="button" {{on "click" (fn this.deleteTrip trip.id)}}>
+                    <i class="bi bi-trash"></i> Delete
+                  </button>
+                </div>
+                {{/if}}
+              </div>
             </div>
-            {{else}}
-            <h2 class="mb-0">Setup incomplete {{trip.destination}}</h2>
-            <div class="mt-3 d-flex gap-2">
-              <button class="btn btn-primary btn-sm" type="button" {{on "click" (fn this.continueSetup trip.id)}}>
-                Continue
-              </button>
-              <button class="btn btn-danger btn-sm" type="button" {{on "click" (fn this.deleteTrip trip.id)}}>
-                <i class="bi bi-trash"></i> Delete
-              </button>
-            </div>
-            {{/if}}
-          </div>
-        </div>
-            {{/unless}}
+          {{/unless}}
         {{/each}}
 
 
@@ -56,7 +54,6 @@
 
   <hr class="my-4">
 
-  {{!-- Memories Section --}}
   <section>
     <h1 class="mb-3">Memories</h1>
     <div class="carousel-container">

@@ -41,7 +41,11 @@ export default class TripService extends Service {
   async getTripItem(id) {
     const tripRef = await this.getTrip(id);
     const tripSnap = await getDoc(tripRef);
-    return tripSnap.data();
+
+    const days = await this.getDays(id);
+    const trip = { id: tripSnap.id, ...tripSnap.data(), days: days };
+    
+    return trip;
   }
 
   async getUserTrips() {

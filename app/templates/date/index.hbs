@@ -29,7 +29,8 @@
 
     <div class="vertical-card-list justify-content-center align-items-center">
     {{#each this.model.dates as |date index|}}
-    <div class="carousel-card-activity fade-in mx-auto d-flex align-items-center">
+    <div class="carousel-card-activity fade-in mx-auto d-flex align-items-center" 
+        style={{this.getAnimationDelay index}}>
       <LinkTo @route="date.detail" @models={{array this.model.trip_id date.id}}
         class="btn btn-light w-100 d-flex align-items-center justify-content-between">
         <span>
