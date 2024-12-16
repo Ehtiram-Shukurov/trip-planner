@@ -504,13 +504,28 @@ div.scrollmenu a:hover {
   }
   .list-group{
     max-height: 400px;
-    overflow-y: auto;
 
   }
   .list-group-item {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.5rem;
+  }
+
+  .list-group-item strong{
+    font-size: 0.95rem;
+  }
+
+  .list-group-item .text-muted{
+    font-size: 0.85rem;
+    line-height: 1.2;
+    word-wrap: break-word;
+  }
+
+  .text-truncate {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
   }
 
   .container {
