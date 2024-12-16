@@ -33,11 +33,17 @@
                 </div>
               </li>
               <li class="list-group-item d-flex justify-content-between align-items-center">
+              {{#if activity.data.journal}}
               <div class="mb-3">
-                  <textarea class="form-control" id="journal_id" rows="5" cols="100" placeholder="Journal Entry....."></textarea>
+                  <Textarea class="form-control" id="journal_id" rows="5" cols="100" @value={{activity.data.journal}} placeholder="Journal Entry....."></Textarea>
               </div>
+              {{else}}
+              <div class="mb-3">
+                <Textarea class="form-control" id="location_id" rows="5" cols="100" placeholder="Journal Entry....." @value={{activity.data.journal}}></Textarea>
+              </div>  
+              {{/if}}
               </li>
-              <button class="btn btn-success w-100" type="button" {{on "click" (fn this.saveMemory this.model.trip_id this.model.date_id )}}>Save</button>
+              <button class="btn btn-success w-100" type="button" {{on "click" (fn this.saveMemory this.model.trip_id this.model.date_id activity.id activity.data.journal)}}>Save</button>
             </ul>
           </div>
         </div>

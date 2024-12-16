@@ -46,6 +46,7 @@ export default class AddActivityController extends Controller {
       time: this.time,
       budget: this.budget,
       location: this.location,
+      journal:'',
     };
 
     await this.database.addActivity(
