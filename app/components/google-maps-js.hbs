@@ -5,7 +5,8 @@
   </gmpx-api-loader>
 
   <div class="place-picker justify-content-center d-flex mb-3">
-    <gmpx-place-picker id="search" placeholder="Enter an address"></gmpx-place-picker>
+    <input type="text" id="pac-input" class="form-control" placeholder="Enter a location" {{did-insert this.setInput}}>
+    <gmpx-place-picker id="search" placeholder="Enter an address" style="display:none;"></gmpx-place-picker>
   </div>
 
   <gmp-map style="height: 500px; width: 100%" center="40.749933,-73.98633" zoom="13" map-id="DEMO_MAP_ID" {{did-insert
@@ -15,40 +16,46 @@
 
 <div class="suggestion">
   {{#if this.search}}
-  {{#if this.selectedLocation}}
-  <div class="mt-3">
-    <!-- Primary button for suggestions -->
-    <button class="btn btn-primary mb-3" type="button" {{on "click" this.searchNearby}}>
-      Want some suggestions?
-    </button>
+    {{#if this.selectedLocation}}
+    <div class="mt-3">
+      <button class="btn btn-primary w-100 mb-3" type="button" {{on "click" this.searchNearby}}>
+        Want some suggestions?
+      </button>
+    </div>
+    {{/if}}
+  {{/if}}
+
+  <div id="suggestionOverlay" class="overlay d-none">
+    <div class="overlay-content">
+      <div class="map-container">
+        <GoogleMapsIframe @query={{this.suggestion}} />
+      </div>
+      {{#if this.places.length}}
+      <ul class="list-group">
+        {{#each this.places as |place|}}
+        <li
+          class="list-group-item d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center">
+          <span class="fw-bold mb-2 mb-md-0">{{place.displayName}}</span>
+          <div class="d-flex gap-2">
+            <button class="btn btn-link btn-sm text-primary" type="button" {{on "click" (fn this.centerMapOnPlace
+              place)}}>
+              Center on Map
+            </button>
+            <button class="btn btn-link btn-sm text-success" type="button" {{on "click" (fn this.pickLocation place)}}>
+              Pick it!
+            </button>
+          </div>
+        </li>
+        {{/each}}
+      </ul>
+      {{else}}
+      <p class="mt-2 text-muted">
+        <i class="bi bi-info-circle"></i> No nearby places found.
+      </p>
+      {{/if}}
+
+    </div>
   </div>
 
-  <!-- Places List -->
-  {{#if this.places.length}}
-  <ul class="list-group">
-    {{#each this.places as |place|}}
-    {{log place}}
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-      <!-- Place Name -->
-      <span class="fw-bold">{{place.displayName}}</span>
-
-      <!-- Actions -->
-      <div>
-        <button class="btn btn-link btn-sm text-primary" type="button" {{on "click" (fn this.centerMapOnPlace place)}}>
-          Center on Map
-        </button>
-        <button class="btn btn-link btn-sm text-success" type="button" {{on "click" (fn this.pickLocation place)}}>
-          Pick it!
-        </button>
-      </div>
-    </li>
-    {{/each}}
-  </ul>
-  {{else}}
-  <p class="mt-2 text-muted">
-    <i class="bi bi-info-circle"></i> No nearby places found.
-  </p>
-  {{/if}}
-  {{/if}}
-  {{/if}}
 </div>
+
