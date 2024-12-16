@@ -2,10 +2,9 @@
   <div class="card shadow-lg w-100" style="max-width: 400px; border-radius: 10px;">
     <div class="card-body text-center">
       <h1 
-        class="card-title mb-3" 
+        class="title card-title mb-3" 
         contenteditable="true" 
         id="title" 
-        style="font-size: 1.75rem; font-weight: bold; border: 1px dashed transparent; transition: border-color 0.3s ease;" 
         {{on "focusout" this.saveTitle}}
         onfocus="this.style.borderColor='#ccc'"
         onblur="this.style.borderColor='transparent'">

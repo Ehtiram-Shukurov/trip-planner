@@ -33,6 +33,39 @@ body {
   border-radius: 5px;
 }
 
+@media (prefers-color-scheme: dark) {
+  .navbar {
+    background-color: #1d4620;
+  }
+
+  .navbar-item,
+  .navbar-burger span {
+    color: white;
+  }
+
+  .navbar-menu.is-active .navbar-item {
+    color: white;
+  }
+
+  .navbar-item:hover {
+    background-color: #235725;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  .navbar {
+    background-color: #235725;
+  }
+
+  .navbar-item,
+  .navbar-burger span {
+    color: white;
+  }
+
+  .navbar-menu.is-active .navbar-item {
+    color: white;
+  }
+}
 
 footer {
   margin-top: auto;
@@ -89,6 +122,20 @@ button:hover {
 .btn-success:hover {
   transform: scale(1.1);
   background-color: #28a745;
+}
+
+/* Adjust buttons for light mode */
+@media (prefers-color-scheme: light) {
+  .button.is-light {
+    background-color: #f8f9fa;
+    color: #235725;
+    border: 1px solid #ddd;
+  }
+
+  .button.is-light:hover {
+    background-color: #e8f5e9;
+    color: #1d4620;
+  }
 }
 
 /* Cards */
@@ -240,7 +287,12 @@ button:hover {
     background-color: transparent;
   }
 }
-
+.carousel-control-prev,
+.carousel-control-next {
+  width: 40px;
+  height: 200px;
+  top: 25%;
+}
 /* Media Queries */
 @media (max-width: 768px) {
   .navbar-menu {
@@ -298,12 +350,9 @@ button:hover {
   .btn-success {
     font-size: 1rem;
   }
-}
-
-@media (prefers-color-scheme: light) {
-  .carousel-control-next,
-  .carousel-control-prev, 
-  .carousel-indicators {
-    filter: invert(100%);
+  .carousel-control-prev,
+  .carousel-control-next {
+    height: 100px;
+    top:40%;
   }
 }
