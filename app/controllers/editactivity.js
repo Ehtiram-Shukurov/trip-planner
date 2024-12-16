@@ -19,7 +19,6 @@ export default class EditActivityController extends Controller {
       this.location = this.model.activity.location || '';
       // This code might need to be changed ^^^
       // the fields might no longer be in this order or structure
-
     }
   }
 

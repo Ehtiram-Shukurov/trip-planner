@@ -16,6 +16,6 @@ export default class MemoryIndexRoute extends Route {
       this.title = await this.database.getTripTitle(params.trip_id);
       this.dates.sort((a, b) => new Date(a.date) - new Date(b.date));
 
-    return { trip_id: params.trip_id, dates: this.dates, title: this.title };
+    return { trip_id: params.trip_id, dates: this.dates, title: this.title.title };
   }
 }

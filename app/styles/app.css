@@ -28,9 +28,40 @@ body {
   z-index: 1030;
 }
 
+.place-picker {
+  margin-top: 0.5rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  animation: fadeIn;
+  animation-duration: 1s;
+}
+
 .navbar-item:hover {
   background-color: #1d4620;
   border-radius: 5px;
+}
+
+.litepicker-container {
+  justify-content: center;
+  margin: auto;
+  width: 100%;
+  z-index: 9999;
+}
+
+.custom-litepicker input {
+  padding: 0.5em;
+  width: 100%;
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+
+.custom-litepicker {
+  width: 100%;
+  max-width: 100%;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -196,6 +227,7 @@ button:hover {
   transform: translateY(-5px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
+
 .carousel-control-prev,
 .carousel-control-next {
   width: 40px;
@@ -204,11 +236,14 @@ button:hover {
 }
 
 .vertical-card-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  align-items: center;
-  justify-content: center;
+  width: 100%;
+  max-height: 400px;
+  overflow-y: auto;
+  margin-left: 5%;
+  padding-right: 5%;
+  margin-top: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 .vertical-card-list .carousel-card {
@@ -219,11 +254,79 @@ button:hover {
   box-shadow: 0 4px 8px rgb(0 0 0 / 10%);
   background-color: #fff;
   max-height: 80px;
+  text-align: center;
+}
+
+.vertical-card-list .carousel-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.vertical-card-list::-webkit-scrollbar {
+  width: 10px;
+}
+
+.vertical-card-list .carousel-card:first-child {
+  margin-top: 0;
+}
+
+.vertical-card-list::-webkit-scrollbar-thumb {
+  background-color: #cccccc;
+  border-radius: 5px;
+}
+
+.vertical-card-list::-webkit-scrollbar-thumb:hover {
+  background-color: #aaaaaa;
+}
+
+.vertical-card-list::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.carousel-card-activity {
+  width: 100%;
+  max-width: 350px;
+  margin-bottom: 5px;
+  padding: 0.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  min-height: 60px;
+  max-height: 80px;
   overflow: hidden;
   text-align: center;
 }
 
-/* Lists */
+.card-body {
+  width: 100%;
+}
+
+/*  Scroll menue code was copied from https://www.w3schools.com/howto/howto_css_menu_horizontal_scroll.asp  */
+div.scrollmenu {
+  overflow-x: auto;
+  white-space: nowrap;
+  display: flex;
+  gap: 1rem;
+  padding: 0.5rem 0;
+}
+
+div.scrollmenu a {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 10px 15px;
+  text-decoration: none;
+  background: #007bff;
+  border-radius: 5px;
+}
+
+div.scrollmenu a:hover {
+  background-color: #0056b3;
+}
+
 .list-group-item {
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -286,9 +389,11 @@ button:hover {
   0% {
     background-color: #d4edda;
   }
+
   50% {
     background-color: #c3e6cb;
   }
+
   100% {
     background-color: transparent;
   }
@@ -351,10 +456,11 @@ button:hover {
   .btn-success {
     font-size: 1rem;
   }
+
   .carousel-control-prev,
   .carousel-control-next {
     height: 100px;
-    top:40%;
+    top: 40%;
   }
 }
 
@@ -370,18 +476,18 @@ button:hover {
   }
 }
 
-
 .fade-in {
   animation: fadeIn 0.6s ease-in-out;
   animation-fill-mode: both;
   opacity: 0;
 }
 
-
 .editable-title {
-  width:100%;
+  width: 100%;
   cursor: text;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .editable-title:focus {
@@ -390,34 +496,25 @@ button:hover {
   outline: none;
 }
 
-
 .destination-highlight {
   position: relative;
   display: inline-block;
   padding-bottom: 4px;
   border-bottom: 2px solid #007bff;
-  transition: color 0.3s ease, border-color 0.3s ease;
+  transition:
+    color 0.3s ease,
+    border-color 0.3s ease;
 }
 
 .destination-highlight:hover {
   color: #0056b3;
   border-color: #0056b3;
 }
-.hidden-input {
-  display: none;
-}
 
-.file-input-label {
-  display: inline-block;
-  padding: 0.5rem;
-  background: #f8f9fa;
-  color: #333;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.file-input-label:hover {
-  background: #e9ecef;
+.date-alert {
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

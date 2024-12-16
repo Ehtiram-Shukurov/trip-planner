@@ -1,46 +1,53 @@
-<div class="container d-flex justify-content-center align-items-center">
-  <div class="card shadow-lg w-100" style="max-width: 400px; border-radius: 10px;">
-    <div class="card-body text-center">
-      <h1 
-        class="title card-title mb-3" 
-        contenteditable="true" 
-        id="title" 
-        {{on "focusout" this.saveTitle}}
-        onfocus="this.style.borderColor='#ccc'"
-        onblur="this.style.borderColor='transparent'">
-        {{#if this.model.title}}
-          {{this.model.title}}
-        {{else}}
-          Edit Trip Name
-        {{/if}}
-      </h1>
+<div class="d-flex justify-content-between align-items-start mb-4">
+  <div class="title-section w-75 pe-3">
+    <h1 class="fs-1 text-dark title">
+      Let's add more details
+    </h1>
+  </div>
 
-      <h5 class="card-subtitle mb-4">Destinations</h5>
-      <div class="vertical-card-list">
-        {{#each this.model.dates as |date|}}
-        <div class="carousel-card">
-          <LinkTo 
-            @route="date.detail"
-            @models={{array this.model.trip_id date.id}}
-            class="btn btn-light w-100 text-center"
-            style="font-size: 1rem; font-weight: 500; padding: 0.75rem; text-transform: capitalize;">
-            {{date.date}}
-          </LinkTo>
-        </div>
-        {{/each}}
-      </div>
+  <div class="button-section">
+    <button class="btn btn-primary btn-lg" type="button" {{on "click" this.saveAndNavigate}}>
+      {{#if (eq this.model.setup false)}}Finish Setup{{else}}Save{{/if}}
+    </button>
+  </div>
+</div>
 
-      <div class="d-flex justify-content-end mt-4">
-        <button 
-          class="btn btn-success rounded-circle d-flex justify-content-center align-items-center" 
-          style="width: 50px; height: 50px; font-size: 1.25rem; transition: transform 0.2s ease, background-color 0.3s ease;" 
-          type="button" 
-          {{on "click" this.saveAndNavigate}}
-          onmouseover="this.style.transform='scale(1.1)'; this.style.backgroundColor='#28a745';" 
-          onmouseout="this.style.transform='scale(1)'; this.style.backgroundColor='';">
-          <i class="bi bi-check"></i>
-        </button>
-      </div>
+<div class="activity-container card shadow-lg mb-3 mx-auto" style="max-width: 600px;">
+  <div class="card-body text-center">
+    <h1 class="card-title mb-3 editable-title bg-light border rounded p-2 text-dark mx-auto" contenteditable="true"
+      id="title" style="width: 80%;" {{on "focusout" this.saveTitle}}>
+      {{#if this.model.title}}
+      {{this.model.title}}
+      {{else}}
+      Edit Trip Name Here
+      {{/if}}
+    </h1>
+
+    <h5 class="card-subtitle mb-4 text-primary fw-bold destination-highlight">
+      Destinations
+    </h5>
+
+    <div class="vertical-card-list justify-content-center align-items-center">
+    {{#each this.model.dates as |date index|}}
+    <div class="carousel-card-activity fade-in mx-auto d-flex align-items-center" 
+        style={{this.getAnimationDelay index}}>
+      <LinkTo @route="date.detail" @models={{array this.model.trip_id date.id}}
+        class="btn btn-light w-100 d-flex align-items-center justify-content-between">
+        <span>
+          {{date.date}}
+        </span>
+      </LinkTo>
+
+      {{#if (eq date.empty true)}}
+      <span
+        class="date-alert alert alert-warning mb-0 ms-2 px-2 py-1 rounded-circle d-flex justify-content-center align-items-center"
+        title="No activities on this date" style="width: 1.5rem; height: 1.5rem;">
+        !
+      </span>
+      {{/if}}
+    </div>
+    {{/each}}
+
     </div>
   </div>
 </div>

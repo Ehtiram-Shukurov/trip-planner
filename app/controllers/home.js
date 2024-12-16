@@ -2,7 +2,7 @@ import Controller from '@ember/controller';
 import { tracked } from '@glimmer/tracking';
 import { service } from '@ember/service';
 import { action } from '@ember/object';
-import { onSnapshot, query, where, orderBy} from 'firebase/firestore';
+import { onSnapshot, query, where, orderBy } from 'firebase/firestore';
 
 export default class HomeController extends Controller {
   @service firebase;
@@ -53,14 +53,15 @@ export default class HomeController extends Controller {
   @action
   async continueSetup(tripId) {
     const trip = await this.database.getTripItem(tripId);
-
+    console.log(trip);
     if (!trip.destination) {
       this.router.transitionTo('destination', tripId);
-    } else if (!this.trips.days) {
+    } else if (trip.days.length === 0) {
       this.router.transitionTo('date-picker', tripId);
     } else {
       this.router.transitionTo('date', tripId);
     }
+
   }
 
   @action

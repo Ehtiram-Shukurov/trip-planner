@@ -16,6 +16,7 @@ import {
   limit,
 } from 'firebase/firestore';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { setup } from 'qunit-dom';
 
 export default class TripService extends Service {
   @service firebase;
@@ -40,7 +41,11 @@ export default class TripService extends Service {
   async getTripItem(id) {
     const tripRef = await this.getTrip(id);
     const tripSnap = await getDoc(tripRef);
-    return tripSnap.data();
+
+    const days = await this.getDays(id);
+    const trip = { id: tripSnap.id, ...tripSnap.data(), days: days };
+    
+    return trip;
   }
 
   async getUserTrips() {
@@ -182,9 +187,11 @@ export default class TripService extends Service {
       });
 
       const date = formatter.format(new Date(doc.data().date));
-
-      dates.push({ id: doc.id, date: date });
+      //activiies is the collection udnreneath the days
+      const isEmpty = doc.data().activities === undefined;
+      dates.push({ id: doc.id, date: date, empty: isEmpty });
     });
+
     return dates;
   }
 
@@ -192,7 +199,7 @@ export default class TripService extends Service {
     const tripRef = await this.getTrip(tripId);
     const snap = await getDoc(tripRef);
     const tripSnap = snap.data();
-    return tripSnap.title;
+    return {title: tripSnap.title, setup: tripSnap.setup};
   }
 
   async saveTripTitle(tripId, title) {
@@ -263,11 +270,8 @@ export default class TripService extends Service {
       this.db,
       `user/${this.uid}/trips/${trip_id}/days/${date_id}/activities/${activity_id}`,
     );
-  
-    await updateDoc(
-      activityDoc,
-      { journal: journalEntry},
-    );
+
+    await updateDoc(activityDoc, { journal: journalEntry });
   }
 
   async addActivity(tripId, date_id, activity) {
