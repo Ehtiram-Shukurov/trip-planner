@@ -1,21 +1,20 @@
 {{page-title "Project2BigChungus"}}
 <div class="d-flex flex-column vh-100">
-    {{#if this.mobile}}
-
-      <nav class="navbar is-fixed-top" style="background-color: #235725;">
-        <div class="navbar-brand">
-          <div class="navbar-start">
-            <h1 class="navbar-item mb-0" style="color:white;font-weight:bold;">My Travel Planner</h1>
-          </div>
-        </div>
-        <div class="navbar-end">
-          <div class="navbar-burger js-burger {{if this.isActive "is-active"}}" style="margin-right: 1rem; margin-left: auto;" data-target="burgerMenu" {{on 'click' this.burgerMenue}}>
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-        </div>
-      </nav>
+{{#if this.mobile}}
+<nav class="navbar" style="background-color: #235725;">
+  <div class="navbar-brand">
+    <div class="navbar-start">
+      <h1 class="navbar-item mb-0" style="color:white;font-weight:bold;">My Travel Planner</h1>
+    </div>
+  </div>
+  <div class="navbar-end">
+    <div class="navbar-burger js-burger {{if this.isActive "is-active"}}" style="margin-right: 1rem; margin-left: auto;" data-target="burerMenue" {{on 'click' this.burgerMenue}}>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</nav>
 
       <div id="burgerMenu" class="navbar-menu {{if this.isActive "is-active"}}">
         <div class="navbar-item">
