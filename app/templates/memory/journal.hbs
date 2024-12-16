@@ -27,17 +27,11 @@
                   </div>
               </li>
               <li class="list-group-item d-flex justify-content-between align-items-center">
-              <div>
-                <label for="imageUpload" class="form-label">Upload Image</label>
-                <input
-                  type="file"
-                  class="form-control"
-                  id="imageUpload"
-                  accept="image/*"
-                  {{on "change" (fn this.setImage activity.location)}}
-                />
-              </div>
-            </li>
+                <div id="{{activity.data.location}}">
+                  <CameraGallery @data={{activity.data.location}} @saveImage={{this.setImage}}>
+                  </CameraGallery>
+                </div>
+              </li>
               <li class="list-group-item d-flex justify-content-between align-items-center">
               <div class="mb-3">
                   <textarea class="form-control" id="journal_id" rows="5" cols="100" placeholder="Journal Entry....."></textarea>
