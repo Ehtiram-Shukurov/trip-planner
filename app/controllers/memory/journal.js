@@ -9,9 +9,9 @@ export default class MemoryJournalController extends Controller {
   @service memory;
 
   @action
-  async saveMemory(trip_id, date_id, activity_id, journal) {
+  async saveMemory(trip_id, date_id, journal) {
     this.memory.save(trip_id, date_id);
     this.router.transitionTo('memory', trip_id);
-    this.database.saveJournal(trip_id, date_id, activity_id, journal);
+    await this.database.saveJournal(trip_id, date_id, journal);
   }
 }

@@ -1,12 +1,12 @@
 {{#if this.model.started}}
 
-<div class="activity-container card shadow-lg mb-3 mx-auto" style="max-width: 600px;">
+<div class="activity-container card shadow-lg mb-3 mx-auto" style="max-width: 800px;">
   <div class="card-body text-center">
 
-      <h1 
-        class="card-title mb-3 title" 
-        contenteditable="true" 
-        id="title" 
+      <h1
+        class="card-title mb-3 title"
+        contenteditable="true"
+        id="title"
         style="font-size: 2rem; font-weight: bold;">
         {{#if this.model.title}}
           {{this.model.title}}
@@ -18,25 +18,53 @@
       <h5 class="card-subtitle mb-4 text-primary fw-bold destination-highlight">
         Destinations
       </h5>
-      
+
       <div class="vertical-card-list justify-content-center align-items-center">
         {{#each this.model.dates as |date index|}}
-        <div class="carousel-card-activity fade-in mx-auto" style={{this.getAnimationDelay index}}>        
-          <LinkTo @route="memory.journal"
-                @models={{array this.model.trip_id date.id}}
-                class="btn btn-light w-100">
+          <div class="carousel-card-activity fade-in mx-auto" style={{this.getAnimationDelay index}}>
+            <LinkTo @route="memory.journal"
+                    @models={{array this.model.trip_id date.id}}
+                    class="btn btn-light w-100">
+              <b>
+                {{date.date}}
+              </b>
+<!--              {{#if date.images}}-->
+<!--                <div class="box">-->
+<!--                  <BsCarousel-->
+<!--                    @autoPlay={{true}}-->
+<!--                    @wrap={{true}}-->
+<!--                    @index={{0}}-->
+<!--                    @interval={{5000}}-->
+<!--                    @keyboard={{true}}-->
+<!--                    @ltr={{true}}-->
+<!--                    @pauseOnMouseEnter={{true}}-->
+<!--                    @showControls={{true}}-->
+<!--                    @showIndicators={{true}}-->
+<!--                    data-test-example="main"-->
+<!--                    as |car|-->
+<!--                  >-->
+<!--                    {{#each date.images as |image|}}-->
+<!--                      <car.slide>-->
+<!--                        <figure class="image">-->
+<!--                          <img src={{image.url}} style="max-height: 300px; width: auto;">-->
+<!--                        </figure>-->
+<!--                      </car.slide>-->
+<!--                    {{/each}}-->
+<!--                  </BsCarousel>-->
+<!--                </div>-->
 
-          {{date.date}}
-        </LinkTo>
-        </div>
+<!--              {{/if}}-->
+
+            </LinkTo>
+          </div>
 
         {{/each}}
       </div>
       <div class="d-flex justify-content-end mt-4">
         <LinkTo @route="index">
-          <button 
-            class="btn btn-success rounded-circle shadow" 
-            type="button" 
+          <button
+            class="btn btn-success rounded-circle shadow"
+            type="button"
             style="width: 50px; height: 50px; font-size: 1.5rem;">
             <i class="bi bi-check"></i>
           </button>
@@ -52,9 +80,9 @@
   </p>
 
   <LinkTo @route="index">
-    <button 
-      type="button" 
-      class="btn btn-primary mt-4 px-4 py-2" 
+    <button
+      type="button"
+      class="btn btn-primary mt-4 px-4 py-2"
       style="font-size: 1.25rem; border-radius: 8px; transition: transform 0.2s ease, background-color 0.3s;">
       Let's go back to somewhere safe
     </button>

@@ -1,79 +1,63 @@
 {{page-title "Journal"}}
-{{#if this.model.seeActivity}}
 
 {{!-- Inspired by: https://www.ember-bootstrap.com/components/carousel/ --}}
-<BsCarousel
-  @autoPlay={{false}}
-  @wrap={{true}}
-  @index={{0}}
-  @interval={{0}}
-  @keyboard={{true}}
-  @ltr={{true}}
-  @pauseOnMouseEnter={{true}}
-  @showControls={{true}}
-  @showIndicators={{true}}
-  data-test-example="main"
-  as |card|
->
-  {{#each this.model.activities as |activity|}}
-    <card.slide>
+{{#if this.model.images}}
+  <div class="box">
+    <BsCarousel
+      @autoPlay={{true}}
+      @wrap={{true}}
+      @index={{0}}
+      @interval={{5000}}
+      @keyboard={{true}}
+      @ltr={{true}}
+      @pauseOnMouseEnter={{true}}
+      @showControls={{true}}
+      @showIndicators={{true}}
+      data-test-example="main"
+      as |car|
+    >
+      {{#each this.model.images as |image|}}
+        <car.slide>
+          <figure class="image">
+            <img src={{image.url}} style="max-height: 300px; width: auto;">
+          </figure>
+        </car.slide>
+      {{/each}}
+    </BsCarousel>
+  </div>
+
+{{/if}}
       <div class="card shadow p-3 mb-5">
         <div style="margin: 0% 10% 5%">
             <h2 class="title text-center mb-4">Date: {{this.model.date}}</h2>
             <ul class="list-group">
               <li class="list-group-item d-flex justify-content-between align-items-center">
-                  <div>
-                      <h2 class="text-center">{{activity.data.location}}</h2>
-                  </div>
-              </li>
-              <li class="list-group-item d-flex justify-content-between align-items-center">
-                <div id="{{activity.data.location}}">
-                  <CameraGallery @data={{activity.data.location}} @saveImage={{this.setImage}}>
+                  <CameraGallery>
                   </CameraGallery>
-                </div>
               </li>
               <li class="list-group-item d-flex justify-content-between align-items-center">
-              {{#if activity.data.journal}}
+              {{#if this.model.journal}}
               <div class="mb-3">
-                  <Textarea class="form-control" id="journal_id" rows="5" cols="100" @value={{activity.data.journal}} placeholder="Journal Entry....."></Textarea>
+                  <Textarea class="form-control" id="journal_id" rows="5" cols="100" @value={{this.model.journal}} placeholder="Journal Entry....."></Textarea>
               </div>
               {{else}}
               <div class="mb-3">
-                <Textarea class="form-control" id="location_id" rows="5" cols="100" placeholder="Journal Entry....." @value={{activity.data.journal}}></Textarea>
-              </div>  
+                <Textarea class="form-control" id="location_id" rows="5" cols="100" placeholder="Journal Entry....." @value={{this.model.journal}}></Textarea>
+              </div>
               {{/if}}
               </li>
-              <button class="btn btn-success w-100" type="button" {{on "click" (fn this.saveMemory this.model.trip_id this.model.date_id activity.id activity.data.journal)}}>Save</button>
+              <button class="btn btn-success w-100" type="button" {{on "click" (fn this.saveMemory this.model.trip_id this.model.date_id this.model.journal)}}>Save</button>
             </ul>
           </div>
         </div>
 
-    </card.slide>
-  {{/each}}
-</BsCarousel>
+
 
   <div class="d-flex justify-content-between mt-4">
     <LinkTo @route="memory" @model={{this.model.trip_id}}>
-      <button class="btn btn-primary w-100" type="button">
-        Cancel
+      <button class="btn btn-success w-100" type="button">
+        Go Back
       </button>
     </LinkTo>
   </div>
 {{outlet}}
-
-{{else}}
-
-<div class="box">
-    <h1>looks like you dont have any activities to post pictures</h1>
-    <div class="d-flex justify-content-between mt-4">
-      <LinkTo @route="memory" @model={{this.model.trip_id}}>
-        <button class="btn btn-primary rounded-circle" type="button">
-        <i class="bi bi-arrow-left"></i>
-      </button>
-      </LinkTo>
-    </div>
-</div>
-{{outlet}}
-
-{{/if}}
-

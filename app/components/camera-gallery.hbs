@@ -38,6 +38,8 @@
 {{!-- TODO: handle multiple images, edit/delete images, should the upload replace or add to?, styling --}}
 <div id="image-preview-container" class="d-flex flex-column justify-content-center mt-1">
   {{#each this.images as |image|}}
-    <img src={{image.src}}>
+    <figure class="image is-128x128">
+      <img src={{image.src}}>
+    </figure>
   {{/each}}
 </div>

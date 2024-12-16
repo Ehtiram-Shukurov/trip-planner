@@ -7,16 +7,16 @@
       <div class="carousel d-flex justify-content-center align-items-center">
         <div class="carousel-card">
           <div class="card-content d-flex justify-content-center align-items-center">
-            <button 
-              class="btn btn-outline-primary d-flex justify-content-center align-items-center"
-              style="width: 80px; height: 80px; border-radius: 50%; position: relative;" 
-              type="button" 
+            <button
+              class="btn btn-outline-success d-flex justify-content-center align-items-center"
+              style="width: 80px; height: 80px; border-radius: 50%; position: relative;"
+              type="button"
               {{on "click" this.createTrip}}>
               <i class="bi bi-plus" style="font-size: 2rem;"></i>
             </button>
           </div>
         </div>
-        
+
         {{#each this.trips as |trip|}}
           {{#unless trip.complete}}
             <div class="carousel-card">
