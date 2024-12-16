@@ -4,7 +4,7 @@
   <section class="mb-4">
     <h1 class="mb-3" style="color: #235725; font-size: 2rem; font-weight: bold;">Trips</h1>
     <div class="carousel-container">
-      <div class="carousel">
+      <div class="carousel d-flex justify-content-center align-items-center">
         <div class="carousel-card">
           <div class="card-content d-flex justify-content-center align-items-center">
             <button 
@@ -16,7 +16,7 @@
             </button>
           </div>
         </div>
-
+        
         {{#each this.trips as |trip|}}
           {{#unless trip.complete}}
             <div class="carousel-card">
