@@ -69,7 +69,32 @@ Desktop version of our webapp. Everythig is the same excepet for the fact that t
 **[Add a screenshot of each key page](https://stackoverflow.com/questions/10189356/how-to-add-screenshot-to-readmes-in-github-repository)
 along with a very brief caption:**
 
-![](https://media.giphy.com/media/o0vwzuFwCGAFO/giphy.gif)
+Home page where recently created or expired/started trip are displayed
+![home](./screenshot/home.png?raw=true)
+
+
+Destination page where users can select where they want to take a trip to
+![destination](./screenshot/destination.png?raw=true)
+
+
+Calender page where users can select the dates they want to take a trip to
+![calender](./screenshot/calender.png?raw=true)
+
+
+Dates page where the dates selected by users for the dates they want to take a trip are shown. This page is the same for the Trips and Memory section of the website.
+![dates](./screenshot/dates.png?raw=true)
+
+
+Activity page where user can enter itterniary items they want to do per day.
+![activity](./screenshot/activity.png?raw=true)
+
+Suggestions page where the user are presented with suggestion of similar locations to the place the entered.
+![suggestions](./screenshot/suggestions.png?raw=true)
+
+
+Journal page where user can post their images taken throughout the day of the itterniary items. Additionally, a journal of what has occured that day. 
+![journal](./screenshot/journal.png?raw=true)
+
 
 
 
