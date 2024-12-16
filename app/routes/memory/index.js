@@ -6,6 +6,7 @@ export default class MemoryIndexRoute extends Route {
   @service auth;
   @tracked dates;
   @tracked title;
+  @tracked images; //TODO
 
   async beforeModel() {
     await this.auth.ensureLoggedIn();
