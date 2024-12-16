@@ -14,7 +14,7 @@ export default class DateDetailRoute extends Route {
     const day = await this.database.getDay(trip_id, date_id);
     const activities = await this.database.getActivities(trip_id, date_id);
     return {
-      date: new Date(day.date),
+      date: new Date(day.date).toLocaleDateString("en-US"),
       date_id: date_id,
       trip_id: trip_id,
       activities: activities,

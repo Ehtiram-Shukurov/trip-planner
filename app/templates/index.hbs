@@ -1,18 +1,27 @@
 {{page-title "Index"}}
-<section class="hero is-fullheight">
+<section class="hero is-fullheight" style="background-color: #e8f5e9;">
   <div class="hero-body">
     <div class="container">
-      <div class="columns">
-        <div class="column is-half" >
-          <p class="title" style="color: black">Welcome to Big Chungus's Travel App</p>
-          <p class="subtitle">Please login to continue</p>
+      <div class="columns is-vcentered">
+        <div class="column is-half">
+          <p class="title" style="color: #235725; font-size: 2.5rem; font-weight: bold; margin-bottom: 1rem;">
+            Welcome to Big Chungus's Travel App
+          </p>
+          <p class="subtitle" style="color: #555; font-size: 1.25rem;">
+            Please login to continue
+          </p>
         </div>
         <div class="column is-half has-text-centered">
-          {{!-- TODO: restyle button--}}
-          <button class="button is-medium is-dark" type="button" {{on "click" this.signIn}}>Login</button>
+          <button 
+            class="button is-medium" 
+            style="background-color: #235725; color: white; border: none; padding: 1rem 2rem; font-size: 1.1rem; border-radius: 8px; transition: transform 0.2s ease, background-color 0.3s ease;" 
+            type="button" 
+            {{on "click" this.signIn}}
+          >
+            Login
+          </button>
         </div>
       </div>
     </div>
   </div>
 </section>
-

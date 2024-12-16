@@ -2,31 +2,40 @@
   <div class="card shadow-lg w-100" style="max-width: 400px; border-radius: 10px;">
     <div class="card-body text-center">
 
-      <h1 class="card-title mb-3" contenteditable="true" id="title">
+      <h1 
+        class="card-title mb-3 title" 
+        contenteditable="true" 
+        id="title" 
+        style="font-size: 2rem; font-weight: bold;">
         {{#if this.model.title}}
           {{this.model.title}}
         {{else}}
-        Edit Trip Name
+          Edit Trip Name
         {{/if}}
       </h1>
-      <h5 class="card-subtitle mb-4 text-muted">Destinations</h5>
+      <h5 class="card-subtitle mb-4" style=" font-size: 1.2rem;">
+        Destinations
+      </h5>
 
       <div class="vertical-card-list">
         {{#each this.model.dates as |date|}}
-        <div class="carousel-card">
-        <LinkTo @route="memory.journal"
-                @models={{array this.model.trip_id date.id}}
-                class="btn btn-light w-100">
-
-          {{date.date}}
-        </LinkTo>
-        </div>
+          <div class="carousel-card shadow-sm">
+            <LinkTo 
+              @route="memory.journal" 
+              @models={{array this.model.trip_id date.id}} 
+              class="btn btn-light w-100" 
+              style="font-size: 1rem; font-weight: bold;">
+              {{date.date}}
+            </LinkTo>
+          </div>
         {{/each}}
       </div>
-
       <div class="d-flex justify-content-end mt-4">
         <LinkTo @route="index">
-          <button class="btn btn-success rounded-circle" type="button">
+          <button 
+            class="btn btn-success rounded-circle shadow" 
+            type="button" 
+            style="width: 50px; height: 50px; font-size: 1.5rem;">
             <i class="bi bi-check"></i>
           </button>
         </LinkTo>
@@ -34,6 +43,4 @@
     </div>
   </div>
 </div>
-
 {{outlet}}
-
