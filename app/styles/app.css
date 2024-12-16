@@ -10,12 +10,6 @@ body {
   flex-direction: column;
 }
 
-@media (min-width: 961px) {
-  body {
-    padding-top: 4.1em !important;
-  }
-}
-
 .content-wrapper {
   flex: 1;
 }
@@ -166,7 +160,6 @@ button:hover {
   background-color: #235725;
   color: white;
 }
-
 .carousel-card-activity {
   width: 100%;
   max-width: 350px;
@@ -268,6 +261,7 @@ button:hover {
   transition: transform 0.2s ease-in-out, box-shadow 0.3s ease;
 }
 
+
 .carousel-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
@@ -278,6 +272,11 @@ button:hover {
   width: 40px;
   height: 200px;
   top: 25%;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(100%);
 }
 
 .vertical-card-list {
@@ -329,20 +328,6 @@ button:hover {
 
 .vertical-card-list::-webkit-scrollbar-track {
   background-color: transparent;
-}
-
-.carousel-card-activity {
-  width: 100%;
-  max-width: 350px;
-  margin-bottom: 5px;
-  padding: 0.5rem;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
-  min-height: 60px;
-  max-height: 80px;
-  overflow: hidden;
-  text-align: center;
 }
 
 .card-body {
