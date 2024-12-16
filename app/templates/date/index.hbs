@@ -6,7 +6,7 @@
   </div>
 
   <div class="button-section">
-    <button class="btn btn-primary btn-lg" type="button" {{on "click" this.saveAndNavigate}}>
+    <button class="btn btn-success w-100" type="button" {{on "click" this.saveAndNavigate}}>
       {{#if (eq this.model.setup false)}}Finish Setup{{else}}Save{{/if}}
     </button>
   </div>
@@ -29,7 +29,7 @@
 
     <div class="vertical-card-list justify-content-center align-items-center">
     {{#each this.model.dates as |date index|}}
-    <div class="carousel-card-activity fade-in mx-auto d-flex align-items-center" 
+    <div class="carousel-card-activity fade-in mx-auto d-flex align-items-center"
         style={{this.getAnimationDelay index}}>
       <LinkTo @route="date.detail" @models={{array this.model.trip_id date.id}}
         class="btn btn-light w-100 d-flex align-items-center justify-content-between">

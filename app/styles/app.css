@@ -10,12 +10,6 @@ body {
   flex-direction: column;
 }
 
-@media (min-width: 961px) {
-  body {
-    padding-top: 4.1em !important;
-  }
-}
-
 .content-wrapper {
   flex: 1;
 }
