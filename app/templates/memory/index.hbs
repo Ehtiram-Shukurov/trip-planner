@@ -1,6 +1,7 @@
-<div class="container d-flex justify-content-center align-items-center">
-  <div class="card shadow-lg w-100" style="max-width: 400px; border-radius: 10px;">
-    <div class="card-body text-center">
+{{#if this.model.started}}
+
+<div class="activity-container card shadow-lg mb-3 mx-auto" style="max-width: 600px;">
+  <div class="card-body text-center">
 
       <h1 
         class="card-title mb-3 title" 
@@ -13,21 +14,22 @@
           Edit Trip Name
         {{/if}}
       </h1>
-      <h5 class="card-subtitle mb-4" style=" font-size: 1.2rem;">
+
+      <h5 class="card-subtitle mb-4 text-primary fw-bold destination-highlight">
         Destinations
       </h5>
+      
+      <div class="vertical-card-list justify-content-center align-items-center">
+        {{#each this.model.dates as |date index|}}
+        <div class="carousel-card-activity fade-in mx-auto" style={{this.getAnimationDelay index}}>        
+          <LinkTo @route="memory.journal"
+                @models={{array this.model.trip_id date.id}}
+                class="btn btn-light w-100">
 
-      <div class="vertical-card-list">
-        {{#each this.model.dates as |date|}}
-          <div class="carousel-card shadow-sm">
-            <LinkTo 
-              @route="memory.journal" 
-              @models={{array this.model.trip_id date.id}} 
-              class="btn btn-light w-100" 
-              style="font-size: 1rem; font-weight: bold;">
-              {{date.date}}
-            </LinkTo>
-          </div>
+          {{date.date}}
+        </LinkTo>
+        </div>
+
         {{/each}}
       </div>
       <div class="d-flex justify-content-end mt-4">
@@ -42,5 +44,23 @@
       </div>
     </div>
   </div>
+{{else}}
+<div class="d-flex flex-column justify-content-center align-items-center vh-100 text-center">
+  <h1 style="font-size: 6rem; font-weight: bold; color: #333;">404</h1>
+  <p style="font-size: 1.25rem; color: #555;">
+    Oops! The page you're looking for doesn't exist.
+  </p>
+
+  <LinkTo @route="index">
+    <button 
+      type="button" 
+      class="btn btn-primary mt-4 px-4 py-2" 
+      style="font-size: 1.25rem; border-radius: 8px; transition: transform 0.2s ease, background-color 0.3s;">
+      Let's go back to somewhere safe
+    </button>
+  </LinkTo>
 </div>
+{{/if}}
 {{outlet}}
+
+

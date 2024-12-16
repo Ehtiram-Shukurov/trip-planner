@@ -108,7 +108,6 @@ export default class GoogleMapsJs extends Component {
           location: place.location,
         }));
       } else {
-        console.log('No results');
         this.places = [];
       }
     } catch (error) {
@@ -144,7 +143,6 @@ export default class GoogleMapsJs extends Component {
   @action
   async pickLocation(place) {
     const placePicker = document.querySelector('gmpx-place-picker');
-    console.log(placePicker.value);
 
     this.selectedLocation = place.displayName;
     const formatted = await this.reverseGeocode(
@@ -169,7 +167,6 @@ export default class GoogleMapsJs extends Component {
         const address = response.results[0].formatted_address;
         this.formattedAddress = address;
 
-        console.log('Formatted Address:', address);
         return address;
       } else {
         console.error('No results found for the given coordinates.');

@@ -83,6 +83,15 @@ body {
   }
 }
 
+.vertical-card-list {
+  width: 100%;
+  max-height: 400px;
+  overflow-y: auto;
+  margin-left: 5%;
+  padding-right: 5%;
+  margin-top: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
 @media (prefers-color-scheme: light) {
   .navbar {
     background-color: #235725;
@@ -106,6 +115,13 @@ footer {
   padding: 1rem;
   font-size: 0.9rem;
 }
+
+.vertical-card-list .carousel-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 
 footer p {
   margin: 0;
@@ -142,6 +158,27 @@ button:hover {
   background-color: #235725;
   color: white;
 }
+
+.carousel-card-activity {
+  width: 100%;
+  max-width: 350px;
+  margin-bottom: 5px;
+  padding: 0.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  min-height: 60px;
+  max-height: 80px;
+  overflow: hidden;
+  text-align: center;
+}
+
+.carousel-card-activity:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 
 .btn-success {
   width: 50px;
@@ -510,6 +547,26 @@ div.scrollmenu a:hover {
   color: #0056b3;
   border-color: #0056b3;
 }
+
+.hidden-input {
+  display: none;
+}
+
+.file-input-label {
+  display: inline-block;
+  padding: 0.5rem;
+  background: #f8f9fa;
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.file-input-label:hover {
+  background: #e9ecef;
+}
+
 
 .date-alert {
   width: 1.5rem;
