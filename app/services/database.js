@@ -70,7 +70,7 @@ export default class TripService extends Service {
     );
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
-      if (new Date(doc.data().date.seconds * 1000) < new Date()) {
+      if (new Date(doc.data().date) < new Date()) {
         this.markTripComplete(trip.id);
       }
     });
@@ -85,7 +85,7 @@ export default class TripService extends Service {
 
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
-      if (new Date(doc.data().date.seconds * 1000) <= new Date()) {
+      if (new Date(doc.data().date) <= new Date()) {
         this.markTripStarted(trip.id);
       }
     });
