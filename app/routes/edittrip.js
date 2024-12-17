@@ -1,4 +1,4 @@
-import Route from '@ember/routing/route';
+import Route from '@ember/routing/route'
 import { service } from '@ember/service';
 import { getDoc } from 'firebase/firestore';
 
@@ -23,14 +23,20 @@ export default class EditTripRoute extends Route {
   
     const tripData = tripSnapshot.data();
   
-    const days = Object.values(tripData.days || {}).map((day) => new Date(day.date));
-    days.sort((a, b) => a - b);
-  
+    const days = await this.database.getDays(params.trip_id);
+
+
+    const dates = days.map((day) => {
+      const[m,d,y]= day.date.split('/');
+      return new Date(`${y}-${m}-${d}`);
+    });
+
+    dates.sort((a, b) => a - b);
     return {
       id: params.trip_id,
       destination: tripData.destination,
-      startDate: days.length && !isNaN(days[0]) ? days[0] : null,
-      endDate: days.length && !isNaN(days[days.length - 1]) ? days[days.length - 1] : null,
+      startDate: dates.length && !isNaN(dates[0]) ? dates[0] : null,
+      endDate: dates.length && !isNaN(dates[dates.length - 1]) ? dates[dates.length - 1] : null,
       days: tripData.days || {},
     };
   }

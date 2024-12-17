@@ -341,7 +341,7 @@ export default class TripService extends Service {
       `user/${this.uid}/trips/${trip_id}/days/${date_id}`,
     );
     const dateSnap = await getDoc(dateRef);
-    return dateSnap.data().images;
+    return dateSnap.data();
   }
 
   async saveImage(image, tripId, date_id) {
@@ -367,5 +367,17 @@ export default class TripService extends Service {
         });
       });
     });
+  }
+
+  async deleteImage(tripId, date_id, index) {
+    const dateRef = await doc(
+      this.db,
+      `user/${this.uid}/trips/${tripId}/days/${date_id}`,
+    );
+    const dateSnap = await getDoc(dateRef);
+    const images = dateSnap.data().images;
+    images.splice(index, 1);
+
+    await updateDoc(dateRef, {images: images});
   }
 }

@@ -1,7 +1,7 @@
 {{page-title "Journal"}}
 
 {{!-- Inspired by: https://www.ember-bootstrap.com/components/carousel/ --}}
-{{#if this.model.images}}
+{{#if this.model.images.images}}
   <div class="box">
     <BsCarousel
       @autoPlay={{true}}
@@ -12,14 +12,17 @@
       @ltr={{true}}
       @pauseOnMouseEnter={{true}}
       @showControls={{true}}
-      @showIndicators={{true}}
+      @showIndicators={{false}}
       data-test-example="main"
       as |car|
     >
-      {{#each this.model.images as |image|}}
+      {{#each this.model.images.images as |image index|}}
         <car.slide class="has-text-centered">
             <figure class="image is-inline-block">
                 <img src={{image.url}} style="max-height: 300px; width: auto;">
+              <button class="btn btn-danger btn-sm" type="button" {{on "click" (fn this.deleteImage this.model.trip_id this.model.date_id index)}}>
+                <i class="bi bi-trash"></i> Delete
+              </button>
             </figure>
         </car.slide>
       {{/each}}
