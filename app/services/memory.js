@@ -9,16 +9,18 @@ export default class Memory extends Service {
     this.images = files;
   }
 
-  save(trip_id, date_id) {
+  async save(trip_id, date_id) {
     // save images
-    this.images.forEach(async (image) => {
-      await this.database.saveImage(image, trip_id, date_id);
-    });
-    // save journal entry
-    //this.database.saveJournalEntry(this.journalEntry, tripId, dateId);
+    try{
+      await Promise.all(this.images.map(async (image) => {
+        await this.database.saveImage(image, trip_id, date_id);
+      }));
+      this.images = [];
+      this.journalEntry = '';
+    }
+    catch (error){
+      console.error('Error saving images', error);
+    }
 
-    // reset images and journal entry
-    this.images = [];
-    this.journalEntry = '';
   }
 }

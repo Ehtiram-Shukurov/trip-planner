@@ -469,6 +469,11 @@ div.scrollmenu a:hover {
 
 /* Media Queries */
 @media (max-width: 768px) {
+  #image-preview-container {
+    max-height: 200px;
+    overflow-y: auto;
+  }
+
   .navbar-menu {
     display: none;
   }
@@ -504,6 +509,7 @@ div.scrollmenu a:hover {
   }
   .list-group{
     max-height: 400px;
+    overflow-y: auto;
 
   }
   .list-group-item {
