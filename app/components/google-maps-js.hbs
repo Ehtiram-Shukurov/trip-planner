@@ -25,37 +25,43 @@
     {{/if}}
   {{/if}}
 
-  <div id="suggestionOverlay" class="overlay d-none">
-    <div class="overlay-content">
-      <div class="map-container">
-        <GoogleMapsIframe @query={{this.suggestion}} />
-      </div>
-      {{#if this.places.length}}
-      <ul class="list-group">
-        {{#each this.places as |place|}}
-        <li
-          class="list-group-item d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center">
-          <span class="fw-bold mb-2 mb-md-0">{{place.displayName}}</span>
-          <div class="d-flex gap-2">
-            <button class="btn btn-link btn-sm text-primary" type="button" {{on "click" (fn this.centerMapOnPlace
-              place)}}>
-              Center on Map
-            </button>
-            <button class="btn btn-link btn-sm text-success" type="button" {{on "click" (fn this.pickLocation place)}}>
-              Pick it!
-            </button>
-          </div>
-        </li>
-        {{/each}}
-      </ul>
-      {{else}}
-      <p class="mt-2 text-muted">
-        <i class="bi bi-info-circle"></i> No nearby places found.
-      </p>
-      {{/if}}
+<div id="suggestionOverlay" class="overlay d-none">
+  <div class="overlay-content position-relative">
+    <button type="button" class="btn btn-outline-secondary position-absolute top-0 start-0 m-2" {{on "click"
+      this.toggleOverlay}}>
+      <i class="bi bi-arrow-left"></i> Back
+    </button>
 
+    <div class="map-container">
+      <GoogleMapsIframe @query={{this.suggestion}} />
     </div>
+
+    {{#if this.places.length}}
+    <ul class="list-group">
+      {{#each this.places as |place|}}
+      <li
+        class="list-group-item d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center">
+        <span class="fw-bold mb-2 mb-md-0">{{place.displayName}}</span>
+        <div class="d-flex gap-2">
+          <button class="btn btn-link btn-sm text-primary" type="button" {{on "click" (fn this.centerMapOnPlace
+            place)}}>
+            Center on Map
+          </button>
+          <button class="btn btn-link btn-sm text-success" type="button" {{on "click" (fn this.pickLocation place)}}>
+            Pick it!
+          </button>
+        </div>
+      </li>
+      {{/each}}
+    </ul>
+    {{else}}
+    <p class="mt-2 text-muted">
+      <i class="bi bi-info-circle"></i> No nearby places found.
+    </p>
+    {{/if}}
   </div>
+</div>
+
 
 </div>
 

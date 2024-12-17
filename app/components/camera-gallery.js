@@ -13,6 +13,7 @@ export default class CameraGallery extends Component {
     super(...arguments);
     this.mobile = this.isMobile();
   }
+  
   @action
   handleCameraInput(event) {
     this.images = [];
@@ -63,5 +64,10 @@ export default class CameraGallery extends Component {
     } else {
       return false;
     }
+  }
+
+  @action 
+  clearImages() {
+    this.images = [];
   }
 }

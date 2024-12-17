@@ -2,7 +2,7 @@
 
 {{!-- Inspired by: https://www.ember-bootstrap.com/components/carousel/ --}}
 {{#if this.model.images.images}}
-  <div class="box">
+  <div class="box h-100">
     <BsCarousel
       @autoPlay={{true}}
       @wrap={{true}}
@@ -17,43 +17,41 @@
       as |car|
     >
       {{#each this.model.images.images as |image index|}}
-        <car.slide class="has-text-centered">
+        <car.slide class="has-text-centered " style="height: 350px;">
             <figure class="image is-inline-block">
-                <img src={{image.url}} style="max-height: 300px; width: auto;">
-              <button class="btn btn-danger btn-sm" type="button" {{on "click" (fn this.deleteImage this.model.trip_id this.model.date_id index)}}>
+                <img src={{image.url}} style="height: 300px; width: auto;">
+            </figure>
+            <div class="d-flex justify-content-end mt-4">
+              <button class="btn btn-danger btn-sm" type="button" {{on "click" (fn this.deleteImage this.model.trip_id
+                this.model.date_id index)}}>
                 <i class="bi bi-trash"></i> Delete
               </button>
-            </figure>
+            </div> 
         </car.slide>
       {{/each}}
     </BsCarousel>
   </div>
 
 {{/if}}
-      <div class="card shadow p-3 mb-5">
-        <div style="margin: 0% 10% 5%">
-            <h2 class="title text-center mb-4">Date: {{this.model.date}}</h2>
-            <ul class="list-group">
-              <li class="list-group-item d-flex justify-content-between align-items-center">
-                  <CameraGallery>
-                  </CameraGallery>
-              </li>
-              <li class="list-group-item d-flex justify-content-between align-items-center">
-              {{#if this.model.journal}}
-              <div class="mb-3">
-                  <Textarea class="form-control" id="journal_id" rows="5" cols="100" @value={{this.model.journal}} placeholder="Journal Entry....."></Textarea>
-              </div>
-              {{else}}
-              <div class="mb-3">
-                <Textarea class="form-control" id="location_id" rows="5" cols="100" placeholder="Journal Entry....." @value={{this.model.journal}}></Textarea>
-              </div>
-              {{/if}}
-              </li>
-              <button class="btn btn-success w-100" type="button" {{on "click" (fn this.saveMemory this.model.trip_id this.model.date_id this.model.journal)}}>Save</button>
-            </ul>
-          </div>
+<div class="card shadow p-3 mb-5">
+  <div style="margin: 0% 10% 5%">
+      <h2 class="title text-center mb-4">Date: {{this.model.date}}</h2>
+      <ul class="list-group">
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <CameraGallery>
+            </CameraGallery>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div class="mb-3">
+            <Textarea class="form-control" id="journal_id" rows="5" cols="100" @value={{this.model.journal}} placeholder="Journal Entry....." {{on "input" this.updateJournal}}></Textarea>
         </div>
+        </li>
+      </ul>
+    </div>
+  </div>
 
+  <button class="btn btn-success w-100" type="button" {{on "click" (fn this.saveMemory this.model.trip_id
+    this.model.date_id)}}>Save</button>
 
 
   <div class="d-flex justify-content-between mt-4">

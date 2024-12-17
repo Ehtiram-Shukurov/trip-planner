@@ -345,28 +345,27 @@ export default class TripService extends Service {
   }
 
   async saveImage(image, tripId, date_id) {
-    // saves to storage ref
-    const tripsStorageRef = await ref(
-      this.storage,
-      `user/${this.uid}/trips/${tripId}/days/${date_id}/${image.name}`,
-    );
-    const dateRef = await doc(
-      this.db,
-      `user/${this.uid}/trips/${tripId}/days/${date_id}`,
-    );
-    // Uploads the image to the storage
-    uploadBytes(tripsStorageRef, image).then(() => {
-      // gets the download url for the image that was just uploaded
-      getDownloadURL(tripsStorageRef).then(async (url) => {
-        // saves the image data to the db for later retrieval
-        const imageData = { id: image.name, url: url };
-        await updateDoc(dateRef, {
-          images: arrayUnion(imageData),
-        }).then(() => {
-          console.log('saved image info to db');
-        });
+    try{
+      const tripsStorageRef = await ref(
+        this.storage,
+        `user/${this.uid}/trips/${tripId}/days/${date_id}/${image.name}`,
+      );
+      const dateRef = await doc(
+        this.db,
+        `user/${this.uid}/trips/${tripId}/days/${date_id}`,
+      );
+      // Uploads the image to the storage
+      await uploadBytes(tripsStorageRef, image);
+      const url = await getDownloadURL(tripsStorageRef);
+      // saves to storage reference
+      const imageData = { id: image.name, url: url };
+      await updateDoc(dateRef, {
+        images: arrayUnion(imageData),
       });
-    });
+    }
+    catch (error) {
+      console.error("Error uploading image: ", error);
+    }
   }
 
   async deleteImage(tripId, date_id, index) {
