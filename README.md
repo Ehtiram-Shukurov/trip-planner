@@ -12,7 +12,7 @@ CSCI 5117, Fall 2024, [assignment description](https://canvas.umn.edu/courses/46
 
 
 * Daniel Bielejeski, biele026@umn.edu
-* Ezra Blake, shuku010@umn.edu
+* Ezra Shukurov, shuku010@umn.edu
 * Crystal Wen, wen00015@umn.edu
 * William Yang, yang7313@umn.edu
 * Jinming Chen, chen6386@umn.edu
